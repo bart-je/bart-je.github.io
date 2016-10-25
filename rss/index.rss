@@ -1,4 +1,72 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Bart Jansen</title><description>Technical Evangelist at Microsoft</description><link>http://localhost:2368/</link><generator>Ghost 0.11</generator><lastBuildDate>Mon, 17 Oct 2016 20:09:39 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Welcome to Ghost</title><description>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list&lt;/p&gt;</description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">d695826f-0311-4a5f-aec6-b1dc9520dce2</guid><category>Getting Started</category><dc:creator>Bart Jansen</dc:creator><pubDate>Mon, 17 Oct 2016 19:24:05 GMT</pubDate><content:encoded>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Bart Jansen</title><description>Technical Evangelist at Microsoft</description><link>http://localhost:2368/</link><generator>Ghost 0.11</generator><lastBuildDate>Tue, 25 Oct 2016 13:47:08 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>My journey from AWS to Azure</title><description>&lt;p&gt;Before joining Microsoft a little over a month ago, I was not familiar with the Azure Cloud whatsoever and I replaced my Windows machine with an Apple Macbook several years ago without ever looking back. I have been a software engineer for the last 10 years, but when working in&lt;/p&gt;</description><link>http://localhost:2368/my-journey-from-aws-to-azure/</link><guid isPermaLink="false">72c889a6-4f79-494a-9747-d8b213dea79f</guid><dc:creator>Bart Jansen</dc:creator><pubDate>Tue, 18 Oct 2016 14:36:52 GMT</pubDate><content:encoded>&lt;p&gt;Before joining Microsoft a little over a month ago, I was not familiar with the Azure Cloud whatsoever and I replaced my Windows machine with an Apple Macbook several years ago without ever looking back. I have been a software engineer for the last 10 years, but when working in the cloud I have always developed in Amazon's AWS Cloud while working at various startups. &lt;/p&gt;
+
+&lt;p&gt;When I signed up to become a Technical Evangelist at Microsoft I knew this was about to change. I spent the last month and a half onboarding to Microsoft's Windows OS and Azure Cloud. Five years ago, I wouldn't have even considered joining MSFT, but due to Microsoft's new vision, focus on Cloud productivity and innovation I'm proud to call myself a Technical Evangelist at Microsoft.&lt;/p&gt;
+
+&lt;p&gt;In this blog I will be sharing my Azure onboarding experiences while trying to stay unbiased ;)&lt;/p&gt;
+
+&lt;h4 id="excitementgraph"&gt;Excitement Graph&lt;/h4&gt;
+
+&lt;p&gt;I think my ongoing journey can be described in a simple excitement-over-time graph shown below which I will try to explain in further detail in the remainder of this blog: &lt;br&gt;
+&lt;code&gt;graph here&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id="firstimpression"&gt;First impression&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Shitload of options&lt;/li&gt;
+&lt;li&gt;Bring me back my CLI
+&lt;ul&gt;&lt;li&gt;nice for non experienced users&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id="microsoftembracesopensourcesoftware"&gt;Microsoft embraces Open Source Software&lt;/h4&gt;
+
+&lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Azure CTO, coding on a Mac, running in Docker, deploying to hw running Linux. Am I taking crazy pills? &lt;a href="https://twitter.com/hashtag/DockerCon?src=hash"&gt;#DockerCon&lt;/a&gt; &lt;a href="https://t.co/qMCQxajBtd"&gt;pic.twitter.com/qMCQxajBtd&lt;/a&gt;&lt;/p&gt;&amp;mdash; Andrew Bell (@recursive_chaos) &lt;a href="https://twitter.com/recursive_chaos/status/745303319162171394"&gt;June 21, 2016&lt;/a&gt;&lt;/blockquote&gt;  
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;  
+
+&lt;ul&gt;
+&lt;li&gt;No C# experience, but Node.JS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Quote from former CEO Steve Ballmer in 2001:  &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;"Linux is a cancer that attaches itself in an intellectual property sense to everything it touches"&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Something that was unthinkable a couple of years ago (Steve Ballmer quote on Linux) &lt;/p&gt;
+
+&lt;h4 id="everyawsservicehasitsazurecounterpart"&gt;Every AWS service has its Azure counterpart&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;EC2 -&gt; Virtual Machines &lt;/li&gt;
+&lt;li&gt;S3 -&gt; Azure storage&lt;/li&gt;
+&lt;li&gt;AWS Lambda -&gt; Azure Functions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id="amentoazuresaas"&gt;Amen to Azure SaaS&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Instagram Cognitive Services&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id="somedrawbacks"&gt;Some drawbacks&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Portal tends to be slow&lt;/li&gt;
+&lt;li&gt;Outages&lt;/li&gt;
+&lt;li&gt;Feels slower to deploy new instances&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id="integrationinvisualstudio"&gt;Integration in Visual Studio&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Does it get any easier?&lt;/li&gt;
+&lt;li&gt;Tooling&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id="finalthoughts"&gt;Final thoughts&lt;/h4&gt;
+
+&lt;p&gt;Another big thing which I do not take into account in this blog, is the money aspect of it all which can be a really decisive argument for choosing a Cloud to build on. &lt;/p&gt;</content:encoded></item><item><title>Welcome to Ghost</title><description>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list&lt;/p&gt;</description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">d695826f-0311-4a5f-aec6-b1dc9520dce2</guid><category>Getting Started</category><dc:creator>Bart Jansen</dc:creator><pubDate>Mon, 17 Oct 2016 19:24:05 GMT</pubDate><content:encoded>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!&lt;/p&gt;
 
 &lt;h2 id="gettingstarted"&gt;Getting Started&lt;/h2&gt;
 
