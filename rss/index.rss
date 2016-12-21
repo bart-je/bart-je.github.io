@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Bart Jansen</title><description>Technical Evangelist at Microsoft</description><link>http://localhost:2368/</link><generator>Ghost 0.11</generator><lastBuildDate>Mon, 14 Nov 2016 10:14:39 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>My journey from AWS to Azure</title><description>&lt;p&gt;Before joining Microsoft a little over a month ago, I was not familiar with the Azure Cloud whatsoever and I replaced my Windows machine with an Apple Macbook several years ago without ever looking back. I have been a software engineer for the last 10 years, but when working in&lt;/p&gt;</description><link>http://localhost:2368/my-journey-from-aws-to-azure/</link><guid isPermaLink="false">72c889a6-4f79-494a-9747-d8b213dea79f</guid><dc:creator>Bart Jansen</dc:creator><pubDate>Tue, 18 Oct 2016 14:36:52 GMT</pubDate><content:encoded>&lt;p&gt;Before joining Microsoft a little over a month ago, I was not familiar with the Azure Cloud whatsoever and I replaced my Windows machine with an Apple Macbook several years ago without ever looking back. I have been a software engineer for the last 10 years, but when working in the cloud I have always developed in Amazon's AWS Cloud while working at various startups. &lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Bart Jansen</title><description>Technical Evangelist at Microsoft</description><link>http://localhost:2368/</link><generator>Ghost 0.11</generator><lastBuildDate>Wed, 21 Dec 2016 14:09:13 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>My journey from AWS to Azure</title><description>azure, aws, microsoft, amazon, migration, IaaS, PaaS, SaaS, Cognitive Services, first impression, impression, Open Source</description><link>http://localhost:2368/my-journey-from-aws-to-azure/</link><guid isPermaLink="false">72c889a6-4f79-494a-9747-d8b213dea79f</guid><category>azure</category><category>aws</category><category>experience</category><dc:creator>Bart Jansen</dc:creator><pubDate>Mon, 12 Dec 2016 15:36:00 GMT</pubDate><content:encoded>&lt;p&gt;Before joining Microsoft a little over three months ago, I was not familiar with the Azure Cloud whatsoever and I replaced my Windows machine with an Apple Macbook several years ago without ever looking back. I have been a software engineer for the last 10 years, but when working in the cloud I have always developed in Amazon's AWS Cloud while working at various startups. &lt;/p&gt;
 
 &lt;p&gt;When I signed up to become a Technical Evangelist at Microsoft I knew this was about to change. I spent the last month and a half onboarding to Microsoft's Windows OS and Azure Cloud. Five years ago, I wouldn't have even considered joining MSFT, but due to Microsoft's new vision, focus on Cloud productivity and innovation I'm proud to call myself a Technical Evangelist at Microsoft.&lt;/p&gt;
 
@@ -7,70 +7,59 @@
 &lt;h4 id="excitementgraph"&gt;Excitement Graph&lt;/h4&gt;
 
 &lt;p&gt;I think my ongoing journey can be described in a simple excitement-over-time graph shown below which I will try to explain in further detail in the remainder of this blog: &lt;br&gt;
-&lt;img src="http://localhost:2368/content/images/2016/11/excitement-graph.png" alt="Excitement graph"&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;graph here&lt;/code&gt;&lt;/p&gt;
+&lt;img src="http://localhost:2368/content/images/2016/12/excitement-graph-1.png" alt="Excitement graph"&gt;&lt;/p&gt;
 
 &lt;h4 id="firstimpression"&gt;First impression&lt;/h4&gt;
 
 &lt;p&gt;When I first opened the Azure Portal, the first thing I noticed is the extensive amount of options, items and resources I could pick from which felt really overwhelming. &lt;/p&gt;
 
-&lt;p&gt;Another whereas AWS focuses on getting everything done via the Command Line Interface, Azure tends to put more focus on its UI-based Web Portal. Even though the latter is nice for less experienced users, it takes some getting used to.&lt;/p&gt;
+&lt;p&gt;AWS focuses on getting everything done via the Command Line Interface (CLI), whereas Azure tends to put more focus on its UI-based Web Portal. Even though the latter is nice for less experienced developers, it takes some getting used to.&lt;/p&gt;
 
-&lt;p&gt;Luckily Azure fully functions via the command line interface as well (&lt;a href="https://github.com/Azure/azure-cli"&gt;azure-cli&lt;/a&gt;).  &lt;/p&gt;
+&lt;p&gt;Luckily Azure fully functions via the Command Line Interface as well (&lt;a href="https://github.com/Azure/azure-cli"&gt;azure-cli&lt;/a&gt;), but does not seem to promote it in the way that Amazon does. Every tutorial/webinar/blog seems to use the Portal-approach and guide you through their code with various Portal screenshots. This is why it actually took me a couple of days before I found out there was a CLI :)&lt;/p&gt;
 
 &lt;h4 id="everyawsservicehasitsazurecounterpart"&gt;Every AWS service has its Azure counterpart&lt;/h4&gt;
 
-&lt;ul&gt;
-&lt;li&gt;EC2 -&gt; Virtual Machines &lt;/li&gt;
-&lt;li&gt;S3 -&gt; Azure storage&lt;/li&gt;
-&lt;li&gt;AWS Lambda -&gt; Azure Functions&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Yes, &lt;em&gt;Every&lt;/em&gt;. It just takes some getting used to since they both use different naming conventions. A useful chart for me can be found &lt;a href="https://docs.microsoft.com/en-us/azure/guidance/guidance-azure-for-aws-professionals-service-map"&gt;here&lt;/a&gt;. AWS' EC2 and S3 can be found in Azure under respectively Virtual Machines and Azure Storages. And even more specific serverless functionality where e.g. AWS uses Lambda can be found in Azure under Azure Functions.&lt;/p&gt;
 
 &lt;h4 id="microsoftembracesopensourcesoftware"&gt;Microsoft embraces Open Source Software&lt;/h4&gt;
 
-&lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Azure CTO, coding on a Mac, running in Docker, deploying to hw running Linux. Am I taking crazy pills? &lt;a href="https://twitter.com/hashtag/DockerCon?src=hash"&gt;#DockerCon&lt;/a&gt; &lt;a href="https://t.co/qMCQxajBtd"&gt;pic.twitter.com/qMCQxajBtd&lt;/a&gt;&lt;/p&gt;&amp;mdash; Andrew Bell (@recursive_chaos) &lt;a href="https://twitter.com/recursive_chaos/status/745303319162171394"&gt;June 21, 2016&lt;/a&gt;&lt;/blockquote&gt;  
+&lt;p&gt;The biggest concern I had when I joined Microsoft was that I had no .NET/C# experience whatsoever. A language and environment that have been going hand-in-hand with the Microsoft ecosystem. Fortunately, this does not hold me back in my productivity and programming capabilities at all in these days at Microsoft. The time where you could only run your code in sandboxed Windows Machines supporting solely ASP.NET with SQL server is over. Microsoft embraces every kind of programming and honestly does not care whether you are running a .NET application with SQL or a NodeJS application with MongoDB as a backend.&lt;/p&gt;
 
-&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;  
-
-&lt;ul&gt;
-&lt;li&gt;No C# experience, but Node.JS&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Quote from former CEO Steve Ballmer in 2001:  &lt;/p&gt;
+&lt;p&gt;Historically, the path that Microsoft took is rather surprising. Especially when we look at a quote of Microsoft's former CEO Steve Ballmer in 2001:  &lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;"Linux is a cancer that attaches itself in an intellectual property sense to everything it touches"&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Something that was unthinkable a couple of years ago (Steve Ballmer quote on Linux) &lt;/p&gt;
+&lt;p&gt;Times sure have changed and even Ballmer seems to &lt;a href="http://www.zdnet.com/article/ballmer-i-may-have-called-linux-a-cancer-but-now-i-love-it/"&gt;agree&lt;/a&gt;. At the time, Microsoft was fighting against the open source Linux community but as of lately actually embraces the whole OSS scene. Being the &lt;a href="http://thenextweb.com/microsoft/2016/09/15/in-your-face-google/"&gt;largest open source contributor&lt;/a&gt; on GitHub, &lt;a href="https://www.microsoft.com/en-us/sql-server/sql-server-vnext-including-Linux"&gt;SQL server running on Linux&lt;/a&gt;, &lt;a href="http://www.pcworld.com/article/3055403/windows/windows-10s-bash-shell-can-run-graphical-linux-applications-with-this-trick.html"&gt;Ubuntu running on Windows 10&lt;/a&gt; and the list goes on. And it does result in some crazy setups which were unthinkable a couple of years ago:  &lt;/p&gt;
+
+&lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;Azure CTO, coding on a Mac, running in Docker, deploying to hw running Linux. Am I taking crazy pills? &lt;a href="https://twitter.com/hashtag/DockerCon?src=hash"&gt;#DockerCon&lt;/a&gt; &lt;a href="https://t.co/qMCQxajBtd"&gt;pic.twitter.com/qMCQxajBtd&lt;/a&gt;&lt;/p&gt;&amp;mdash; Andrew Bell (@recursive_chaos) &lt;a href="https://twitter.com/recursive_chaos/status/745303319162171394"&gt;June 21, 2016&lt;/a&gt;&lt;/blockquote&gt;  
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;p&gt;Of course there are still scenarios where you wish you grew up in the MSFT ecosystem. One of the interesting companies that Microsoft &lt;a href="https://blogs.microsoft.com/blog/2016/02/24/microsoft-to-acquire-xamarin-and-empower-more-developers-to-build-apps-on-any-device/#sm.0000wtu03y1z0fd1qet1odpyu0ih6"&gt;acquired&lt;/a&gt; is Xamarin. Xamarin allows you to build cross platform mobile applications written in one programming language (instead of 3 different ones). Unfortunately, this is C# ;)&lt;/p&gt;
 
 &lt;h4 id="amentoazuresaas"&gt;Amen to Azure SaaS&lt;/h4&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Instagram Cognitive Services&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;One thing that I was used to on Amazon's AWS cloud was setting up Virtual Machines to host my web services. Even though AWS fully supports PaaS services, I have never experimented with this. With Azure, the focus truly lies on PaaS and even SaaS and it's currently trying to win ground for IaaS solutions. That said, a frictionless migration is possible for all your VMs. Furthermore, Azure offers a lot of PaaS services, such as the App Service which automagically maintains, scales up/down and provides lots of insight for your web services. &lt;/p&gt;
+
+&lt;p&gt;Another great example of easy-to-use technology, are &lt;a href="https://www.microsoft.com/cognitive-services"&gt;Microsoft Cognitive Services&lt;/a&gt;. This is an attempt to democratize the otherwise extremely complex AI and Machine Learning possibilities. Cognitive Services exposes simple APIs which developers can leverage to use extremely well-trained models to interpret &amp;amp; analyze images, audio and video. The nice thing about this, is that it does not require any hardcore developer to use these services. Anyone with little programming experience can leverage these models.&lt;/p&gt;
 
 &lt;h4 id="somedrawbacks"&gt;Some drawbacks&lt;/h4&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Portal tends to be slow&lt;/li&gt;
-&lt;li&gt;Outages&lt;/li&gt;
-&lt;li&gt;Feels slower to deploy new instances&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;One of the things that bothered me a lot in the beginning is that the Azure Portal tends to be slow at times. I however later found out that this is due to the fact that I am using an internal Microsoft subscriptions which is known to be less fast. Not just the interface felt slow, but I also feel that deploying new instances in Azure takes a bit longer than necessary imho. Deploying a cluster of Azure Container Services easily takes up to 20mins which I don't fully understand because all they need to do is copy over a bunch of images, right?&lt;/p&gt;
 
-&lt;h4 id="integrationinvisualstudio"&gt;Integration in Visual Studio&lt;/h4&gt;
+&lt;p&gt;Another thing which I noticed is that Azure does suffer from occasional &lt;a href="http://www.zdnet.com/article/global-dns-outage-hits-microsoft-azure-customers/"&gt;outages&lt;/a&gt;. Even though these outages usually only affect specific regions, I believe this isn't something that should still happen anno 2016.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Does it get any easier?&lt;/li&gt;
-&lt;li&gt;Tooling&lt;/li&gt;
-&lt;/ul&gt;
+&lt;!-- #### Integration in Visual Studio  
+&lt;&gt; - Does it get any easier?  
+&lt;&gt; - Tooling --&gt;
 
 &lt;h4 id="finalthoughts"&gt;Final thoughts&lt;/h4&gt;
 
-&lt;p&gt;Another big thing which I do not take into account in this blog, is the money aspect of it all which can be a really decisive argument for choosing a Cloud to build on. &lt;/p&gt;
+&lt;p&gt;One big aspect which I do not take into account in this blog, is the money aspect of it all which can be a really decisive argument for choosing a Cloud to build on. &lt;/p&gt;
 
-&lt;p&gt;Even more important is the actual cloud performance you are getting. Even though certain performance indicators are advertised, I have not analyzed whether both AWS and Azure life up to these standards. &lt;/p&gt;</content:encoded></item><item><title>Welcome to Ghost</title><description>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list&lt;/p&gt;</description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">d695826f-0311-4a5f-aec6-b1dc9520dce2</guid><category>Getting Started</category><dc:creator>Bart Jansen</dc:creator><pubDate>Mon, 17 Oct 2016 19:24:05 GMT</pubDate><content:encoded>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!&lt;/p&gt;
+&lt;p&gt;Even more important is the actual cloud performance you are getting. Even though certain performance indicators are advertised, I have not analyzed whether both AWS and Azure live up to these standards. &lt;/p&gt;</content:encoded></item><item><title>Welcome to Ghost</title><description>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list&lt;/p&gt;</description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">d695826f-0311-4a5f-aec6-b1dc9520dce2</guid><category>Getting Started</category><dc:creator>Bart Jansen</dc:creator><pubDate>Mon, 17 Oct 2016 19:24:05 GMT</pubDate><content:encoded>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!&lt;/p&gt;
 
 &lt;h2 id="gettingstarted"&gt;Getting Started&lt;/h2&gt;
 
