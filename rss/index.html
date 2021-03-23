@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Bart Jansen]]></title><description><![CDATA[Software Engineer at Microsoft]]></description><link>https://blog.bart.je/</link><generator>Ghost 0.11</generator><lastBuildDate>Tue, 23 Mar 2021 22:41:43 GMT</lastBuildDate><atom:link href="https://blog.bart.je/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Deploying a fully configured AKS cluster in Azure using Terraform]]></title><description><![CDATA[<p>Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder.</p>]]></description><link>https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/</link><guid isPermaLink="false">5f295f66-f6b8-4b47-906a-f4b9d1b8ff06</guid><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Tue, 23 Mar 2021 22:07:27 GMT</pubDate><content:encoded><![CDATA[<p>Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder.</p>
+
+<p>To save others from all the trouble I encountered while creating this one-click-deployment, I've published a <a href="https://github.com/bart-jansen/terraform-aks-appgw-acr-keyvault-loganalytics">GitHub repository</a> that serves as a boilerplate for the scenario described above, and fully deploys and configures your Azure Kubernetes Service in the cloud using a single terraform deployment.</p>
+
+<p>This blog post goes into the details of the different resources that are deployed, why these specific resources are chosen and how they tie into each other. A future blog post will build upon this and explain how Helm can be used to automate your container deployments to the AKS cluster. </p>
+
+<h2 id="architectureoverview">Architecture Overview</h2>
+
+<p><img src="https://blog.bart.je/content/images/2021/03/archdiagram_k8s.png" alt="Architecture Overview"></p>
+
+<h3 id="azurekubernetesservice">Azure Kubernetes Service</h3>
+
+<p>Azure Kubernetes Service (AKS) makes it simple to deploy a managed Kubernetes cluster in Azure. Kubernetes is an open-source container orchestration platform that automates many of the manual processes involved in deploying, managing, and scaling containerized applications. Having this cluster is ideal when you want to run multiple containerized services and don't want to worry about managing and scaling them.</p>
+
+<h3 id="azurecontainerregistry">Azure Container Registry</h3>
+
+<p>Azure Container Registry (ACR) is a managed Docker registry service, and it allows you to store and manage images for all types of container deployments. All the services in <code>/services</code> are pushed to their own repository in Azure Container Registry and every codebase change in a specific service triggers a pipeline that pushes a new version for that container to ACR with a unique tag. </p>
+
+<p>AKS and ACR integration is setup during the deployment of the AKS cluster with Terraform. This allows the AKS cluster to interact with ACR, using an Azure Active Directory service principal. The Terraform module automatically configures RBAC permissions for the ACR resources with an appropriate <code>ACRPull</code> role for the service principal.</p>
+
+<p>With this integration in place, AKS pods can fetch any of the Docker images that are pushed to ACR, even though ACR is setup as a private docker registry. Don't forget to add the azurecr.io prefix for the container and specify a tag. It is best practice to not use that <code>:latest</code> tag since this image always points to the latest image pushed to your repository and might introduce unwanted changes. Always pinpoint the container to a specific version and update that version in your <code>yaml</code> file when you want to upgrade.</p>
+
+<p>A simple example for a pod that's running a container from the <code>youracrname.azurecr.io</code> container registry, the <code>test-container</code> repository with tag <code>20210301</code>, is shown below:</p>
+
+<pre><code class="language-yaml">---
+apiVersion: v1  
+kind: Pod  
+metadata:  
+  name: test-container
+spec:  
+  containers:
+    - name: test-container
+      image: youracrname.azurecr.io/test-container: 20210301
+</code></pre>
+
+<h3 id="podidentity">Pod Identity</h3>
+
+<p>AAD Pod Identity enables Kubernetes applications to access cloud resources securely with Azure Active Directory. It's best practice to not use fixed credentials within pods or container images, as they are at risk of exposure or abuse. Instead, we're using pod identities to request access using Azure AD.</p>
+
+<p>When a pod needs access to other Azure services, such as Cosmos DB, Key Vault, or Blob Storage, the pod needs access credentials. You don't manually define credentials for pods, instead they request an access token in real time, and can use it to only access their assigned services that are defined for that identity.</p>
+
+<p>Pod Identity is fully configured on the AKS cluster when the Terraform script is deployed, and pods inside the AKS cluster can use the preconfigured pod identity by specifying the corresponding <code>aadpodidbinding</code> pod label.</p>
+
+<p>Once the identity binding is deployed, any pod in the AKS cluster can use it by matching the pod label as follows:</p>
+
+<pre><code class="language-yaml">apiVersion: v1  
+kind: Pod  
+metadata:  
+  name: demo
+  labels:
+    aadpodidbinding: $IDENTITY_NAME
+spec:  
+  containers:
+  - name: demo
+    image: mcr.microsoft.com/oss/azure/aad-pod-identity/demo:latest
+</code></pre>
+
+<h3 id="azurekeyvaultsecretsstorecsidriver">Azure Key Vault Secrets Store CSI Driver</h3>
+
+<p>Some of the services in the AKS cluster connect to external services. The connection strings and other secret values that are needed by the pods are stored in Azure Key Vault. By storing these variables in Key Vault, we ensure that these secrets are not versioned in the git repository as code, and not accessible to anyone that has access to the AKS cluster.</p>
+
+<p>To securely mount these connection strings, pod identity is used to mount these secrets in the pods and make them available to the container as environment variables. The flow for a pod fetching these variables is shown in the diagram below:</p>
+
+<p><img src="https://blog.bart.je/content/images/2021/03/aks-pod-identity-keyvault.png" alt="Azure Keyvault Pod Identity "></p>
+
+<p>Luckily, there's no need to to worry about all these different data flows, and we can just use deploy the provided <a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure">Azure Key Vault Provider for Secrets Store CSI Driver</a> on the AKS cluster. This provider leverages pod identity on the cluster and provides a <code>SecretProviderClass</code> with all the secrets that you want to fetch from Azure Key Vault. A basic example for setting up a SecretStore from KeyVault <code>kvname</code>, getting secret <code>secret1</code> and exposing these as a SecretStore named <code>kv-secrets</code>:</p>
+
+<pre><code class="language-yaml">apiVersion: secrets-store.csi.x-k8s.io/v1alpha1  
+kind: SecretProviderClass  
+metadata:  
+  name: kv-secrets
+spec:  
+  provider: azure
+  parameters:
+    usePodIdentity: "true"        # set to "true" to enable Pod Identitiy
+    keyvaultName: "kvname"        # the name of the KeyVault
+    objects:  |
+      array:
+        - |
+          objectName: secret1     # name of the secret in KeyVault
+          objectType: secret
+    tenantId: ""                  # tenant ID of the KeyVault
+</code></pre>
+
+<p>To use these secret <code>secret1</code> from <code>kv-secrets</code> in a pod and making it available in the nginx container with the environment variable <code>SECRET_ENV</code>:</p>
+
+<pre><code class="language-yaml">spec:  
+  containers:
+  - image: nginx
+    name: nginx
+    env:
+    - name: SECRET_ENV
+      valueFrom:
+        secretKeyRef:
+          name: kv-secrets
+          key: secret1
+</code></pre>
+
+<h3 id="applicationgateway">Application Gateway</h3>
+
+<p>All traffic that accesses the AKS cluster is routed via an <a href="https://docs.microsoft.com/en-us/azure/application-gateway/overview">Azure Application Gateway</a>. The Application Gateway acts as a Load Balancer and routes the incoming traffic to the corresponding services in AKS. </p>
+
+<p>Specifically, <a href="https://docs.microsoft.com/en-us/azure/application-gateway/ingress-controller-overview">Application Gateway Ingress Controller</a> (AGIC) is used. This Ingress Controller is deployed on the AKS Cluster on its own pod. AGIC monitors the Kubernetes cluster it is hosted on and continuously updates an Application Gateway, so that selected services are exposed to the Internet on the specified URL paths &amp; ports straight from the Ingress rules defined in AKS. This flow is shown in the diagram below:</p>
+
+<p><img src="https://blog.bart.je/content/images/2021/03/app-gateway-ingress-controller-pattern.png" alt="Application Gateway with Ingress Controller"></p>
+
+<p>As shown in the overview diagram, the client reaches a Public IP endpoint before the request is forwarded to the Application Gateway. This Public IP is deployed as part of the Terraform deployment on an Azure-based FQDN (e.g. <code>your-app.westeurope.cloudapp.azure.com</code>).</p>
+
+<h2 id="closingremarks">Closing remarks</h2>
+
+<p>Lots of details on the inner workings for some of these resources. Fortunately, all of these configurations happen for you and all you need to do is setup the <code>tfvars</code> variables for your environment. Keep an eye for the upcoming blog post on setting up Helm to automate your container deployments,</p>
+
+<p>What are you waiting for? Clone the <a href="https://github.com/bart-jansen/terraform-aks-appgw-acr-keyvault-loganalytics">repo</a> and start deploying your fully configured AKS cluster.</p>]]></content:encoded></item><item><title><![CDATA[How do you pimp your festival? With a chat bot!]]></title><description><![CDATA[<p>Last week, we teamed up with 20 different developers for a hackathon to create a chat bot for the <a href="https://blog.bart.je/how-do-you-pimp-your-festival-with-a-chat-bot/www.esns.nl">Eurosonic Noorderslag festival</a>. Eurosonic Noorderslag is an annual festival for new and upcoming artists with over 40,000 attendees. The purpose of our bot is to provide the attendees with near</p>]]></description><link>https://blog.bart.je/how-do-you-pimp-your-festival-with-a-chat-bot/</link><guid isPermaLink="false">870bac3d-cde3-4826-8143-88f3777671da</guid><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Thu, 26 Jan 2017 19:32:24 GMT</pubDate><content:encoded><![CDATA[<p>Last week, we teamed up with 20 different developers for a hackathon to create a chat bot for the <a href="https://blog.bart.je/how-do-you-pimp-your-festival-with-a-chat-bot/www.esns.nl">Eurosonic Noorderslag festival</a>. Eurosonic Noorderslag is an annual festival for new and upcoming artists with over 40,000 attendees. The purpose of our bot is to provide the attendees with near real-time answers to everything related to the festival. Together with these developers we built a fully functioning bot using the <a href="https://dev.botframework.com">Azure Bot Framework</a>. </p>
+
+<p>In this blog I'll briefly introduce the technology we have used for the bot, and I'll go over our approach for getting the chat bot ready in two days without any prior experience with creating bots.</p>
+
+<h3 id="botframework">Bot Framework</h3>
+
+<p>The fundament of our bot is based on the Azure Bot Framework. This framework comes with several advantages:</p>
+
+<ul>
+<li>Easy integrations with all popular chat platforms (i.e. Skype, Messenger, Slack, etc.)</li>
+<li>Serverless bot environment where you can easily scale and pay as you go (per execution) </li>
+<li>Developer SDKs which expose easy-to-use bot functionalities available in both C# and Node.JS (e.g. <a href="https://blogs.msdn.microsoft.com/tsmatsuz/2016/08/31/microsoft-bot-framework-messages-howto-image-html-card-button-etc/">Chat cards</a>)</li>
+</ul>
+
+<p>New bots can be either created via <a href="https://dev.botframework.com">botframework.com</a> or in the <a href="https://portal.azure.com">Azure Portal</a>. When you create a bot an easy walkthrough is provided to pick a programming language (C# or Node.JS), set up a basic template for your desired functionality, connect to the appropriate chat platforms and provide connectors to enabled external providers (e.g. LUIS).</p>
+
+<h3 id="luis">LUIS</h3>
+
+<p>The biggest reasons why bots are so powerful today is because of the newly trained language interpretation systems behind the bots. Microsoft's flavor for this is known as <a href="https://blog.bart.je/how-do-you-pimp-your-festival-with-a-chat-bot/www.luis.ai">Language Understanding Intelligent Service (LUIS)</a> and it serves as the interpretation system between the text input and the data processing used to provide an output that makes sense. The different capabilities are explained in the remainder of this section and illustrated in the figure below: <br>
+<img src="https://blog.bart.je/content/images/2017/01/luis-diagram-Recovered.png" alt=""></p>
+
+<h5 id="intent">Intent</h5>
+
+<p>Whenever LUIS is queried with a sentence, it first tries to determine its intent. For example, if you have a GetFood intent to return food places, you want this functionality to trigger with a variety of sentences, like 'I am hungry', 'I want food', 'I am starving' etc. Completely different sentences as you can see, but because of the built-in language interpretation, LUIS knows there's a relation between starving/hungry/want food and LUIS will trigger the GetFood intent for all three sentences.</p>
+
+<h5 id="entities">Entities</h5>
+
+<p>Another building block which LUIS provides are entities. Whenever a sentence is put through LUIS, it can extract certain keywords in these sentences and pass them to the BotFramework as separate entities. <!-- They come in two flavors: user-defined entities and pre-defined entities. User-defined entities are (as the name suggests) defined by the user in the LUIS dashboard.--> Think of the earlier example to get food. When a user for example asks 'I want pizza' or 'I am looking for a restaurant that serves orange juice', LUIS can be trained to detect food entities and extract relatively pizza and orange juice from these two sentences.</p>
+
+<h5 id="phraselists">Phrase lists</h5>
+
+<p>Lastly, phrase lists in LUIS are ideal to link certain keywords to each other. Different food entities as described in the previous section, can be easily linked together with phrase lists so you don't have to train LUIS to detect every type of food. Instead, you can train LUIS to recognize e.g. pizza, and add a comma-seperated food phrase list with all the different types of food you wish to detect.</p>
+
+<h3 id="codecollaboration">Code collaboration</h3>
+
+<p>Since we only had two days to finish the bot, we didn't organize a traditional hackathon where each team competes with each other for the best idea. We decided to collaborate with each other and to split the group up into different teams for different features. We also had an additional team which went out on the street to ask the festival attendees what functionalities they would be looking for when talking with the festival bot.</p>
+
+<p>Even though every team worked on different functionalities, every functionality got merged into the same <a href="https://github.com/bart-jansen/noorderslag-bot">GitHub repository</a>. After 30 hours, +300 commits and a lot of last minute bug fixing we managed to create our chat bot: <em>Sonic</em>. </p>
+
+<p>To experience the bot yourself, you can try out the bot on <a href="https://www.messenger.com/t/psychetude">Facebook Messenger</a>. Or have a look at the video below showing most of its functionalities:  </p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vhIpm0wgczY" frameborder="0" allowfullscreen></iframe>
+
+<!--- Here's a list with example commands you can throw at the bot:  
+```- When is Blaudzun playing?
+- Who was playing Friday the 13th of January at 21:00?
+- Where can i find hiphop
+- I want techno
+- What is the weather
+- Will it rain during Kensington
+- What is playing at 3fm
+- Play me some youngr
+- Where can I get a pizza?
+- Where can get my wristband
+- Knock knock``` -->]]></content:encoded></item><item><title><![CDATA[My journey from AWS to Azure]]></title><description><![CDATA[azure, aws, microsoft, amazon, migration, IaaS, PaaS, SaaS, Cognitive Services, first impression, impression, Open Source]]></description><link>https://blog.bart.je/aws-to-azure/</link><guid isPermaLink="false">72c889a6-4f79-494a-9747-d8b213dea79f</guid><category><![CDATA[azure]]></category><category><![CDATA[aws]]></category><category><![CDATA[experience]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Mon, 12 Dec 2016 15:36:00 GMT</pubDate><content:encoded><![CDATA[<p>Before joining Microsoft a little over three months ago, I was not familiar with the Azure Cloud whatsoever and I replaced my Windows machine with an Apple MacBook several years ago without ever looking back. I have been a software engineer for the last 10 years, but when working in the cloud I have always developed in Amazon's AWS Cloud while working at various startups. </p>
+
+<p>When I signed up to become a Technical Evangelist at Microsoft I knew this was about to change. I spent the last month and a half onboarding to Microsoft's Windows OS and Azure Cloud. Five years ago, I wouldn't have even considered joining MSFT, but due to Microsoft's new vision, focus on Cloud productivity and innovation I'm proud to call myself a Technical Evangelist at Microsoft.</p>
+
+<p>In this blog I will be sharing my Azure onboarding experiences while trying to stay unbiased ;)</p>
+
+<h4 id="excitementgraph">Excitement Graph</h4>
+
+<p>I think my ongoing journey can be described in a simple excitement-over-time graph shown below which I will try to explain in further detail in the remainder of this blog: <br>
+<img src="https://blog.bart.je/content/images/2016/12/excitement-graph-1.png" alt="Excitement graph over time"></p>
+
+<h4 id="firstimpression">First impression</h4>
+
+<p>When I first opened the Azure Portal, the first thing I noticed is the extensive amount of options, items and resources I could pick from which felt really overwhelming. </p>
+
+<p>AWS focuses on getting everything done via the Command Line Interface (CLI), whereas Azure tends to put more focus on its UI-based Web Portal. Even though the latter is nice for less experienced developers, it takes some getting used to.</p>
+
+<p>Luckily Azure fully functions via the Command Line Interface as well (<a href="https://github.com/Azure/azure-cli">azure-cli</a>), but does not seem to promote it in the way that Amazon does. Every tutorial/webinar/blog seems to use the Portal-approach and guide you through their code with various Portal screenshots. This is why it actually took me a couple of days before I found out there was a CLI :)</p>
+
+<h4 id="everyawsservicehasitsazurecounterpart">Every AWS service has its Azure counterpart</h4>
+
+<p>Yes, <em>Every</em>. It just takes some getting used to since they both use different naming conventions. A useful chart that helped me out a lot can be found <a href="https://docs.microsoft.com/en-us/azure/guidance/guidance-azure-for-aws-professionals-service-map">here</a>. AWS' EC2 and S3 can be found in Azure under respectively Virtual Machines and Azure Storage. And even more specific functionality, e.g. serverless computing where AWS uses Lambda can be found in Azure under Function Apps.</p>
+
+<h4 id="microsoftembracesopensourcesoftware">Microsoft embraces Open Source Software</h4>
+
+<p>The biggest concern I had when I joined Microsoft was that I had no .NET/C# experience whatsoever. A language and environment that have been going hand-in-hand with the Microsoft ecosystem. Fortunately, this does not hold me back in my productivity and programming capabilities at all in these days at Microsoft. The time where you could only run your code in sandboxed Windows Machines supporting solely ASP.NET with SQL server is over. Microsoft embraces every kind of programming and honestly does not care whether you are running a .NET application with SQL or a NodeJS application with MongoDB as a backend.</p>
+
+<p>Historically, the path that Microsoft took is rather surprising. Especially when we look at a quote of Microsoft's former CEO Steve Ballmer in 2001:  </p>
+
+<blockquote>
+  <p>"Linux is a cancer that attaches itself in an intellectual property sense to everything it touches"</p>
+</blockquote>
+
+<p>Times sure have changed and even Ballmer seems to <a href="http://www.zdnet.com/article/ballmer-i-may-have-called-linux-a-cancer-but-now-i-love-it/">agree</a>. At the time, Microsoft was fighting against the open source Linux community but as of lately actually embraces the whole OSS scene. Being the <a href="http://thenextweb.com/microsoft/2016/09/15/in-your-face-google/">largest open source contributor</a> on GitHub, <a href="https://www.microsoft.com/en-us/sql-server/sql-server-vnext-including-Linux">SQL server running on Linux</a>, <a href="http://www.pcworld.com/article/3055403/windows/windows-10s-bash-shell-can-run-graphical-linux-applications-with-this-trick.html">Ubuntu running on Windows 10</a> and the list goes on. And it does result in some crazy setups which were unthinkable a couple of years ago:  </p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Azure CTO, coding on a Mac, running in Docker, deploying to hw running Linux. Am I taking crazy pills? <a href="https://twitter.com/hashtag/DockerCon?src=hash">#DockerCon</a> <a href="https://t.co/qMCQxajBtd">pic.twitter.com/qMCQxajBtd</a></p>&mdash; Andrew Bell (@recursive_chaos) <a href="https://twitter.com/recursive_chaos/status/745303319162171394">June 21, 2016</a></blockquote>  
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Of course there are still scenarios where you wish you grew up in the MSFT ecosystem. One of the interesting companies that Microsoft <a href="https://blogs.microsoft.com/blog/2016/02/24/microsoft-to-acquire-xamarin-and-empower-more-developers-to-build-apps-on-any-device/#sm.0000wtu03y1z0fd1qet1odpyu0ih6">acquired</a> is Xamarin. Xamarin allows you to build cross platform mobile applications written in one programming language (instead of 3 different ones). Unfortunately for me, this language is C# ;)</p>
+
+<h4 id="amentoazuresaas">Amen to Azure SaaS</h4>
+
+<p>One thing that I was used to on Amazon's AWS cloud was setting up Virtual Machines to host my web services. Even though AWS fully supports PaaS services, I have never experimented with this. With Azure, the focus truly lies on PaaS and even SaaS and it's currently trying to win ground for IaaS solutions. That said, a frictionless migration is possible for all your VMs. Furthermore, Azure offers a lot of PaaS services, such as the App Service which automagically maintains, scales up/down and provides lots of insight for your web services. </p>
+
+<p>Another great example of easy-to-use technology, are <a href="https://www.microsoft.com/cognitive-services">Microsoft Cognitive Services</a>. This is an attempt to democratize the otherwise extremely complex AI and Machine Learning possibilities. Cognitive Services exposes simple APIs which developers can leverage to use extremely well-trained models to interpret &amp; analyze images, audio and video. The nice thing about this, is that it does not require a hardcore developer to use these services. Anyone with little programming experience can leverage these models.</p>
+
+<h4 id="somedrawbacks">Some drawbacks</h4>
+
+<p>One of the things that bothered me a lot in the beginning is that the Azure Portal tends to be slow at times. I however later found out that this is because I am using an internal Microsoft subscriptions which is known to be less fast. Not just the interface felt slow, but I also feel that deploying new instances in Azure takes a bit longer than necessary imho. Deploying a cluster of Azure Container Services easily takes up to 20mins which I don't fully understand because all they need to do is copy over a bunch of images, right?</p>
+
+<p>Another thing which I noticed is that Azure does suffer from occasional <a href="http://www.zdnet.com/article/global-dns-outage-hits-microsoft-azure-customers/">outages</a>. Even though these outages usually only affect specific regions, I believe this isn't something that should still happen anno 2016. With all that said, I do certainly think that these two cons outweigh the pros. With the PaaS/SaaS solutions, the openness in which you can use any language/toolset and the large amount of capabilities that Azure brings, I can definitely say I'm hooked.</p>
+
+<!-- #### Integration in Visual Studio  
+<> - Does it get any easier?  
+<> - Tooling -->
+
+<h4 id="finalthoughts">Final thoughts</h4>
+
+<p>One big aspect which I do not consider in this blog, is the money aspect of it all which can be a really decisive argument for choosing a Cloud to build on. </p>
+
+<p>Even more important is the actual cloud performance you are getting. Even though certain performance indicators are advertised, I have not analyzed whether both AWS and Azure live up to these standards. </p>]]></content:encoded></item></channel></rss>
