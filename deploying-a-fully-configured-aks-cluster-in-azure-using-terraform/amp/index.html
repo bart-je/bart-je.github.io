@@ -20,7 +20,7 @@
     <meta property="og:description" content="Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder." />
     <meta property="og:url" content="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/" />
     <meta property="article:published_time" content="2021-03-23T22:07:27.000Z" />
-    <meta property="article:modified_time" content="2021-03-23T22:18:41.000Z" />
+    <meta property="article:modified_time" content="2021-03-24T08:41:10.000Z" />
     <meta property="article:publisher" content="https://www.facebook.com/bartj" />
     <meta property="article:author" content="https://www.facebook.com/bartj" />
     <meta name="twitter:card" content="summary" />
@@ -60,7 +60,7 @@
     "headline": "Deploying a fully configured AKS cluster in Azure using Terraform",
     "url": "https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/",
     "datePublished": "2021-03-23T22:07:27.000Z",
-    "dateModified": "2021-03-23T22:18:41.000Z",
+    "dateModified": "2021-03-24T08:41:10.000Z",
     "description": "Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder.",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -878,9 +878,9 @@
 
 <h3 id="azurecontainerregistry">Azure Container Registry</h3>
 
-<p>Azure Container Registry (ACR) is a managed Docker registry service, and it allows you to store and manage images for all types of container deployments. All the services in <code>/services</code> are pushed to their own repository in Azure Container Registry and every codebase change in a specific service triggers a pipeline that pushes a new version for that container to ACR with a unique tag. </p>
+<p>Azure Container Registry (ACR) is a managed Docker registry service, and it allows you to store and manage images for all types of container deployments. Every service can be pushed to its own repository in Azure Container Registry and every codebase change in a specific service can trigger a pipeline that pushes a new version for that container to ACR with a unique tag.</p>
 
-<p>AKS and ACR integration is setup during the deployment of the AKS cluster with Terraform. This allows the AKS cluster to interact with ACR, using an Azure Active Directory service principal. The Terraform module automatically configures RBAC permissions for the ACR resources with an appropriate <code>ACRPull</code> role for the service principal.</p>
+<p>AKS and ACR integration is setup during the deployment of the AKS cluster with Terraform. This allows the AKS cluster to interact with ACR, using an Azure Active Directory service principal. The Terraform deployment automatically configures RBAC permissions for the ACR resources with an appropriate <code>ACRPull</code> role for the service principal.</p>
 
 <p>With this integration in place, AKS pods can fetch any of the Docker images that are pushed to ACR, even though ACR is setup as a private docker registry. Don't forget to add the azurecr.io prefix for the container and specify a tag. It is best practice to not use that <code>:latest</code> tag since this image always points to the latest image pushed to your repository and might introduce unwanted changes. Always pinpoint the container to a specific version and update that version in your <code>yaml</code> file when you want to upgrade.</p>
 
@@ -894,7 +894,7 @@ metadata:
 spec:  
   containers:
     - name: test-container
-      image: youracrname.azurecr.io/test-container: 20210301
+      image: youracrname.azurecr.io/test-container:20210301
 </code></pre>
 
 <h3 id="podidentity">Pod Identity</h3>
