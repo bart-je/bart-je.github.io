@@ -20,7 +20,7 @@
     <meta property="og:description" content="Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder." />
     <meta property="og:url" content="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/" />
     <meta property="article:published_time" content="2021-03-23T22:07:27.000Z" />
-    <meta property="article:modified_time" content="2021-03-24T08:41:10.000Z" />
+    <meta property="article:modified_time" content="2021-03-24T09:13:50.000Z" />
     <meta property="article:publisher" content="https://www.facebook.com/bartj" />
     <meta property="article:author" content="https://www.facebook.com/bartj" />
     <meta name="twitter:card" content="summary" />
@@ -60,7 +60,7 @@
     "headline": "Deploying a fully configured AKS cluster in Azure using Terraform",
     "url": "https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/",
     "datePublished": "2021-03-23T22:07:27.000Z",
-    "dateModified": "2021-03-24T08:41:10.000Z",
+    "dateModified": "2021-03-24T09:13:50.000Z",
     "description": "Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder.",
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -927,7 +927,9 @@ spec:
 
 <p><amp-img src="https://blog.bart.je/content/images/2021/03/aks-pod-identity-keyvault.png" alt="Azure Keyvault Pod Identity " width="1629" height="967" layout="responsive"></amp-img></p>
 
-<p>Luckily, there's no need to to worry about all these different data flows, and we can just use deploy the provided <a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure">Azure Key Vault Provider for Secrets Store CSI Driver</a> on the AKS cluster. This provider leverages pod identity on the cluster and provides a <code>SecretProviderClass</code> with all the secrets that you want to fetch from Azure Key Vault. A basic example for setting up a SecretStore from KeyVault <code>kvname</code>, getting secret <code>secret1</code> and exposing these as a SecretStore named <code>kv-secrets</code>:</p>
+<p>Luckily, there's no need to to worry about all these different data flows, and we can just use deploy the provided <a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure">Azure Key Vault Provider for Secrets Store CSI Driver</a> on the AKS cluster. This provider leverages pod identity on the cluster and provides a <code>SecretProviderClass</code> with all the secrets that you want to fetch from Azure Key Vault. </p>
+
+<p>A basic example for setting up a SecretStore from KeyVault <code>kvname</code>, getting secret <code>secret1</code> and exposing these as a SecretStore named <code>kv-secrets</code>:</p>
 
 <pre><code class="language-yaml">apiVersion: secrets-store.csi.x-k8s.io/v1alpha1  
 kind: SecretProviderClass  
@@ -972,7 +974,7 @@ spec:
 
 <h2 id="closingremarks">Closing remarks</h2>
 
-<p>Lots of details on the inner workings for some of these resources. Fortunately, all of these configurations happen for you and all you need to do is setup the <code>tfvars</code> variables for your environment. Keep an eye for the upcoming blog post on setting up Helm to automate your container deployments,</p>
+<p>Lots of details on the inner workings for some of these resources. Fortunately, all of these configurations happen for you and all you need to do is setup the <code>tfvars</code> variables for your environment. Keep an eye out for the upcoming blog post on setting up Helm to automate your container deployments.</p>
 
 <p>What are you waiting for? Clone the <a href="https://github.com/bart-jansen/terraform-aks-appgw-acr-keyvault-loganalytics">repo</a> and start deploying your fully configured AKS cluster.</p>
 
