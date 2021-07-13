@@ -129,7 +129,7 @@ td, th{ padding: 0; }
     -moz-osx-font-smoothing: grayscale;
 }
 
-code a {
+code a.vglnk {
     color: #fff;
     text-decoration: none;
     pointer-events: none;
