@@ -4,31 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <title>Adding Event-driven Autoscaling to your Kubernetes Cluster</title>
+    <title>Using a Managed Identity with Databricks to Run Notebooks Through a Web App</title>
 
     <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="canonical" href="https://blog.bart.je/adding-keda-aks-cluster/" />
+    <link rel="canonical" href="https://blog.bart.je/using-a-managed-identity-with-databricks-to-run-notebooks-through-a-web-app/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
     
     <meta property="og:site_name" content="Bart Jansen" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Adding Event-driven Autoscaling to your Kubernetes Cluster" />
-    <meta property="og:description" content="Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically add nodes to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add additional pods based on" />
-    <meta property="og:url" content="https://blog.bart.je/adding-keda-aks-cluster/" />
-    <meta property="og:image" content="https://blog.bart.je/content/images/2021/07/horizontal-autoscaling-kubernetes-1500x700.jpg" />
-    <meta property="article:published_time" content="2021-07-13T12:57:18.000Z" />
-    <meta property="article:modified_time" content="2021-07-21T13:46:21.000Z" />
+    <meta property="og:title" content="Using a Managed Identity with Databricks to Run Notebooks Through a Web App" />
+    <meta property="og:description" content="Databricks is great for processing data, and out of the box comes with &#x27;Jobs&#x27; to automate and schedule notebooks. If you want more control over these triggers, customize the notebook parameters or have your own orchestrator, you could also trigger these notebook runs via another resource, such as a Web" />
+    <meta property="og:url" content="https://blog.bart.je/using-a-managed-identity-with-databricks-to-run-notebooks-through-a-web-app/" />
+    <meta property="og:image" content="https://blog.bart.je/content/images/2021/07/newprofilepic-1.png" />
+    <meta property="article:published_time" content="2023-10-18T08:08:00.000Z" />
+    <meta property="article:modified_time" content="2023-10-24T11:25:17.000Z" />
     <meta property="article:publisher" content="https://www.facebook.com/bartj" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Adding Event-driven Autoscaling to your Kubernetes Cluster" />
-    <meta name="twitter:description" content="Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically add nodes to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add additional pods based on" />
-    <meta name="twitter:url" content="https://blog.bart.je/adding-keda-aks-cluster/" />
-    <meta name="twitter:image" content="https://blog.bart.je/content/images/2021/07/horizontal-autoscaling-kubernetes-1500x700.jpg" />
+    <meta name="twitter:title" content="Using a Managed Identity with Databricks to Run Notebooks Through a Web App" />
+    <meta name="twitter:description" content="Databricks is great for processing data, and out of the box comes with &#x27;Jobs&#x27; to automate and schedule notebooks. If you want more control over these triggers, customize the notebook parameters or have your own orchestrator, you could also trigger these notebook runs via another resource, such as a Web" />
+    <meta name="twitter:url" content="https://blog.bart.je/using-a-managed-identity-with-databricks-to-run-notebooks-through-a-web-app/" />
+    <meta name="twitter:image" content="https://blog.bart.je/content/images/2021/07/newprofilepic.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Bart Jansen" />
     <meta name="twitter:site" content="@bartjansn" />
     <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="933" />
+    <meta property="og:image:height" content="2000" />
     
     <script type="application/ld+json">
 {
@@ -57,17 +57,11 @@
         "url": "https://blog.bart.je/author/bart/",
         "sameAs": []
     },
-    "headline": "Adding Event-driven Autoscaling to your Kubernetes Cluster",
-    "url": "https://blog.bart.je/adding-keda-aks-cluster/",
-    "datePublished": "2021-07-13T12:57:18.000Z",
-    "dateModified": "2021-07-21T13:46:21.000Z",
-    "image": {
-        "@type": "ImageObject",
-        "url": "https://blog.bart.je/content/images/2021/07/horizontal-autoscaling-kubernetes-1500x700.jpg",
-        "width": 2000,
-        "height": 933
-    },
-    "description": "Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can\nautomatically add nodes to the node pool based on the load of the cluster (based\non CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod\nAutoscaling (HPA) to dynamically add additional pods based on the configured\nscaler. CA and KEDA therefore go hand-in-hand when managing dynamic workloads on\nan AKS cluster since they scale on different dimensions, based on different\nrules, as shown below:\n\nVertic",
+    "headline": "Using a Managed Identity with Databricks to Run Notebooks Through a Web App",
+    "url": "https://blog.bart.je/using-a-managed-identity-with-databricks-to-run-notebooks-through-a-web-app/",
+    "datePublished": "2023-10-18T08:08:00.000Z",
+    "dateModified": "2023-10-24T11:25:17.000Z",
+    "description": "Databricks is great for processing data, and out of the box comes with &#x27;Jobs&#x27; to\nautomate and schedule notebooks. If you want more control over these triggers,\ncustomize the notebook parameters or have your own orchestrator, you could also\ntrigger these notebook runs via another resource, such as a Web App. We can use\nthe Web App&#x27;s managed identity to run Databricks notebooks. This is a powerful\nway to automate and secure your data processing workflows, and it&#x27;s surprisingly\neasy to set up.\n\nWha",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://blog.bart.je/"
@@ -1062,65 +1056,87 @@
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">Adding Event-driven Autoscaling to your Kubernetes Cluster</h1>
+                <h1 class="post-title">Using a Managed Identity with Databricks to Run Notebooks Through a Web App</h1>
                 <section class="post-meta">
                     Bart Jansen -
-                    <time class="post-date" datetime="2021-07-13">13 Jul 2021</time>
+                    <time class="post-date" datetime="2023-10-18">18 Oct 2023</time>
                 </section>
             </header>
-            <figure class="post-image">
-                <amp-img src="https://blog.bart.je/content/images/2021/07/horizontal-autoscaling-kubernetes-1500x700.jpg" width="600" height="340" layout="responsive" 
-                alt="Adding Event-driven Autoscaling to your Kubernetes Cluster"
-                ></amp-img>
-            </figure>
             <section class="post-content">
 
-                <p>Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically <em>add nodes</em> to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add <em>additional pods</em> based on the configured scaler. CA and KEDA therefore go hand-in-hand when managing dynamic workloads on an AKS cluster since they scale on different dimensions, based on different rules, as shown below:</p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><figcaption>Vertical and Horizontal scaling in Kubernetes</figcaption></figure><h2 id="overview">Overview</h2><p>An overview of KEDA that scales an <code>App</code> based on the Topic Queue size of <code>Azure Service Bus</code> is shown in this diagram:</p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><figcaption>Communication flow for KEDA scaling an app in AKS</figcaption></figure><p>The app is deployed together with a KEDA-backed <code>ScaledObject</code>.  This ScaledObject supports <code>minReplicaCount</code> and <code>maxReplicaCount</code> that defines the range of concurrent replicas for the pods that can exist for the app. Furthermore, a <code>scale trigger</code> object is defined inside the ScaledObject that defines the scaling criteria and conditions for scaling up and down.</p><p>Although optional, the diagram above also uses <em>Pod Identity</em>. Similar to how secrets are <a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure">fetched from Azure Key Vault inside containers</a>, Pod Identity is used with KEDA to directly subscribe to an e.g. <em>Azure Service Bus Topic</em> to scale the pods without passing any connecting strings by specifying its <code>AzureIdentityBinding</code>. </p><h2 id="usage">Usage</h2><p>The KEDA <a href="https://github.com/kedacore/charts" rel="noopener noreferrer">Helm Chart</a> needs to be installed on the AKS cluster and configured to use  <code>AzureIdentityBinding</code> to access resources in Azure. This Azure AD Identity needs to have sufficient RBAC permissions to directly access the required resources in Azure.</p><p>The <code>ScaledObject</code> is defined as follows, which is deployed along with the application deployment specified under <code>scaleTargetRef</code>. This needs to match the deployment name which needs to be deployed in the same Kubernetes namespace.</p><pre><code class="language-yaml">apiVersion: keda.sh/v1alpha1
-kind: ScaledObject
-metadata:
-  name: msg-processor-scaler
-spec:
-  scaleTargetRef:
-    name: msg-processor # must be in the same namespace as the ScaledObject
-  minReplicaCount: 1
-  maxReplicaCount: 10
-  triggers:
-  - type: azure-servicebus
-    metadata:
-      namespace: SERVICE_BUS_NAMESPACE 
-      topicName: SERVICE_BUS_TOPIC
-      subscriptionName: SERVICE_BUS_TOPIC_SUBSCRIPTION
-      messageCount: "5"
-    authenticationRef:
-      name: trigger-auth-service-bus-msgs
-</code></pre><p>It defines the <code>type</code> of scale trigger we would like to use and the scaling criteria specified under the <code>metadata</code> object. Lots of different KEDA scalars are available out of the box and details can be found by going through the <a href="https://keda.sh/docs/latest/scalers/">KEDA documentation</a>. </p><p>In the example above, we use an <a href="https://keda.sh/docs/latest/scalers/azure-service-bus/">azure-servicebus scalar</a> and would like to scale out if there are more than 5 unprocessed messages on the topic subscription <code>SERVICE_BUS_TOPIC_SUBSCRIPTION</code> on the <code>SERVICE_BUS_TOPIC</code> topic in the <code>SERVICE_BUS_NAMESPACE</code> kubernetes namespace. Scaling will go up to a maximum of 10 concurrent replicas which is defined via <code>maxReplicaCount</code> and there will always be a 1 pod minimum as defined by <code>minReplicaCount</code>.</p><p>Since we are using Pod Identity, we also specify the <code>authenticationRef</code> for the ScaledObject to<code>trigger-auth-service-bus-msgs</code>. This is a <code>TriggerAuthentication</code> resource that defines how KEDA should authenticate to get the metrics.</p><pre><code class="language-yaml">apiVersion: keda.sh/v1alpha1
-kind: TriggerAuthentication
-metadata:
-  name: trigger-auth-service-bus-msgs
-spec:
-  podIdentity:
-    provider: azure
-</code></pre><p>In this case, we are telling KEDA to use Azure as a Pod Identity provider which uses <a href="https://github.com/Azure/aad-pod-identity" rel="noopener noreferrer">Azure AD Pod Identity</a>. Alternatively, a full connection string can also be used without specifying a TriggerAuthentication resource.</p><p>By using a TriggerAuthentication you can easily re-use this authentication resource, but it also allows you to separate the permissions for KEDA and other resources inside your kubernetes cluster by binding them to different Azure AD Identities with different RBAC permissions.</p><h2 id="using-alternative-keda-scalars">Using alternative KEDA scalars</h2><p>The example above shows how to configure KEDA for autoscaling using <em>Azure Service Bus Topics</em>, but lots of other scalars are supported out of the box and more information can be found on <a href="https://keda.sh/docs/2.2/scalers/" rel="noopener noreferrer">KEDA Documentation - Scalars</a> .</p><blockquote>Note: when adding additional triggers, also ensure that Pod Identity can read from these resources by adding the corresponding RBAC permissions.</blockquote><h2 id="using-the-prebuilt-helm-chart-with-keda-support">Using the prebuilt Helm chart with KEDA support</h2><p>If you have <a href="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/">deployed a fully configured AKS cluster to Azure</a> and you are also using the accompanying <a href="https://github.com/bart-jansen/secretstore-ingress-keda-apps-helm">Umbrella Helm chart</a> for easy deployment of your apps then you're in luck, because it also allows you to easily add KEDA support for the applications you deploy to the AKS cluster. </p><p>Most of the documentation to get started is available on <a href="https://github.com/bart-jansen/secretstore-ingress-keda-apps-helm">GitHub</a>, but here's a sample on how you would deploy the application described above using this Helm Chart.</p><pre><code class="language-yaml">helm-app:
-  app:
-    name: app-service-name
-    container:
-      image: hello-world:latest
-      port: 80
+                <p>Databricks is great for processing data, and out of the box comes with 'Jobs' to automate and schedule notebooks. If you want more control over these triggers, customize the notebook parameters or have your own orchestrator, you could also trigger these notebook runs via another resource, such as a Web App. We can use the Web App's managed identity to run Databricks notebooks. This is a powerful way to automate and secure your data processing workflows, and it's surprisingly easy to set up.</p><h3 id="what-is-a-managed-identity">What is a Managed Identity?</h3><p>Before we dive in, let's quickly define what a managed identity is. In Azure, a managed identity is a service principal that's automatically managed by Azure. It provides an identity for applications to use when connecting to resources that support Azure Active Directory (Azure AD) authentication.</p><h3 id="why-not-use-role-based-access-control-rbac">Why not use Role-Based Access Control (RBAC)?</h3><p>While Role-Based Access Control (RBAC) is a common practice in many Azure services to manage access, when it comes to Databricks, there are specific reasons to opt for Databricks' own access control management:</p><ol><li><strong>Customized Access Control</strong>: Databricks provides its own specialized access system, allowing for direct integration with Azure resources via Service Principals. This approach is tailored to Databricks' unique workflows and ecosystem.</li><li><strong>Granularity of Permissions</strong>: Databricks allows specific entitlements, such as workspace access or cluster creation. This refined control surpasses the often generalized permissions of traditional RBAC, granting precise access based on exact needs.</li><li><strong>Group-Based Assignments</strong>: Beyond just entitlements, Databricks facilitates the assignment of Service Principals to specific groups. This caters to varied levels of access needed for different jobs or notebooks, ensuring both security and flexibility.</li></ol><p>In summary, while RBAC is a valuable tool for many Azure services, when working within Databricks, leveraging its custom access control mechanisms can offer more precise, flexible, and streamlined management of permissions and access.</p><p>In order to programatically setup these permissions we can leverage the <a href="https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad">SCIM API</a> to assign a managed identity and assign it to a group. These groups can have specific entitlements for specific workspaces. One way to do this is shown in the diagram below:</p><figure class="kg-card kg-image-card"></figure><h3 id="setting-up-a-managed-identity">Setting Up a Managed Identity</h3><p>To set up a managed identity for your existing Web App, you'll need to follow these steps:</p><ol><li>In the Azure Portal, open the Web App</li><li>Click on "Identity" and enable "System assigned managed identitiy".</li><li>Copy the generated "Object (principal) ID" and search for the associated Enterprise Application in Azure Active Directory.</li><li>Copy the associated Application ID, as we will need this to configure Databricks.</li></ol><h3 id="assigning-the-managed-identity-to-databricks">Assigning the Managed Identity to Databricks</h3><p>After creating the managed identity, you'll need to assign it to your Databricks workspace:<br />1. In the Azure portal, go to your Databricks workspace.<br />2. In the Admin settings (right top), go to the "Service principals" section.<br />3. Click on Add Service Principal, add the Application ID you copied earlier and tick "Allow workspace access" to ensure the Service Principal has sufficient privileges to run notebooks.</p><h3 id="running-databricks-notebooks-from-a-web-app">Running Databricks Notebooks from a Web App</h3><p>Now that we have a managed identity set up and assigned to Databricks, we can use it to run Databricks notebooks from a web application. Here's how:</p><ol><li>In your web application, use the Azure SDK to get a token for the managed identity. This token will be used to authenticate to Databricks.</li><li>Use the Databricks REST API to create a new job. The job should be configured to run the notebook you want.</li><li>Start the job using the Databricks REST API. You'll need to include the token you got in step 1 in the Authorization header.</li></ol><p>Here's a sample code snippet in Python that shows how to do this:</p><pre><code class="language-python">from azure.identity import DefaultAzureCredential
+from azure.databricks import DatabricksClient
 
-  keda:
-    enabled: true
-    name: app-service-name-keda
-    authRefName: auth-trigger-app-service-name
-    scaleTargetRef: app-service-name 
-    minReplicaCount: 1
-    maxReplicaCount: 10
-    triggers:
-    - type: azure-servicebus
-      metadata:
-        topicName: sbtopic-app-example-service
-        subscriptionName: sbsub-app-example-service
-        namespace: servicebus-app-example-ns
-        messageCount: 5</code></pre><p>Using this Helm Chart, you can easily deploy your Service, Deployment, Scaled Object, AuthenticationTriggers and optionally all other resources (e.g. ingress, secretstore) your deployment requires. </p>
+# Get a token for the managed identity
+credential = DefaultAzureCredential()
+token = credential.get_token('2ff814a6-3304-4ab8-85cb-cd0e6f879c1d')
+
+# Create a Databricks client
+client = DatabricksClient(base_url='https://&lt;databricks-instance&gt;', token=token.token)
+
+# Create a new job
+job_id = client.jobs.create({'notebook_task': {'notebook_path': '/path/to/notebook'}})
+
+# Start the job
+client.jobs.run_now(job_id)</code></pre><p>With this setup, you can securely run Databricks notebooks from your web application using a managed identity. The same applies for other services that support managed identity (e.g. Azure Functions, Azure Container Instances, AKS, etc) and the same also applies for User Assigned Managed Identities instead of System Assigned Managed Identities.</p><h3 id="automate-deployment-using-terraform">Automate deployment using Terraform</h3><p>Instead of configuring the managed identity manually, we can leverage the azure and databricks terraform providers to automate the creation of the managed identity and attaching it to a databricks cluster. The databricks providers uses the SCIM API under the hood, and here's an example how to tie everything together in terraform:</p><pre><code class="language-hcl">provider "azurerm" {
+  features {}
+}
+
+data "azurerm_databricks_workspace" "workspace" {
+  name                = "your-databricks-workspace-name"
+  resource_group_name = "your-databricks-rg-name"
+}
+
+provider "databricks" {
+  host                        = data.azurerm_databricks_workspace.workspace.workspace_url
+  azure_workspace_resource_id = data.azurerm_databricks_workspace.workspace.id
+}
+
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "West Europe"
+}
+
+resource "azurerm_service_plan" "example" {
+  name                = "example"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  os_type             = "Linux"
+  sku_name            = "P1v2"
+}
+
+resource "azurerm_linux_web_app" "example" {
+  name                = "example"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_service_plan.example.location
+  service_plan_id     = azurerm_service_plan.example.id
+
+  site_config {}
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
+/* 
+The code below adds the Managed Identity service principal to the databricks 
+admin group using the Databricks Terraform Provider. 
+
+This is required to allow the WebApp to access the Databricks REST API.
+*/
+data "databricks_group" "admin" {
+  display_name = "admin" // existing admin group in databricks workspace
+}
+
+resource "databricks_service_principal" "sp" {
+  application_id = azurerm_linux_web_app.example.identity[0].client_id
+  display_name   = "appsvc-id"
+}
+
+resource "databricks_group_member" "admin_group" {
+  group_id  = data.databricks_group.admin.id
+  member_id = databricks_service_principal.sp.id
+}</code></pre><h3 id="wrapping-up"><br />Wrapping up</h3><p>Managed identities offer a secure and simple way to authenticate to services like Databricks. By using a managed identity, you can eliminate the need to store sensitive credentials in your code and simplify your authentication process. Assigning the managed identity to Databricks, allows us to have granular control on what the identity (i.e. Web App) can access and this will allow you to e.g. trigger Databricks workloads from other resources in Azure. </p>
 
             </section>
 
