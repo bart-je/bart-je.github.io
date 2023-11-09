@@ -6,29 +6,38 @@
 
     <title>Adding Event-driven Autoscaling to your Kubernetes Cluster</title>
 
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="canonical" href="https://blog.bart.je/adding-keda-aks-cluster/" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="icon" href="https://blog.bart.je/content/images/size/w256h256/2023/10/android-chrome-192x192.png" type="image/png">
+    <link rel="canonical" href="https://blog.bart.je/adding-keda-aks-cluster/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
     
-    <meta property="og:site_name" content="Bart Jansen" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Adding Event-driven Autoscaling to your Kubernetes Cluster" />
-    <meta property="og:description" content="Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically add nodes to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add additional pods based on" />
-    <meta property="og:url" content="https://blog.bart.je/adding-keda-aks-cluster/" />
-    <meta property="og:image" content="https://blog.bart.je/content/images/2021/07/horizontal-autoscaling-kubernetes-1500x700.jpg" />
-    <meta property="article:published_time" content="2021-07-13T12:57:18.000Z" />
-    <meta property="article:modified_time" content="2021-07-21T13:46:21.000Z" />
-    <meta property="article:publisher" content="https://www.facebook.com/bartj" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Adding Event-driven Autoscaling to your Kubernetes Cluster" />
-    <meta name="twitter:description" content="Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically add nodes to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add additional pods based on" />
-    <meta name="twitter:url" content="https://blog.bart.je/adding-keda-aks-cluster/" />
-    <meta name="twitter:image" content="https://blog.bart.je/content/images/2021/07/horizontal-autoscaling-kubernetes-1500x700.jpg" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Bart Jansen" />
-    <meta name="twitter:site" content="@bartjansn" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="933" />
+    <meta property="og:site_name" content="Bart Jansen">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Adding Event-driven Autoscaling to your Kubernetes Cluster">
+    <meta property="og:description" content="Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically add nodes to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add additional pods based on">
+    <meta property="og:url" content="https://blog.bart.je/adding-keda-aks-cluster/">
+    <meta property="og:image" content="https://blog.bart.je/content/images/2021/07/horizontal-autoscaling-kubernetes-1500x700.jpg">
+    <meta property="article:published_time" content="2021-07-13T12:57:18.000Z">
+    <meta property="article:modified_time" content="2023-11-09T12:07:40.000Z">
+    <meta property="article:tag" content="azure">
+    <meta property="article:tag" content="keda">
+    <meta property="article:tag" content="aks">
+    <meta property="article:tag" content="autoscaling">
+    <meta property="article:tag" content="kubernetes">
+    <meta property="article:tag" content="helm">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/bartj">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Adding Event-driven Autoscaling to your Kubernetes Cluster">
+    <meta name="twitter:description" content="Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically add nodes to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add additional pods based on">
+    <meta name="twitter:url" content="https://blog.bart.je/adding-keda-aks-cluster/">
+    <meta name="twitter:image" content="https://blog.bart.je/content/images/2021/07/horizontal-autoscaling-kubernetes-1500x700.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Bart Jansen">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="azure, keda, aks, autoscaling, kubernetes, helm">
+    <meta name="twitter:site" content="@bartjansn">
+    <meta property="og:image:width" content="2000">
+    <meta property="og:image:height" content="933">
     
     <script type="application/ld+json">
 {
@@ -40,7 +49,7 @@
         "url": "https://blog.bart.je/",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://blog.bart.je/content/images/2021/07/newprofilepic-400x400.png",
+            "url": "https://blog.bart.je/content/images/2023/10/newprofilepic_o-1.png",
             "width": 60,
             "height": 60
         }
@@ -48,35 +57,27 @@
     "author": {
         "@type": "Person",
         "name": "Bart Jansen",
-        "image": {
-            "@type": "ImageObject",
-            "url": "https://blog.bart.je/content/images/2021/05/profilepic.jpeg",
-            "width": 500,
-            "height": 500
-        },
         "url": "https://blog.bart.je/author/bart/",
         "sameAs": []
     },
     "headline": "Adding Event-driven Autoscaling to your Kubernetes Cluster",
     "url": "https://blog.bart.je/adding-keda-aks-cluster/",
     "datePublished": "2021-07-13T12:57:18.000Z",
-    "dateModified": "2021-07-21T13:46:21.000Z",
+    "dateModified": "2023-11-09T12:07:40.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://blog.bart.je/content/images/2021/07/horizontal-autoscaling-kubernetes-1500x700.jpg",
         "width": 2000,
         "height": 933
     },
-    "description": "Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can\nautomatically add nodes to the node pool based on the load of the cluster (based\non CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod\nAutoscaling (HPA) to dynamically add additional pods based on the configured\nscaler. CA and KEDA therefore go hand-in-hand when managing dynamic workloads on\nan AKS cluster since they scale on different dimensions, based on different\nrules, as shown below:\n\nVertic",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://blog.bart.je/"
-    }
+    "keywords": "azure, keda, aks, autoscaling, kubernetes, helm",
+    "description": "Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically add nodes to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add additional pods based on the configured scaler. CA and KEDA therefore go hand-in-hand when managing dynamic workloads on an AKS cluster since they scale on different dimensions, based on different rules, as shown below:\n\n\nOverv",
+    "mainEntityOfPage": "https://blog.bart.je/adding-keda-aks-cluster/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 4.48" />
-    <link rel="alternate" type="application/rss+xml" title="Bart Jansen" href="https://blog.bart.je/rss/" />
+    <meta name="generator" content="Ghost 5.72">
+    <link rel="alternate" type="application/rss+xml" title="Bart Jansen" href="https://blog.bart.je/rss/">
 
     <style amp-custom>
     *,
@@ -251,6 +252,16 @@
 
     amp-img img {
         object-fit: cover;
+    }
+    
+    amp-youtube {
+        height: calc(100vw / 1.78);
+        width: 100vw;
+        position: relative;
+    }
+
+    amp-youtube img {
+        position: absolute;
     }
 
     .page-header {
@@ -1054,7 +1065,7 @@
 <body class="amp-template">
     <header class="page-header">
         <a href="https://blog.bart.je">
-                <amp-img class="site-icon" src="https://blog.bart.je/content/images/2021/07/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
+                <amp-img class="site-icon" src="https://blog.bart.je/content/images/2023/10/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
         </a>
     </header>
 
@@ -1075,7 +1086,7 @@
             </figure>
             <section class="post-content">
 
-                <p>Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically <em>add nodes</em> to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add <em>additional pods</em> based on the configured scaler. CA and KEDA therefore go hand-in-hand when managing dynamic workloads on an AKS cluster since they scale on different dimensions, based on different rules, as shown below:</p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><figcaption>Vertical and Horizontal scaling in Kubernetes</figcaption></figure><h2 id="overview">Overview</h2><p>An overview of KEDA that scales an <code>App</code> based on the Topic Queue size of <code>Azure Service Bus</code> is shown in this diagram:</p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><figcaption>Communication flow for KEDA scaling an app in AKS</figcaption></figure><p>The app is deployed together with a KEDA-backed <code>ScaledObject</code>.  This ScaledObject supports <code>minReplicaCount</code> and <code>maxReplicaCount</code> that defines the range of concurrent replicas for the pods that can exist for the app. Furthermore, a <code>scale trigger</code> object is defined inside the ScaledObject that defines the scaling criteria and conditions for scaling up and down.</p><p>Although optional, the diagram above also uses <em>Pod Identity</em>. Similar to how secrets are <a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure">fetched from Azure Key Vault inside containers</a>, Pod Identity is used with KEDA to directly subscribe to an e.g. <em>Azure Service Bus Topic</em> to scale the pods without passing any connecting strings by specifying its <code>AzureIdentityBinding</code>. </p><h2 id="usage">Usage</h2><p>The KEDA <a href="https://github.com/kedacore/charts" rel="noopener noreferrer">Helm Chart</a> needs to be installed on the AKS cluster and configured to use  <code>AzureIdentityBinding</code> to access resources in Azure. This Azure AD Identity needs to have sufficient RBAC permissions to directly access the required resources in Azure.</p><p>The <code>ScaledObject</code> is defined as follows, which is deployed along with the application deployment specified under <code>scaleTargetRef</code>. This needs to match the deployment name which needs to be deployed in the same Kubernetes namespace.</p><pre><code class="language-yaml">apiVersion: keda.sh/v1alpha1
+                <p>Azure Kubernetes Service (AKS) comes with a Cluster Autoscaler (CA) that can automatically <em>add nodes</em> to the node pool based on the load of the cluster (based on CPU/memory usage). KEDA is active on the pod-level and uses Horizontal Pod Autoscaling (HPA) to dynamically add <em>additional pods</em> based on the configured scaler. CA and KEDA therefore go hand-in-hand when managing dynamic workloads on an AKS cluster since they scale on different dimensions, based on different rules, as shown below:</p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><amp-img src="https://blog.bart.je/content/images/2021/07/aks-scaling-dimensions.png" class="kg-image" width="822" height="485" srcset="https://blog.bart.je/content/images/size/w600/2021/07/aks-scaling-dimensions.png 600w, https://blog.bart.je/content/images/2021/07/aks-scaling-dimensions.png 822w" layout="responsive"></amp-img><figcaption><span>Vertical and Horizontal scaling in Kubernetes</span></figcaption></figure><h2 id="overview">Overview</h2><p>An overview of KEDA that scales an <code>App</code> based on the Topic Queue size of <code>Azure Service Bus</code> is shown in this diagram:</p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><amp-img src="https://blog.bart.je/content/images/2021/07/keda-overview.png" class="kg-image" width="1652" height="871" srcset="https://blog.bart.je/content/images/size/w600/2021/07/keda-overview.png 600w, https://blog.bart.je/content/images/size/w1000/2021/07/keda-overview.png 1000w, https://blog.bart.je/content/images/size/w1600/2021/07/keda-overview.png 1600w, https://blog.bart.je/content/images/2021/07/keda-overview.png 1652w" layout="responsive"></amp-img><figcaption><span>Communication flow for KEDA scaling an app in AKS</span></figcaption></figure><p>The app is deployed together with a KEDA-backed <code>ScaledObject</code>.  This ScaledObject supports <code>minReplicaCount</code> and <code>maxReplicaCount</code> that defines the range of concurrent replicas for the pods that can exist for the app. Furthermore, a <code>scale trigger</code> object is defined inside the ScaledObject that defines the scaling criteria and conditions for scaling up and down.</p><p>Although optional, the diagram above also uses <em>Pod Identity</em>. Similar to how secrets are <a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure?ref=192.168.1.45">fetched from Azure Key Vault inside containers</a>, Pod Identity is used with KEDA to directly subscribe to an e.g. <em>Azure Service Bus Topic</em> to scale the pods without passing any connecting strings by specifying its <code>AzureIdentityBinding</code>. </p><h2 id="usage">Usage</h2><p>The KEDA <a href="https://github.com/kedacore/charts?ref=192.168.1.45" rel="noopener noreferrer">Helm Chart</a> needs to be installed on the AKS cluster and configured to use  <code>AzureIdentityBinding</code> to access resources in Azure. This Azure AD Identity needs to have sufficient RBAC permissions to directly access the required resources in Azure.</p><p>The <code>ScaledObject</code> is defined as follows, which is deployed along with the application deployment specified under <code>scaleTargetRef</code>. This needs to match the deployment name which needs to be deployed in the same Kubernetes namespace.</p><pre><code class="language-yaml">apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: msg-processor-scaler
@@ -1093,14 +1104,14 @@ spec:
       messageCount: "5"
     authenticationRef:
       name: trigger-auth-service-bus-msgs
-</code></pre><p>It defines the <code>type</code> of scale trigger we would like to use and the scaling criteria specified under the <code>metadata</code> object. Lots of different KEDA scalars are available out of the box and details can be found by going through the <a href="https://keda.sh/docs/latest/scalers/">KEDA documentation</a>. </p><p>In the example above, we use an <a href="https://keda.sh/docs/latest/scalers/azure-service-bus/">azure-servicebus scalar</a> and would like to scale out if there are more than 5 unprocessed messages on the topic subscription <code>SERVICE_BUS_TOPIC_SUBSCRIPTION</code> on the <code>SERVICE_BUS_TOPIC</code> topic in the <code>SERVICE_BUS_NAMESPACE</code> kubernetes namespace. Scaling will go up to a maximum of 10 concurrent replicas which is defined via <code>maxReplicaCount</code> and there will always be a 1 pod minimum as defined by <code>minReplicaCount</code>.</p><p>Since we are using Pod Identity, we also specify the <code>authenticationRef</code> for the ScaledObject to<code>trigger-auth-service-bus-msgs</code>. This is a <code>TriggerAuthentication</code> resource that defines how KEDA should authenticate to get the metrics.</p><pre><code class="language-yaml">apiVersion: keda.sh/v1alpha1
+</code></pre><p>It defines the <code>type</code> of scale trigger we would like to use and the scaling criteria specified under the <code>metadata</code> object. Lots of different KEDA scalars are available out of the box and details can be found by going through the <a href="https://keda.sh/docs/latest/scalers/?ref=192.168.1.45">KEDA documentation</a>. </p><p>In the example above, we use an <a href="https://keda.sh/docs/latest/scalers/azure-service-bus/?ref=192.168.1.45">azure-servicebus scalar</a> and would like to scale out if there are more than 5 unprocessed messages on the topic subscription <code>SERVICE_BUS_TOPIC_SUBSCRIPTION</code> on the <code>SERVICE_BUS_TOPIC</code> topic in the <code>SERVICE_BUS_NAMESPACE</code> kubernetes namespace. Scaling will go up to a maximum of 10 concurrent replicas which is defined via <code>maxReplicaCount</code> and there will always be a 1 pod minimum as defined by <code>minReplicaCount</code>.</p><p>Since we are using Pod Identity, we also specify the <code>authenticationRef</code> for the ScaledObject to<code>trigger-auth-service-bus-msgs</code>. This is a <code>TriggerAuthentication</code> resource that defines how KEDA should authenticate to get the metrics.</p><pre><code class="language-yaml">apiVersion: keda.sh/v1alpha1
 kind: TriggerAuthentication
 metadata:
   name: trigger-auth-service-bus-msgs
 spec:
   podIdentity:
     provider: azure
-</code></pre><p>In this case, we are telling KEDA to use Azure as a Pod Identity provider which uses <a href="https://github.com/Azure/aad-pod-identity" rel="noopener noreferrer">Azure AD Pod Identity</a>. Alternatively, a full connection string can also be used without specifying a TriggerAuthentication resource.</p><p>By using a TriggerAuthentication you can easily re-use this authentication resource, but it also allows you to separate the permissions for KEDA and other resources inside your kubernetes cluster by binding them to different Azure AD Identities with different RBAC permissions.</p><h2 id="using-alternative-keda-scalars">Using alternative KEDA scalars</h2><p>The example above shows how to configure KEDA for autoscaling using <em>Azure Service Bus Topics</em>, but lots of other scalars are supported out of the box and more information can be found on <a href="https://keda.sh/docs/2.2/scalers/" rel="noopener noreferrer">KEDA Documentation - Scalars</a> .</p><blockquote>Note: when adding additional triggers, also ensure that Pod Identity can read from these resources by adding the corresponding RBAC permissions.</blockquote><h2 id="using-the-prebuilt-helm-chart-with-keda-support">Using the prebuilt Helm chart with KEDA support</h2><p>If you have <a href="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/">deployed a fully configured AKS cluster to Azure</a> and you are also using the accompanying <a href="https://github.com/bart-jansen/secretstore-ingress-keda-apps-helm">Umbrella Helm chart</a> for easy deployment of your apps then you're in luck, because it also allows you to easily add KEDA support for the applications you deploy to the AKS cluster. </p><p>Most of the documentation to get started is available on <a href="https://github.com/bart-jansen/secretstore-ingress-keda-apps-helm">GitHub</a>, but here's a sample on how you would deploy the application described above using this Helm Chart.</p><pre><code class="language-yaml">helm-app:
+</code></pre><p>In this case, we are telling KEDA to use Azure as a Pod Identity provider which uses <a href="https://github.com/Azure/aad-pod-identity?ref=192.168.1.45" rel="noopener noreferrer">Azure AD Pod Identity</a>. Alternatively, a full connection string can also be used without specifying a TriggerAuthentication resource.</p><p>By using a TriggerAuthentication you can easily re-use this authentication resource, but it also allows you to separate the permissions for KEDA and other resources inside your kubernetes cluster by binding them to different Azure AD Identities with different RBAC permissions.</p><h2 id="using-alternative-keda-scalars">Using alternative KEDA scalars</h2><p>The example above shows how to configure KEDA for autoscaling using <em>Azure Service Bus Topics</em>, but lots of other scalars are supported out of the box and more information can be found on <a href="https://keda.sh/docs/2.2/scalers/?ref=192.168.1.45" rel="noopener noreferrer">KEDA Documentation - Scalars</a> .</p><blockquote>Note: when adding additional triggers, also ensure that Pod Identity can read from these resources by adding the corresponding RBAC permissions.</blockquote><h2 id="using-the-prebuilt-helm-chart-with-keda-support">Using the prebuilt Helm chart with KEDA support</h2><p>If you have <a href="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/?ref=192.168.1.45">deployed a fully configured AKS cluster to Azure</a> and you are also using the accompanying <a href="https://github.com/bart-jansen/secretstore-ingress-keda-apps-helm?ref=192.168.1.45">Umbrella Helm chart</a> for easy deployment of your apps then you're in luck, because it also allows you to easily add KEDA support for the applications you deploy to the AKS cluster. </p><p>Most of the documentation to get started is available on <a href="https://github.com/bart-jansen/secretstore-ingress-keda-apps-helm?ref=192.168.1.45">GitHub</a>, but here's a sample on how you would deploy the application described above using this Helm Chart.</p><pre><code class="language-yaml">helm-app:
   app:
     name: app-service-name
     container:
@@ -1127,7 +1138,7 @@ spec:
         </article>
     </main>
     <footer class="page-footer">
-            <amp-img class="site-icon" src="https://blog.bart.je/content/images/2021/07/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
+            <amp-img class="site-icon" src="https://blog.bart.je/content/images/2023/10/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
         <h3>Bart Jansen</h3>
             <p>Software Engineer at Microsoft</p>
         <p><a href="https://blog.bart.je">Read more posts →</a></p>

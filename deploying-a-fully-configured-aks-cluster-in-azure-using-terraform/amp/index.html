@@ -6,39 +6,39 @@
 
     <title>Deploying a fully configured AKS cluster in Azure using Terraform</title>
 
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="canonical" href="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="icon" href="https://blog.bart.je/content/images/size/w256h256/2023/10/android-chrome-192x192.png" type="image/png">
+    <link rel="canonical" href="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
     
-    <meta property="og:site_name" content="Bart Jansen" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Deploying a fully configured AKS cluster in Azure using Terraform" />
-    <meta property="og:description" content="Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder." />
-    <meta property="og:url" content="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/" />
-    <meta property="og:image" content="https://blog.bart.je/content/images/2021/07/archdiagram_k8s.png" />
-    <meta property="article:published_time" content="2021-03-23T15:10:00.000Z" />
-    <meta property="article:modified_time" content="2021-07-13T14:17:18.000Z" />
-    <meta property="article:tag" content="azure" />
-    <meta property="article:tag" content="aks" />
-    <meta property="article:tag" content="terraform" />
-    <meta property="article:tag" content="application gateway" />
-    <meta property="article:tag" content="azure container registry" />
-    <meta property="article:tag" content="azure key vault" />
-    <meta property="article:tag" content="pod identity" />
+    <meta property="og:site_name" content="Bart Jansen">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Deploying a fully configured AKS cluster in Azure using Terraform">
+    <meta property="og:description" content="Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder.">
+    <meta property="og:url" content="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/">
+    <meta property="og:image" content="https://blog.bart.je/content/images/2021/07/archdiagram_k8s.png">
+    <meta property="article:published_time" content="2021-03-23T15:10:00.000Z">
+    <meta property="article:modified_time" content="2023-11-09T12:07:48.000Z">
+    <meta property="article:tag" content="azure">
+    <meta property="article:tag" content="aks">
+    <meta property="article:tag" content="terraform">
+    <meta property="article:tag" content="application gateway">
+    <meta property="article:tag" content="azure container registry">
+    <meta property="article:tag" content="azure key vault">
+    <meta property="article:tag" content="pod identity">
     
-    <meta property="article:publisher" content="https://www.facebook.com/bartj" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Deploying a fully configured AKS cluster in Azure using Terraform" />
-    <meta name="twitter:description" content="Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder." />
-    <meta name="twitter:url" content="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/" />
-    <meta name="twitter:image" content="https://blog.bart.je/content/images/2021/07/archdiagram_k8s.png" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Bart Jansen" />
-    <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="azure, aks, terraform, application gateway, azure container registry, azure key vault, pod identity" />
-    <meta name="twitter:site" content="@bartjansn" />
-    <meta property="og:image:width" content="1438" />
-    <meta property="og:image:height" content="943" />
+    <meta property="article:publisher" content="https://www.facebook.com/bartj">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Deploying a fully configured AKS cluster in Azure using Terraform">
+    <meta name="twitter:description" content="Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder.">
+    <meta name="twitter:url" content="https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/">
+    <meta name="twitter:image" content="https://blog.bart.je/content/images/2021/07/archdiagram_k8s.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Bart Jansen">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="azure, aks, terraform, application gateway, azure container registry, azure key vault, pod identity">
+    <meta name="twitter:site" content="@bartjansn">
+    <meta property="og:image:width" content="1438">
+    <meta property="og:image:height" content="943">
     
     <script type="application/ld+json">
 {
@@ -50,7 +50,7 @@
         "url": "https://blog.bart.je/",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://blog.bart.je/content/images/2021/07/newprofilepic-400x400.png",
+            "url": "https://blog.bart.je/content/images/2023/10/newprofilepic_o-1.png",
             "width": 60,
             "height": 60
         }
@@ -58,19 +58,13 @@
     "author": {
         "@type": "Person",
         "name": "Bart Jansen",
-        "image": {
-            "@type": "ImageObject",
-            "url": "https://blog.bart.je/content/images/2021/05/profilepic.jpeg",
-            "width": 500,
-            "height": 500
-        },
         "url": "https://blog.bart.je/author/bart/",
         "sameAs": []
     },
     "headline": "Deploying a fully configured AKS cluster in Azure using Terraform",
     "url": "https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/",
     "datePublished": "2021-03-23T15:10:00.000Z",
-    "dateModified": "2021-07-13T14:17:18.000Z",
+    "dateModified": "2023-11-09T12:07:48.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://blog.bart.je/content/images/2021/07/archdiagram_k8s.png",
@@ -78,16 +72,13 @@
         "height": 943
     },
     "keywords": "azure, aks, terraform, application gateway, azure container registry, azure key vault, pod identity",
-    "description": "Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy.\nSetting up a full-fledged AKS cluster that can read images from Azure Container\nRegistry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all\ntraffic is routed via an AKS managed Application Gateway is much harder.\n\nTo save others from all the trouble I encountered while creating this\none-click-deployment, I&#x27;ve published a GitHub repository\n[https://github.com/bart-jansen/terraform-aks-appgw-acr-keyva",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://blog.bart.je/"
-    }
+    "description": "Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder.\n\nTo save others from all the trouble I encountered while creating this one-click-deployment, I&#x27;ve published a GitHub repository that serves as a boilerplate for the scenario described above",
+    "mainEntityOfPage": "https://blog.bart.je/deploying-a-fully-configured-aks-cluster-in-azure-using-terraform/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 4.48" />
-    <link rel="alternate" type="application/rss+xml" title="Bart Jansen" href="https://blog.bart.je/rss/" />
+    <meta name="generator" content="Ghost 5.72">
+    <link rel="alternate" type="application/rss+xml" title="Bart Jansen" href="https://blog.bart.je/rss/">
 
     <style amp-custom>
     *,
@@ -262,6 +253,16 @@
 
     amp-img img {
         object-fit: cover;
+    }
+    
+    amp-youtube {
+        height: calc(100vw / 1.78);
+        width: 100vw;
+        position: relative;
+    }
+
+    amp-youtube img {
+        position: absolute;
     }
 
     .page-header {
@@ -1065,7 +1066,7 @@
 <body class="amp-template">
     <header class="page-header">
         <a href="https://blog.bart.je">
-                <amp-img class="site-icon" src="https://blog.bart.je/content/images/2021/07/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
+                <amp-img class="site-icon" src="https://blog.bart.je/content/images/2023/10/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
         </a>
     </header>
 
@@ -1086,7 +1087,7 @@
             </figure>
             <section class="post-content">
 
-                <p>Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder.</p><p>To save others from all the trouble I encountered while creating this one-click-deployment, I've published a <a href="https://github.com/bart-jansen/terraform-aks-appgw-acr-keyvault-loganalytics">GitHub repository</a> that serves as a boilerplate for the scenario described above, and fully deploys and configures your Azure Kubernetes Service in the cloud using a single terraform deployment.</p><p>This blog post goes into the details of the different resources that are deployed, why these specific resources are chosen and how they tie into each other. A future blog post will build upon this and explain how Helm can be used to automate your container deployments to the AKS cluster.</p><h2 id="architecture-overview">Architecture Overview</h2><figure class="kg-card kg-image-card kg-width-wide"></figure><h3 id="azure-kubernetes-service">Azure Kubernetes Service</h3><p>Azure Kubernetes Service (AKS) makes it simple to deploy a managed Kubernetes cluster in Azure. Kubernetes is an open-source container orchestration platform that automates many of the manual processes involved in deploying, managing, and scaling containerized applications. Having this cluster is ideal when you want to run multiple containerized services and don't want to worry about managing and scaling them.</p><h3 id="azure-container-registry">Azure Container Registry</h3><p>Azure Container Registry (ACR) is a managed Docker registry service, and it allows you to store and manage images for all types of container deployments. Every service can be pushed to its own repository in Azure Container Registry and every codebase change in a specific service can trigger a pipeline that pushes a new version for that container to ACR with a unique tag.</p><p>AKS and ACR integration is setup during the deployment of the AKS cluster with Terraform. This allows the AKS cluster to interact with ACR, using an Azure Active Directory service principal. The Terraform deployment automatically configures RBAC permissions for the ACR resources with an appropriate <code>ACRPull</code> role for the service principal.</p><p>With this integration in place, AKS pods can fetch any of the Docker images that are pushed to ACR, even though ACR is setup as a private docker registry. Don't forget to add the azurecr.io prefix for the container and specify a tag. It is best practice to not use that <code>:latest</code> tag since this image always points to the latest image pushed to your repository and might introduce unwanted changes. Always pinpoint the container to a specific version and update that version in your <code>yaml</code> file when you want to upgrade.</p><p>A simple example for a pod that's running a container from the <code>youracrname.azurecr.io</code> container registry, the <code>test-container</code> repository with tag <code>20210301</code>, is shown below:</p><pre><code class="language-yaml">---
+                <p>Setting up an Azure Kubernetes Service (AKS) using Terraform, is fairly easy. Setting up a full-fledged AKS cluster that can read images from Azure Container Registry (ACR), fetch secrets from Azure Key Vault using Pod Identity while all traffic is routed via an AKS managed Application Gateway is much harder.</p><p>To save others from all the trouble I encountered while creating this one-click-deployment, I've published a <a href="https://github.com/bart-jansen/terraform-aks-appgw-acr-keyvault-loganalytics?ref=192.168.1.45">GitHub repository</a> that serves as a boilerplate for the scenario described above, and fully deploys and configures your Azure Kubernetes Service in the cloud using a single terraform deployment.</p><p>This blog post goes into the details of the different resources that are deployed, why these specific resources are chosen and how they tie into each other. A future blog post will build upon this and explain how Helm can be used to automate your container deployments to the AKS cluster.</p><h2 id="architecture-overview">Architecture Overview</h2><figure class="kg-card kg-image-card kg-width-wide"><amp-img src="https://blog.bart.je/content/images/2021/07/archdiagram_k8s-2.png" class="kg-image" alt="Architecture Overview" width="1438" height="943" srcset="https://blog.bart.je/content/images/size/w600/2021/07/archdiagram_k8s-2.png 600w, https://blog.bart.je/content/images/size/w1000/2021/07/archdiagram_k8s-2.png 1000w, https://blog.bart.je/content/images/2021/07/archdiagram_k8s-2.png 1438w" layout="responsive"></amp-img></figure><h3 id="azure-kubernetes-service">Azure Kubernetes Service</h3><p>Azure Kubernetes Service (AKS) makes it simple to deploy a managed Kubernetes cluster in Azure. Kubernetes is an open-source container orchestration platform that automates many of the manual processes involved in deploying, managing, and scaling containerized applications. Having this cluster is ideal when you want to run multiple containerized services and don't want to worry about managing and scaling them.</p><h3 id="azure-container-registry">Azure Container Registry</h3><p>Azure Container Registry (ACR) is a managed Docker registry service, and it allows you to store and manage images for all types of container deployments. Every service can be pushed to its own repository in Azure Container Registry and every codebase change in a specific service can trigger a pipeline that pushes a new version for that container to ACR with a unique tag.</p><p>AKS and ACR integration is setup during the deployment of the AKS cluster with Terraform. This allows the AKS cluster to interact with ACR, using an Azure Active Directory service principal. The Terraform deployment automatically configures RBAC permissions for the ACR resources with an appropriate <code>ACRPull</code> role for the service principal.</p><p>With this integration in place, AKS pods can fetch any of the Docker images that are pushed to ACR, even though ACR is setup as a private docker registry. Don't forget to add the azurecr.io prefix for the container and specify a tag. It is best practice to not use that <code>:latest</code> tag since this image always points to the latest image pushed to your repository and might introduce unwanted changes. Always pinpoint the container to a specific version and update that version in your <code>yaml</code> file when you want to upgrade.</p><p>A simple example for a pod that's running a container from the <code>youracrname.azurecr.io</code> container registry, the <code>test-container</code> repository with tag <code>20210301</code>, is shown below:</p><pre><code class="language-yaml">---
 apiVersion: v1  
 kind: Pod  
 metadata:  
@@ -1105,7 +1106,7 @@ spec:
   containers:
   - name: demo
     image: mcr.microsoft.com/oss/azure/aad-pod-identity/demo:latest
-</code></pre><h3 id="azure-key-vault-secrets-store-csi-driver">Azure Key Vault Secrets Store CSI Driver</h3><p>Some of the services in the AKS cluster connect to external services. The connection strings and other secret values that are needed by the pods are stored in Azure Key Vault. By storing these variables in Key Vault, we ensure that these secrets are not versioned in the git repository as code, and not accessible to anyone that has access to the AKS cluster.</p><p>To securely mount these connection strings, pod identity is used to mount these secrets in the pods and make them available to the container as environment variables. The flow for a pod fetching these variables is shown in the diagram below:</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Flow for fetching Azure Key Vault secrets using Pod Identity</figcaption></figure><p>Luckily, there's no need to to worry about all these different data flows, and we can just use deploy the provided <a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure">Azure Key Vault Provider for Secrets Store CSI Driver</a> on the AKS cluster. This provider leverages pod identity on the cluster and provides a <code>SecretProviderClass</code> with all the secrets that you want to fetch from Azure Key Vault.</p><p>A basic example for setting up a SecretStore from KeyVault <code>kvname</code>, getting secret <code>secret1</code> and exposing these as a SecretStore named <code>kv-secrets</code>:</p><pre><code class="language-yaml">apiVersion: secrets-store.csi.x-k8s.io/v1alpha1  
+</code></pre><h3 id="azure-key-vault-secrets-store-csi-driver">Azure Key Vault Secrets Store CSI Driver</h3><p>Some of the services in the AKS cluster connect to external services. The connection strings and other secret values that are needed by the pods are stored in Azure Key Vault. By storing these variables in Key Vault, we ensure that these secrets are not versioned in the git repository as code, and not accessible to anyone that has access to the AKS cluster.</p><p>To securely mount these connection strings, pod identity is used to mount these secrets in the pods and make them available to the container as environment variables. The flow for a pod fetching these variables is shown in the diagram below:</p><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://blog.bart.je/content/images/2021/07/aks-pod-identity-keyvault.png" class="kg-image" alt="Azure Keyvault Pod Identity " width="1629" height="967" srcset="https://blog.bart.je/content/images/size/w600/2021/07/aks-pod-identity-keyvault.png 600w, https://blog.bart.je/content/images/size/w1000/2021/07/aks-pod-identity-keyvault.png 1000w, https://blog.bart.je/content/images/size/w1600/2021/07/aks-pod-identity-keyvault.png 1600w, https://blog.bart.je/content/images/2021/07/aks-pod-identity-keyvault.png 1629w" layout="responsive"></amp-img><figcaption><span>Flow for fetching Azure Key Vault secrets using Pod Identity</span></figcaption></figure><p>Luckily, there's no need to to worry about all these different data flows, and we can just use deploy the provided <a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure?ref=192.168.1.45">Azure Key Vault Provider for Secrets Store CSI Driver</a> on the AKS cluster. This provider leverages pod identity on the cluster and provides a <code>SecretProviderClass</code> with all the secrets that you want to fetch from Azure Key Vault.</p><p>A basic example for setting up a SecretStore from KeyVault <code>kvname</code>, getting secret <code>secret1</code> and exposing these as a SecretStore named <code>kv-secrets</code>:</p><pre><code class="language-yaml">apiVersion: secrets-store.csi.x-k8s.io/v1alpha1  
 kind: SecretProviderClass  
 metadata:  
   name: kv-secrets
@@ -1130,14 +1131,14 @@ spec:
         secretKeyRef:
           name: kv-secrets
           key: secret1
-</code></pre><h3 id="application-gateway">Application Gateway</h3><p>All traffic that accesses the AKS cluster is routed via an <a href="https://docs.microsoft.com/en-us/azure/application-gateway/overview">Azure Application Gateway</a>. The Application Gateway acts as a Load Balancer and routes the incoming traffic to the corresponding services in AKS.</p><p>Specifically, <a href="https://docs.microsoft.com/en-us/azure/application-gateway/ingress-controller-overview">Application Gateway Ingress Controller</a> (AGIC) is used. This Ingress Controller is deployed on the AKS Cluster on its own pod. AGIC monitors the Kubernetes cluster it is hosted on and continuously updates an Application Gateway, so that selected services are exposed to the Internet on the specified URL paths &amp; ports straight from the Ingress rules defined in AKS. This flow is shown in the diagram below:</p><figure class="kg-card kg-image-card kg-width-wide"></figure><p>As shown in the overview diagram, the client reaches a Public IP endpoint before the request is forwarded to the Application Gateway. This Public IP is deployed as part of the Terraform deployment on an Azure-based FQDN (e.g. <code><a href="http://your-app.westeurope.cloudapp.azure.com/" rel="nofollow">your-app.westeurope.cloudapp.azure.com</a></code>).</p><h2 id="closing-remarks">Closing remarks</h2><p>Lots of details on the inner workings for some of these resources. Fortunately, all of these configurations happen for you and all you need to do is setup the <code>tfvars</code> variables for your environment. Keep an eye out for the upcoming blog post on setting up Helm to automate your container deployments.</p><p>What are you waiting for? Clone the <a href="https://github.com/bart-jansen/terraform-aks-appgw-acr-keyvault-loganalytics">repo</a> and start deploying your fully configured AKS cluster.</p>
+</code></pre><h3 id="application-gateway">Application Gateway</h3><p>All traffic that accesses the AKS cluster is routed via an <a href="https://docs.microsoft.com/en-us/azure/application-gateway/overview?ref=192.168.1.45">Azure Application Gateway</a>. The Application Gateway acts as a Load Balancer and routes the incoming traffic to the corresponding services in AKS.</p><p>Specifically, <a href="https://docs.microsoft.com/en-us/azure/application-gateway/ingress-controller-overview?ref=192.168.1.45">Application Gateway Ingress Controller</a> (AGIC) is used. This Ingress Controller is deployed on the AKS Cluster on its own pod. AGIC monitors the Kubernetes cluster it is hosted on and continuously updates an Application Gateway, so that selected services are exposed to the Internet on the specified URL paths &amp; ports straight from the Ingress rules defined in AKS. This flow is shown in the diagram below:</p><figure class="kg-card kg-image-card kg-width-wide"><amp-img src="https://blog.bart.je/content/images/2021/07/aks-appgw-deployment-architecture.png" class="kg-image" alt="Application Gateway with Ingress Controller" width="1287" height="660" srcset="https://blog.bart.je/content/images/size/w600/2021/07/aks-appgw-deployment-architecture.png 600w, https://blog.bart.je/content/images/size/w1000/2021/07/aks-appgw-deployment-architecture.png 1000w, https://blog.bart.je/content/images/2021/07/aks-appgw-deployment-architecture.png 1287w" layout="responsive"></amp-img></figure><p>As shown in the overview diagram, the client reaches a Public IP endpoint before the request is forwarded to the Application Gateway. This Public IP is deployed as part of the Terraform deployment on an Azure-based FQDN (e.g. <a href="http://your-app.westeurope.cloudapp.azure.com/?ref=192.168.1.45" rel="nofollow"><code>your-app.westeurope.cloudapp.azure.com</code></a>).</p><h2 id="closing-remarks">Closing remarks</h2><p>Lots of details on the inner workings for some of these resources. Fortunately, all of these configurations happen for you and all you need to do is setup the <code>tfvars</code> variables for your environment. Keep an eye out for the upcoming blog post on setting up Helm to automate your container deployments.</p><p>What are you waiting for? Clone the <a href="https://github.com/bart-jansen/terraform-aks-appgw-acr-keyvault-loganalytics?ref=192.168.1.45">repo</a> and start deploying your fully configured AKS cluster.</p>
 
             </section>
 
         </article>
     </main>
     <footer class="page-footer">
-            <amp-img class="site-icon" src="https://blog.bart.je/content/images/2021/07/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
+            <amp-img class="site-icon" src="https://blog.bart.je/content/images/2023/10/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
         <h3>Bart Jansen</h3>
             <p>Software Engineer at Microsoft</p>
         <p><a href="https://blog.bart.je">Read more posts →</a></p>
