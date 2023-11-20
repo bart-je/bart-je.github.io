@@ -1,4 +1,229 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Bart Jansen]]></title><description><![CDATA[Software Engineer at Microsoft]]></description><link>https://blog.bart.je/</link><image><url>https://blog.bart.je/favicon.png</url><title>Bart Jansen</title><link>https://blog.bart.je/</link></image><generator>Ghost 5.73</generator><lastBuildDate>Thu, 16 Nov 2023 14:00:21 GMT</lastBuildDate><atom:link href="https://blog.bart.je/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Add Insights to Unstructured PDFs with Retrieval Augmented Generation]]></title><description><![CDATA[<p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top of that to get insights.</p><figure class="kg-card kg-image-card kg-width-full"><img src="https://blog.bart.je/content/images/2023/11/cognitive-search-pdf-ingestion.png" class="kg-image" alt loading="lazy" width="2000" height="487" srcset="https://blog.bart.je/content/images/size/w600/2023/11/cognitive-search-pdf-ingestion.png 600w, https://blog.bart.je/content/images/size/w1000/2023/11/cognitive-search-pdf-ingestion.png 1000w, https://blog.bart.je/content/images/size/w1600/2023/11/cognitive-search-pdf-ingestion.png 1600w, https://blog.bart.je/content/images/size/w2400/2023/11/cognitive-search-pdf-ingestion.png 2400w"></figure><h3 id="create-azure-cognitive-search-index">Create Azure Cognitive Search Index</h3><p>Setup ACS index, Embedding field, Semantic Configuration, etc </p><h3 id="process-pdfs">Process PDFs</h3><p>Split PDFs to process,</p>]]></description><link>https://blog.bart.je/ingest-pdfs-cognitive-search-rag/</link><guid isPermaLink="false">6554901574cc9d000175f02e</guid><category><![CDATA[ingestion]]></category><category><![CDATA[rag]]></category><category><![CDATA[retrievel augmented generation]]></category><category><![CDATA[azure cognitive search]]></category><category><![CDATA[form recognizer]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Mon, 13 Nov 2023 13:52:00 GMT</pubDate><content:encoded><![CDATA[<p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top of that to get insights.</p><figure class="kg-card kg-image-card kg-width-full"><img src="https://blog.bart.je/content/images/2023/11/cognitive-search-pdf-ingestion.png" class="kg-image" alt loading="lazy" width="2000" height="487" srcset="https://blog.bart.je/content/images/size/w600/2023/11/cognitive-search-pdf-ingestion.png 600w, https://blog.bart.je/content/images/size/w1000/2023/11/cognitive-search-pdf-ingestion.png 1000w, https://blog.bart.je/content/images/size/w1600/2023/11/cognitive-search-pdf-ingestion.png 1600w, https://blog.bart.je/content/images/size/w2400/2023/11/cognitive-search-pdf-ingestion.png 2400w"></figure><h3 id="create-azure-cognitive-search-index">Create Azure Cognitive Search Index</h3><p>Setup ACS index, Embedding field, Semantic Configuration, etc </p><h3 id="process-pdfs">Process PDFs</h3><p>Split PDFs to process, chunk size &amp; overlap size, form recognizer for OCR/Tables, enrichment</p><h3 id="generate-vector-embeddings">Generate Vector Embeddings</h3><p>Generate embeddings use text-embedding-ada-002, explain hybrid search</p><h3 id="ingest-data">Ingest Data</h3><p>Populate documents to ACS Index, </p><h3 id="retrieval-augmented-generation">Retrieval Augmented Generation</h3><p>ACS Index + GPT enrichment</p><h3 id="customize-system-prompt-for-better-results">Customize System Prompt for better results</h3><p>..</p><h3 id="evaluation">Evaluation</h3><p></p><p></p>]]></content:encoded></item><item><title><![CDATA[Add Insights to Your Existing Data Using Retrieval-Augmented Generation with Azure OpenAI and Azure Cognitive Search]]></title><description><![CDATA[<p>In the rapidly evolving world of data analytics and AI, new frameworks are popping up every day to enhance the way we interact with and understand our data. One of the most exciting developments is the integration of tailor-made Large Language Models (LLM) into business processes. These models, like Azure</p>]]></description><link>https://blog.bart.je/add-insights-with-rag-azure-openai-cognitive-search/</link><guid isPermaLink="false">65512af46b831c0001b0673d</guid><category><![CDATA[llm]]></category><category><![CDATA[azure openai]]></category><category><![CDATA[embeddings]]></category><category><![CDATA[vector search]]></category><category><![CDATA[azure cognitive search]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Wed, 08 Nov 2023 19:49:00 GMT</pubDate><content:encoded><![CDATA[<p>In the rapidly evolving world of data analytics and AI, new frameworks are popping up every day to enhance the way we interact with and understand our data. One of the most exciting developments is the integration of tailor-made Large Language Models (LLM) into business processes. These models, like Azure OpenAI&apos;s GPT-4, are transforming how companies get insights from their data. In this post, we&apos;ll dive into how you can leverage Retrieval-Augmented Generation (RAG) using Azure OpenAI and Azure Cognitive Search to create a CoPilot experience for your data.</p><h3 id="what-is-rag-and-why-should-you-care">What Is RAG and Why Should You Care?</h3><p>Retrieval-Augmented Generation is an architecture that combines the best of two worlds: the knowledge and natural language understanding of LLMs and the precision of an effective search index. While there are other alternatives available, RAG stands out for its ease of use and effectiveness.</p><figure class="kg-card kg-image-card kg-width-wide"><img src="https://blog.bart.je/content/images/2023/11/ragexample.svg" class="kg-image" alt loading="lazy" width="851" height="294"></figure><p>As shown in the diagram above, RAG works by first retrieving relevant information from, e.g. a search index, and then using that specific knowledge index from the data sources to generate more informed and accurate responses using GPT. This makes it particularly valuable for businesses looking to extract insights from their existing data, while having the ability to form a proper natural language based response.</p><h3 id="how-to-implement-rag-in-your-data-pipeline">How to Implement RAG in Your Data Pipeline</h3><p>Implementing RAG involves two main components: setting up an ingestion pipeline that indexes all your business-specific data and creating a RAG consumption pipeline. Here&apos;s how you can do it:</p><p><strong>Setting Up the Ingestion Pipeline:</strong></p><ol><li><strong>Create an Azure Cognitive Search Index with Vector Embeddings:</strong> Start by building an index that can handle vector embeddings. This will lay the foundation for powerful search capabilities.</li><li><strong>Ingest Your Data and Populate Your Index:</strong> Once your index is ready, ingest your existing data. This step is crucial as it populates your index with the data that the RAG model will use.</li></ol><p><strong>Setting Up the RAG Consumption Pipeline:</strong></p><ol><li><strong>Generate Embeddings for Prompts:</strong> Use Azure OpenAI to generate embeddings for your prompts. These embeddings represent the semantic content of your queries.</li><li><strong>Query Azure Cognitive Search Endpoint:</strong> Hit the Azure Cognitive Search endpoint to retrieve the top results based on your embeddings.</li><li><strong>Combine Results with a Customized System Prompt:</strong> Take the results from Azure Cognitive Search and combine them with a customized prompt. Then, use this combined input to query the GPT-4 model to provide an insightful answer.</li></ol><h3 id="testing-and-optimizing-performance">Testing and Optimizing Performance</h3><p>An essential part of implementing RAG is testing and optimizing the performance of your Azure Cognitive Search Index. You can use an LLM like GPT-4 to generate question-answer pairs relevant to your data. This approach allows you to test how well your index performs, giving you insights into the effectiveness of your data indexing strategies, chunking, overlap size, and data enrichment processes. A simple approach using synthetic QA generation is described <a href="https://jakobs.dev/evaluating-rag-synthetic-dataset-generation/?ref=192.168.1.45" rel="noreferrer">here</a>.</p><h3 id="conclusion">Conclusion</h3><p>Adding RAG to your data pipeline using Azure OpenAI and Azure Cognitive Search is not just about keeping up with the latest tech trends. It&apos;s about unlocking new levels of understanding and insights from your data, tailored specifically to your company&apos;s data. With the steps outlined above, you&apos;re well on your way to implementing a powerful CoPilot for your data.</p>]]></content:encoded></item><item><title><![CDATA[Host your own ChatGPT instance using Azure OpenAI]]></title><description><![CDATA[<p>It&#x2019;s 2023, everyone is playing around with ChatGPT on <a href="https://chat.openai.com/?ref=192.168.1.45" rel="noreferrer">OpenAI</a> and a new and improved version of GPT is being released every couple of months with lots of new improvements which make you even more effective.</p><p>The problem with these new models is that they&#x2019;re only</p>]]></description><link>https://blog.bart.je/host-your-own-chatgpt-instance-azure-openai/</link><guid isPermaLink="false">65410f7beef0a80001302e68</guid><category><![CDATA[chatgpt]]></category><category><![CDATA[openai]]></category><category><![CDATA[azure]]></category><category><![CDATA[azure openai]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Tue, 31 Oct 2023 14:30:19 GMT</pubDate><media:content url="https://blog.bart.je/content/images/2023/11/Screenshot-2023-11-09-at-11.36.02.png" medium="image"/><content:encoded><![CDATA[<img src="https://blog.bart.je/content/images/2023/11/Screenshot-2023-11-09-at-11.36.02.png" alt="Host your own ChatGPT instance using Azure OpenAI"><p>It&#x2019;s 2023, everyone is playing around with ChatGPT on <a href="https://chat.openai.com/?ref=192.168.1.45" rel="noreferrer">OpenAI</a> and a new and improved version of GPT is being released every couple of months with lots of new improvements which make you even more effective.</p><p>The problem with these new models is that they&#x2019;re only available for customers with OpenAI plus subscriptions, setting you back $20 each month (excluding tax). Instead of using OpenAI&#x2019;s version, you can also setup your own gpt-4 instance on Azure OpenAI .</p><h3 id="great-but-what%E2%80%99s-in-it-for-me"><strong>Great! But what&#x2019;s in it for me?</strong></h3><ul><li>You pay as you go; instead of a flat fee of $20 per month, you pay a small amount per query</li><li>Your data isn&#x2019;t used for training the models, whereas the OpenAI ChatGPT implementation is continuously <a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance?ref=192.168.1.45" rel="noreferrer">used to improve the model</a>.</li><li>More flexibility: you can customize the temperature of the GPT model and customize the system prompt message</li><li>It allows you to have way larger context windows for your queries, at the time of writing Azure OpenAI supports 32k token limit versus 8k token limit of ChatGPT&apos;s Plus subscription&#xA0;</li></ul><h3 id="but-where%E2%80%99s-my-nice-chatgpt-like-ui"><strong>But where&#x2019;s my nice ChatGPT-like UI?</strong></h3><p>Luckily there are lots of open source solutions that have you covered. All very much inspired by ChatGPT&#x2019;s interface, showing a prompt history, word per word output and nice formatting.</p><p>A personal favorite of mine is <a href="https://github.com/mckaywrigley/chatbot-ui?ref=192.168.1.45" rel="noreferrer">chatbot-ui</a>. I run this as a docker container on a raspberry pi in my local network, accessible only within my local network or with a proper VPN connection:</p><figure class="kg-card kg-code-card"><pre><code class="language-bash">docker run \
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Bart Jansen]]></title><description><![CDATA[Software Engineer at Microsoft]]></description><link>https://blog.bart.je/</link><image><url>https://blog.bart.je/favicon.png</url><title>Bart Jansen</title><link>https://blog.bart.je/</link></image><generator>Ghost 5.74</generator><lastBuildDate>Mon, 20 Nov 2023 23:03:36 GMT</lastBuildDate><atom:link href="https://blog.bart.je/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search & RAG]]></title><description><![CDATA[<p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code</p>]]></description><link>https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/</link><guid isPermaLink="false">6554901574cc9d000175f02e</guid><category><![CDATA[ingestion]]></category><category><![CDATA[rag]]></category><category><![CDATA[retrievel augmented generation]]></category><category><![CDATA[azure cognitive search]]></category><category><![CDATA[form recognizer]]></category><category><![CDATA[python]]></category><category><![CDATA[search index]]></category><category><![CDATA[azure openai]]></category><category><![CDATA[embeddings]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Mon, 13 Nov 2023 13:52:00 GMT</pubDate><content:encoded><![CDATA[<p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT. </p><blockquote>Please keep in mind that these snippets are a great starting point, but have been kept as small as possible to fit the format of this blog. Comprehensive processing such as chunking, text splitting, enriching, embedding and semantic configuration, semantic reranking have consciously been kept out of the scope of this blog post, but are required for creating an effective search index.</blockquote><figure class="kg-card kg-image-card kg-width-full"><img src="https://blog.bart.je/content/images/2023/11/cognitive-search-pdf-ingestion.png" class="kg-image" alt loading="lazy" width="2000" height="487" srcset="https://blog.bart.je/content/images/size/w600/2023/11/cognitive-search-pdf-ingestion.png 600w, https://blog.bart.je/content/images/size/w1000/2023/11/cognitive-search-pdf-ingestion.png 1000w, https://blog.bart.je/content/images/size/w1600/2023/11/cognitive-search-pdf-ingestion.png 1600w, https://blog.bart.je/content/images/size/w2400/2023/11/cognitive-search-pdf-ingestion.png 2400w"></figure><h3 id="create-azure-cognitive-search-index">Create Azure Cognitive Search Index</h3><p>First step is to create an Azure Cognitive Search Index, this can be done through the Azure Portal, the REST API or with the Python SDK:</p><pre><code class="language-python">SEARCH_SERVICE = &quot;your-azure-search-resource&quot;
+SEARCH_INDEX = &quot;your-search-index&quot;
+SEARCH_KEY = &quot;your-secret-azure-search-key&quot;
+SEARCH_CREDS = AzureKeyCredential(SEARCH_KEY)
+SEARCH_CLIENT = SearchIndexerClient(endpoint=f&quot;https://{SEARCH_SERVICE}.search.windows.net/&quot;, credential=SEARCH_CREDS)
+
+def create_index():
+    client = SearchIndexClient(endpoint=f&quot;https://{SEARCH_SERVICE}.search.windows.net/&quot;, index=SEARCH_INDEX, credential=SEARCH_CREDS)
+    # Define the index
+    index_definition = SearchIndex(
+        name=SEARCH_INDEX,
+        fields=[
+            SearchField(name=&quot;id&quot;, type=SearchFieldDataType.String, key=True),
+            SearchField(name=&quot;content&quot;, type=SearchFieldDataType.String, filterable=True, sortable=True),
+            SearchField(name=&quot;sourcefile&quot;, type=SearchFieldDataType.String, filterable=True, facetable=True),
+            SearchField(
+                name=&quot;embedding&quot;,
+                type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
+                hidden=False,
+                searchable=True,
+                filterable=False,
+                sortable=False,
+                facetable=False,
+                vector_search_dimensions=1536,
+                vector_search_configuration=&quot;default&quot;,
+            )
+        ],
+        semantic_settings=SemanticSettings(
+            configurations=[
+                SemanticConfiguration(
+                    name=&apos;default&apos;,
+                    prioritized_fields=PrioritizedFields(
+                        title_field=None, prioritized_content_fields=[SemanticField(field_name=&apos;content&apos;)]
+                    )
+                )
+            ]
+        ),
+        vector_search=VectorSearch(
+            algorithm_configurations=[
+                VectorSearchAlgorithmConfiguration(
+                    name=&quot;default&quot;,
+                    kind=&quot;hnsw&quot;,
+                    hnsw_parameters=HnswParameters(metric=&quot;cosine&quot;)
+                )
+            ]
+        )
+    )
+    
+    # Create the index
+    client.create_index(index=index_definition)
+</code></pre><p>This sets up an Azure Cognitive Search Index with these fields:</p><ul><li> <code>id</code> : ID of the document</li><li> <code>content</code> : plain text content of your document</li><li><code>sourcefile</code> : PDF file used, including page number of this document</li><li><code>embedding</code> : vectorized embedding of your plain text content</li></ul><p>Since we&apos;re using a vector embedding field we configure <code>vector_search</code>, we also setup a default <code>semantic_configuration</code> and define which fields to use for our (non-vector) content (<code>content</code> in our case).</p><h3 id="process-pdfs">Process PDFs</h3><p>With the index in place, we need to split PDFs to process, chunk size &amp; overlap size, form recognizer for OCR/Tables, enrichment.</p><p>First, we split the PDFs into single page documents:</p><pre><code class="language-python">import io
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
+def split_pdf_to_pages(pdf_path):
+    &quot;&quot;&quot;
+    Splits a PDF file into individual pages and returns a list of byte streams, 
+    each representing a single page.
+    &quot;&quot;&quot;
+    pages = []
+    with open(pdf_path, &apos;rb&apos;) as file:
+        reader = PdfFileReader(file)
+
+        for i in range(reader.getNumPages()):
+            writer = PdfFileWriter()
+            writer.addPage(reader.getPage(i))
+
+            page_stream = io.BytesIO()
+            writer.write(page_stream)
+            page_stream.seek(0)
+            pages.append(page_stream)
+
+    return pages
+
+# Example usage
+pdf_path = &apos;path/to/your/pdf/file.pdf&apos;
+pages = split_pdf_to_pages(pdf_path)</code></pre><p>We then use the contents of these single-page documents with Azure Form Recognizer (also known as Azure Document Intelligence), to extract the text from the document:</p><pre><code class="language-python">FORM_RECOGNIZER_SERVICE = &quot;your-fr-resource&quot;
+FORM_RECOGNIZER_KEY = &quot;SECRET_FR_KEY&quot;
+FORM_RECOGNIZER_CREDS = AzureKeyCredential(FORM_RECOGNIZER_KEY)
+
+def get_document_text_from_content(blob_content):
+    offset = 0
+    page_map = []
+
+    form_recognizer_client = DocumentAnalysisClient(
+        endpoint=f&quot;https://{FORM_RECOGNIZER_SERVICE}.cognitiveservices.azure.com/&quot;, 
+        credential=FORM_RECOGNIZER_CREDS, 
+        headers={&quot;x-ms-useragent&quot;: &quot;azure-search-sample/1.0.0&quot;}
+    )
+
+    poller = form_recognizer_client.begin_analyze_document(&quot;prebuilt-layout&quot;, document=blob_content)
+    form_recognizer_results = poller.result()
+
+    for page_num, page in enumerate(form_recognizer_results.pages):
+        # Extract text for each page
+        page_text = page.content
+        page_map.append((page_num, offset, page_text))
+        offset += len(page_text)
+
+    return page_map
+</code></pre><h3 id="split-text-into-indexable-sized-chunks">Split text into indexable sized chunks</h3><p>With the page contents extracted from the PDF, per page, we can split the text to chunks, an easy way to do this is:</p><pre><code class="language-python">def split_text(page_map, max_section_length):
+    &quot;&quot;&quot;
+    Splits the text from page_map into sections of a specified maximum length.
+
+    :param page_map: List of tuples containing page text.
+    :param max_section_length: Maximum length of each text section.
+    :return: Generator yielding text sections.
+    &quot;&quot;&quot;
+    all_text = &quot;&quot;.join(p[2] for p in page_map)  # Concatenate all text
+    start = 0
+    length = len(all_text)
+
+    while start &lt; length:
+        end = min(start + max_section_length, length)
+        section_text = all_text[start:end]
+        yield section_text
+        start = end
+
+# Example usage
+max_section_length = 1000  # For example, 1000 characters per section
+sections = split_text(page_map, max_section_length)
+
+for section in sections:
+    print(section)  # Process each section as needed
+</code></pre><blockquote>Note: the snippet above is a very simplistic way of splitting text. In production you&apos;d want to take into account sentence_endings, overlap, word_breaks, tables, cross-page sections, etc.</blockquote><h3 id="create-search-index-sections">Create Search Index sections</h3><p>We can use the <code>page_map</code> from <code>get_document_from_text</code>  to call the<code>split_text</code> function and setup the sections for our index:</p><pre><code class="language-python">def create_sections(filename, page_map):
+    for i, (content, pagenum) in enumerate(split_text(page_map, filename)):
+        section = {
+            &quot;id&quot;: f&quot;{filename}-page-{i}&quot;,
+            &quot;content&quot;: content,
+            &quot;sourcefile&quot;: filename
+        }
+        section[&quot;embedding&quot;] = compute_embedding(content)
+        yield section</code></pre><h3 id="generate-embeddings">Generate embeddings</h3><p>We can generate embeddings using Azure OpenAI&apos;s <code>text-embedding-ada-002</code> model:</p><pre><code class="language-python"># Configurations
+OPENAI_SERVICE = &quot;your-azure-openai-resource&quot;
+OPENAI_DEPLOYMENT = &quot;embedding&quot;
+OPENAI_KEY = &quot;your-secret-openai-key&quot;
+
+# OpenAI setup
+openai.api_type = &quot;azure&quot;
+openai.api_key = OPENAI_KEY
+openai.api_base = f&quot;https://{OPENAI_SERVICE}.openai.azure.com&quot;
+openai.api_version = &quot;2022-12-01&quot;
+
+def compute_embedding(text):
+    return openai.Embedding.create(engine=OPENAI_DEPLOYMENT, input=text)[&quot;data&quot;][0][&quot;embedding&quot;]</code></pre><h3 id="ingest-data-into-search-index">Ingest Data into Search Index</h3><p>With the computed sections from <code>create_sections</code> we can batch-upload them  (in pairs of 1000 documents) into our Search Index:</p><pre><code class="language-python">def index_sections(filename, sections):
+    &quot;&quot;&quot;
+    Indexes sections from a file into a search index.
+
+    :param filename: The name of the file being indexed.
+    :param sections: The sections of text to index.
+    &quot;&quot;&quot;
+    search_client = SearchClient(endpoint=f&quot;https://{SEARCH_SERVICE}.search.windows.net/&quot;,
+                                 index_name=SEARCH_INDEX,
+                                 credential=SEARCH_CREDS)
+
+    batch = []
+    for i, section in enumerate(sections, 1):
+        batch.append(section)
+        if i % 1000 == 0:
+            search_client.upload_documents(documents=batch)
+            batch = []
+
+    if batch:
+        search_client.upload_documents(documents=batch)
+
+# filename and sections from previous steps
+index_sections(filename, sections)</code></pre><p>The result of this last ingestion step is a fully populated Search Index, ready to be consumed.</p><h3 id="retrieval-augmented-generation">Retrieval Augmented Generation</h3><p>Now we can query our Search Index endpoint, using:</p><pre><code class="language-python">from azure.core.credentials import AzureKeyCredential
+from azure.search.documents import SearchClient
+
+def search_index(query, endpoint, index_name, api_key):
+    &quot;&quot;&quot;
+    Searches the indexed data in Azure Search.
+
+    :param query: The search query string.
+    :param endpoint: Azure Search service endpoint URL.
+    :param index_name: Name of the Azure Search index.
+    :param api_key: Azure Search API key.
+    :return: Search results.
+    &quot;&quot;&quot;
+    credential = AzureKeyCredential(api_key)
+    search_client = SearchClient(endpoint=endpoint, index_name=index_name, credential=credential)
+
+    results = search_client.search(query)
+    return [result for result in results]
+
+# Example usage
+endpoint = &apos;https://[service-name].search.windows.net&apos;  # Replace with your service endpoint
+index_name = &apos;your-index-name&apos;  # Replace with your index name
+api_key = &apos;your-api-key&apos;  # Replace with your API key
+search_query = &apos;example search text&apos;
+
+search_results = search_index(search_query, endpoint, index_name, api_key)
+
+for result in search_results:
+    print(result)  # Process each search result as needed
+</code></pre><h3 id="enrich-results-with-gpt-4">Enrich results with GPT-4</h3><p>After retrieval, we can enrich the search results with GPT-4:</p><pre><code class="language-python">import openai
+
+def enrich_with_gpt(result, openai_api_key):
+    &quot;&quot;&quot;
+    Enriches the search result with additional information generated by OpenAI GPT-4.
+
+    :param result: The search result item to enrich.
+    :param openai_api_key: OpenAI API key.
+    :return: Enriched information.
+    &quot;&quot;&quot;
+    openai.api_key = openai_api_key
+
+    # Construct a prompt based on the result for GPT-4
+    prompt = f&quot;Based on the following search result: {result}, generate additional insights.&quot;
+
+    # Call OpenAI GPT-4 to generate additional information
+    response = openai.Completion.create(engine=&quot;gpt4-32k&quot;, prompt=prompt, max_tokens=150)
+    return response.choices[0].text.strip()
+
+# Example usage
+openai_api_key = &apos;your-openai-api-key&apos;  # Replace with your OpenAI API key
+
+enriched_results = []
+for result in search_results:
+    enriched_info = enrich_with_gpt(result, openai_api_key)
+    enriched_results.append((result, enriched_info))
+
+for result, enriched_info in enriched_results:
+    print(&quot;Original Result:&quot;, result)
+    print(&quot;Enriched Information:&quot;, enriched_info)
+    print(&quot;-----&quot;)
+</code></pre><h3 id="next-steps">Next Steps</h3><p>As mentioned in the beginning of this blog post, this code snippets can serve as the basis of your RAG ingestion &amp; consumption pipeline. But to come increase the effectiveness of your RAG implementation, there&apos;s a lot of improvements that can be made.</p><p></p><p></p>]]></content:encoded></item><item><title><![CDATA[Enhancing Your Data with Azure: Unlocking Insights through Retrieval-Augmented Generation]]></title><description><![CDATA[<p>In the rapidly evolving world of data analytics and AI, new frameworks are popping up every day to enhance the way we interact with and understand our data. One of the most exciting developments is the integration of tailor-made Large Language Models (LLM) into business processes. These models, like Azure</p>]]></description><link>https://blog.bart.je/enhancing-data-azure-insights-retrieval-augmented-generation/</link><guid isPermaLink="false">65512af46b831c0001b0673d</guid><category><![CDATA[llm]]></category><category><![CDATA[azure openai]]></category><category><![CDATA[embeddings]]></category><category><![CDATA[vector search]]></category><category><![CDATA[azure cognitive search]]></category><category><![CDATA[rag]]></category><category><![CDATA[retrievel augmented generation]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Wed, 08 Nov 2023 19:49:00 GMT</pubDate><media:content url="https://blog.bart.je/content/images/2023/11/needle-in-haystack.jpg" medium="image"/><content:encoded><![CDATA[<img src="https://blog.bart.je/content/images/2023/11/needle-in-haystack.jpg" alt="Enhancing Your Data with Azure: Unlocking Insights through Retrieval-Augmented Generation"><p>In the rapidly evolving world of data analytics and AI, new frameworks are popping up every day to enhance the way we interact with and understand our data. One of the most exciting developments is the integration of tailor-made Large Language Models (LLM) into business processes. These models, like Azure OpenAI&apos;s GPT-4, are transforming how companies get insights from their data. In this post, we&apos;ll dive into how you can leverage Retrieval-Augmented Generation (RAG) using Azure OpenAI and Azure Cognitive Search to create a CoPilot experience for your data.</p><h3 id="what-is-rag-and-why-should-you-care">What Is RAG and Why Should You Care?</h3><p>Retrieval-Augmented Generation is an architecture that combines the best of two worlds: the knowledge and natural language understanding of LLMs and the precision of an effective search index. While there are other alternatives available, RAG stands out for its ease of use and effectiveness.</p><figure class="kg-card kg-image-card kg-width-wide"><img src="https://blog.bart.je/content/images/2023/11/ragexample.svg" class="kg-image" alt="Enhancing Your Data with Azure: Unlocking Insights through Retrieval-Augmented Generation" loading="lazy" width="851" height="294"></figure><p>As shown in the diagram above, RAG works by first retrieving relevant information from, e.g. a search index, and then using that specific knowledge index from the data sources to generate more informed and accurate responses using GPT. This makes it particularly valuable for businesses looking to extract insights from their existing data, while having the ability to form a proper natural language based response.</p><h3 id="how-to-implement-rag-in-your-data-pipeline">How to Implement RAG in Your Data Pipeline</h3><p>Implementing RAG involves two main components: setting up an ingestion pipeline that indexes all your business-specific data and creating a RAG consumption pipeline. Here&apos;s how you can do it:</p><p><strong>Setting Up the Ingestion Pipeline:</strong></p><ol><li><strong>Create an Azure Cognitive Search Index with Vector Embeddings:</strong> Start by building an index that can handle vector embeddings. This will lay the foundation for powerful search capabilities.</li><li><strong>Ingest Your Data and Populate Your Index:</strong> Once your index is ready, ingest your existing data. This step is crucial as it populates your index with the data that the RAG model will use.</li></ol><p><strong>Setting Up the RAG Consumption Pipeline:</strong></p><ol><li><strong>Generate Embeddings for Prompts:</strong> Use Azure OpenAI to generate embeddings for your prompts. These embeddings represent the semantic content of your queries.</li><li><strong>Query Azure Cognitive Search Endpoint:</strong> Hit the Azure Cognitive Search endpoint to retrieve the top results based on your embeddings.</li><li><strong>Combine Results with a Customized System Prompt:</strong> Take the results from Azure Cognitive Search and combine them with a customized prompt. Then, use this combined input to query the GPT-4 model to provide an insightful answer.</li></ol><h3 id="testing-and-optimizing-performance">Testing and Optimizing Performance</h3><p>An essential part of implementing RAG is testing and optimizing the performance of your Azure Cognitive Search Index. You can use an LLM like GPT-4 to generate question-answer pairs relevant to your data. This approach allows you to test how well your index performs, giving you insights into the effectiveness of your data indexing strategies, chunking, overlap size, and data enrichment processes. A simple approach using synthetic QA generation is described <a href="https://jakobs.dev/evaluating-rag-synthetic-dataset-generation/?ref=192.168.1.45" rel="noreferrer">here</a>.</p><h3 id="conclusion">Conclusion</h3><p>Adding RAG to your data pipeline using Azure OpenAI and Azure Cognitive Search is not just about keeping up with the latest tech trends. It&apos;s about unlocking new levels of understanding and insights from your data, tailored specifically to your company&apos;s data. With the steps outlined above, you&apos;re well on your way to implementing a powerful CoPilot for your data.</p>]]></content:encoded></item><item><title><![CDATA[Host your own ChatGPT instance using Azure OpenAI]]></title><description><![CDATA[<p>It&#x2019;s 2023, everyone is playing around with ChatGPT on <a href="https://chat.openai.com/?ref=192.168.1.45" rel="noreferrer">OpenAI</a> and a new and improved version of GPT is being released every couple of months with lots of new improvements which make you even more effective.</p><p>The problem with these new models is that they&#x2019;re only</p>]]></description><link>https://blog.bart.je/host-your-own-chatgpt-instance-azure-openai/</link><guid isPermaLink="false">65410f7beef0a80001302e68</guid><category><![CDATA[chatgpt]]></category><category><![CDATA[openai]]></category><category><![CDATA[azure]]></category><category><![CDATA[azure openai]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Tue, 31 Oct 2023 14:30:19 GMT</pubDate><media:content url="https://blog.bart.je/content/images/2023/11/Screenshot-2023-11-09-at-11.36.02.png" medium="image"/><content:encoded><![CDATA[<img src="https://blog.bart.je/content/images/2023/11/Screenshot-2023-11-09-at-11.36.02.png" alt="Host your own ChatGPT instance using Azure OpenAI"><p>It&#x2019;s 2023, everyone is playing around with ChatGPT on <a href="https://chat.openai.com/?ref=192.168.1.45" rel="noreferrer">OpenAI</a> and a new and improved version of GPT is being released every couple of months with lots of new improvements which make you even more effective.</p><p>The problem with these new models is that they&#x2019;re only available for customers with OpenAI plus subscriptions, setting you back $20 each month (excluding tax). Instead of using OpenAI&#x2019;s version, you can also setup your own gpt-4 instance on Azure OpenAI .</p><h3 id="great-but-what%E2%80%99s-in-it-for-me"><strong>Great! But what&#x2019;s in it for me?</strong></h3><ul><li>You pay as you go; instead of a flat fee of $20 per month, you pay a small amount per query</li><li>Your data isn&#x2019;t used for training the models, whereas the OpenAI ChatGPT implementation is continuously <a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance?ref=192.168.1.45" rel="noreferrer">used to improve the model</a>.</li><li>More flexibility: you can customize the temperature of the GPT model and customize the system prompt message</li><li>It allows you to have way larger context windows for your queries, at the time of writing Azure OpenAI supports 32k token limit versus 8k token limit of ChatGPT&apos;s Plus subscription&#xA0;</li></ul><h3 id="but-where%E2%80%99s-my-nice-chatgpt-like-ui"><strong>But where&#x2019;s my nice ChatGPT-like UI?</strong></h3><p>Luckily there are lots of open source solutions that have you covered. All very much inspired by ChatGPT&#x2019;s interface, showing a prompt history, word per word output and nice formatting.</p><p>A personal favorite of mine is <a href="https://github.com/mckaywrigley/chatbot-ui?ref=192.168.1.45" rel="noreferrer">chatbot-ui</a>. I run this as a docker container on a raspberry pi in my local network, accessible only within my local network or with a proper VPN connection:</p><figure class="kg-card kg-code-card"><pre><code class="language-bash">docker run \
   -e OPENAI_API_KEY=YOURKEY \
   -e AZURE_DEPLOYMENT_ID=YOURDEPLOYMENTNAME \
   -e OPENAI_API_HOST=https://YOURENDPOINT.openai.azure.com \
