@@ -1,4 +1,116 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Bart Jansen]]></title><description><![CDATA[Software Engineer at Microsoft]]></description><link>https://blog.bart.je/</link><image><url>https://blog.bart.je/favicon.png</url><title>Bart Jansen</title><link>https://blog.bart.je/</link></image><generator>Ghost 5.74</generator><lastBuildDate>Mon, 20 Nov 2023 23:03:36 GMT</lastBuildDate><atom:link href="https://blog.bart.je/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search & RAG]]></title><description><![CDATA[<p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code</p>]]></description><link>https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/</link><guid isPermaLink="false">6554901574cc9d000175f02e</guid><category><![CDATA[ingestion]]></category><category><![CDATA[rag]]></category><category><![CDATA[retrievel augmented generation]]></category><category><![CDATA[azure cognitive search]]></category><category><![CDATA[form recognizer]]></category><category><![CDATA[python]]></category><category><![CDATA[search index]]></category><category><![CDATA[azure openai]]></category><category><![CDATA[embeddings]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Mon, 13 Nov 2023 13:52:00 GMT</pubDate><content:encoded><![CDATA[<p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT. </p><blockquote>Please keep in mind that these snippets are a great starting point, but have been kept as small as possible to fit the format of this blog. Comprehensive processing such as chunking, text splitting, enriching, embedding and semantic configuration, semantic reranking have consciously been kept out of the scope of this blog post, but are required for creating an effective search index.</blockquote><figure class="kg-card kg-image-card kg-width-full"><img src="https://blog.bart.je/content/images/2023/11/cognitive-search-pdf-ingestion.png" class="kg-image" alt loading="lazy" width="2000" height="487" srcset="https://blog.bart.je/content/images/size/w600/2023/11/cognitive-search-pdf-ingestion.png 600w, https://blog.bart.je/content/images/size/w1000/2023/11/cognitive-search-pdf-ingestion.png 1000w, https://blog.bart.je/content/images/size/w1600/2023/11/cognitive-search-pdf-ingestion.png 1600w, https://blog.bart.je/content/images/size/w2400/2023/11/cognitive-search-pdf-ingestion.png 2400w"></figure><h3 id="create-azure-cognitive-search-index">Create Azure Cognitive Search Index</h3><p>First step is to create an Azure Cognitive Search Index, this can be done through the Azure Portal, the REST API or with the Python SDK:</p><pre><code class="language-python">SEARCH_SERVICE = &quot;your-azure-search-resource&quot;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Bart Jansen]]></title><description><![CDATA[Software Engineer at Microsoft]]></description><link>https://blog.bart.je/</link><image><url>https://blog.bart.je/favicon.png</url><title>Bart Jansen</title><link>https://blog.bart.je/</link></image><generator>Ghost 5.82</generator><lastBuildDate>Wed, 08 May 2024 11:37:25 GMT</lastBuildDate><atom:link href="https://blog.bart.je/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations]]></title><description><![CDATA[<p>The Azure Search Index can be populated in two different ways. You can either directly <em>push</em> data into the index via the REST API/SDK (left image), or leverage the built-in Azure Search Indexer, which&#xA0;<em>pulls</em>&#xA0;data from a chosen DataSource and adds them to a specified index</p>]]></description><link>https://blog.bart.je/optimizing-azure-ai-search-push-vs-pull/</link><guid isPermaLink="false">66388f349a6420000157a8d6</guid><category><![CDATA[azure ai search]]></category><category><![CDATA[push]]></category><category><![CDATA[pull]]></category><category><![CDATA[indexers]]></category><category><![CDATA[search index]]></category><category><![CDATA[vector search]]></category><category><![CDATA[ingestion]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Mon, 06 May 2024 09:44:00 GMT</pubDate><media:content url="https://blog.bart.je/content/images/2024/05/pushvspull_yellow.png" medium="image"/><content:encoded><![CDATA[<img src="https://blog.bart.je/content/images/2024/05/pushvspull_yellow.png" alt="Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations"><p>The Azure Search Index can be populated in two different ways. You can either directly <em>push</em> data into the index via the REST API/SDK (left image), or leverage the built-in Azure Search Indexer, which&#xA0;<em>pulls</em>&#xA0;data from a chosen DataSource and adds them to a specified index (right image)</p><figure class="kg-card kg-image-card kg-width-full"><img src="https://blog.bart.je/content/images/2024/05/search-index-solutions.drawio-1.png" class="kg-image" alt="Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations" loading="lazy" width="1061" height="342" srcset="https://blog.bart.je/content/images/size/w600/2024/05/search-index-solutions.drawio-1.png 600w, https://blog.bart.je/content/images/size/w1000/2024/05/search-index-solutions.drawio-1.png 1000w, https://blog.bart.je/content/images/2024/05/search-index-solutions.drawio-1.png 1061w"></figure><p>Choosing between the pull and push models depends on the requirements you have. Do you care most about how fast your data gets indexed, or is security your top priority? Maybe you need the flexibility to work with many different data sources. Each model has its own set of pros and cons. To help you decide, we&apos;ve put together a comparison table below that breaks down the differences between the pull and push models across several important areas, including their ability to enrich data with AI, security features, indexing performance, and more. </p>
+<!--kg-card-begin: html-->
+<table>
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Pull Model</th>
+      <th>Push Model</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Enrichment</strong></td>
+      <td>&#x2705; Supports AI enrichment through built-in skillsets.</td>
+      <td>&#x274C; Does not support AI enrichment capabilities via skillsets.</td>
+      <td>Manual enrichment before indexing also possible</td>
+    </tr>
+    <tr>
+      <td><strong>Security</strong></td>
+      <td>&#x2705; Makes use of Azure AI Search&apos;s built-in security.</td>
+      <td>&#x274C; All security measures must be implemented by the user.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>Performance</strong></td>
+      <td>&#x274C; Inferior indexing performance compared to push model (currently ~3 times slower)* </td>
+      <td>&#x2705; More performant indexing, allows async upload upto 1000 documents per batch.</td>
+      <td>Indexing performance is key for the overall ingestion duration.</td>
+    </tr>
+    <tr>
+      <td><strong>Monitoring</strong></td>
+      <td>&#x2705; Azure AI Search provides built-in monitoring capabilities.</td>
+      <td>&#x274C; User needs to monitor the index status manually.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>Flexibility</strong></td>
+      <td>&#x274C; Limited to supported data sources; source needs to be compatible with Azure AI Search Indexer.</td>
+      <td>&#x2705; More flexible; can push data from any source.</td>
+      <td>Azure Blob, Data Lake, SQL, Table Storage and CosmosDB are supported at time of writing.</td>
+    </tr>
+    <tr>
+      <td><strong>Reindexing</strong></td>
+      <td>&#x2705; Easily able to reindex with a simple trigger, if data stays in place in DataSource.</td>
+      <td>&#x274C; Need to cache documents and manually push each document again</td>
+      <td>Re-indexing a lot easier with pull model.</td>
+    </tr>
+    <tr>
+      <td><strong>Tooling</strong></td>
+      <td>&#x2705; Indexer functionality is exposed in the Azure portal.</td>
+      <td>&#x274C; No tool support for pushing data via the portal.</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<!--kg-card-end: html-->
+<p>The comparison between the pull and push models shows that the pull model excels in areas like AI enrichment, built-in security, monitoring, and ease of reindexing, thanks to its integration with Azure AI Search&apos;s capabilities. However, it falls short in indexing performance and flexibility, being slower and limited to certain data sources.</p><h2 id="performance-improvements">Performance improvements</h2><p>Feeding data into your search index, whether through push or pull, significantly impacts the overall time taken for ingestion. As seen from the comparison table above, using the push approach can make the process up to three times faster. These results come from the standard configuration, when using a single Azure Search Indexer and a single thread pushing batches of documents to the search index.</p><p>Using a dataset with 10,000 documents, we evaluated the performance of ingestions data with the pull and push models under various configurations:</p><ul><li>Upgrade Azure AI Search service tier from S1 to S2</li><li>Add partitions, scaling document counts as well as faster data ingestion by spanning your index over multiple units</li><li>Parallel indexing, using multiple indexers and async pushing documents</li></ul><p>We&apos;ll have a look at the impact of each individual configuration first, and then combine configurations for further optimizations. To ensure consistency in testing conditions and to mitigate the effects of throughput and latency, all data ingestions were conducted within the same Azure Region, originating from an Azure-hosted machine. The results presented are the average of five test runs.</p>
+<!--kg-card-begin: html-->
+<table>
+    <tr>
+        <th></th>
+        <th><strong>Indexer/Pull</strong></th>
+        <th><strong>Push</strong></th>
+    </tr>
+    <tr>
+        <td>S1 1 partition</td>
+        <td>3:10</td>
+        <td>1:05</td>
+    </tr>
+    <tr>
+        <td>S2 1 partition</td>
+        <td>2:51</td>
+        <td>0:57</td>
+    </tr>
+    <tr>
+        <td>S1 4 partitions</td>
+        <td>3:22</td>
+        <td>1:10</td>
+    </tr>
+</table>
+<!--kg-card-end: html-->
+<p>As shown in the results above, the push method is almost three times faster than using an indexer.Interestingly, the introduction of additional partitions and upgrading to an S2 search instance had a negligible effect on performance in these tests. These results suggest that both the addition of more partitions and upgrading to an S2 search instance primarily enhance capacity and query-performance, rather than directly improving the rate of data ingestion. </p><p>To speed things up, we also investigated parallel indexing. For the pull model we can use multiple indexers that write to the same index, and with the push model we can asynchronously push multiple batches simultaneously. Here, we also play with the partition size, to see how that effects the results.</p>
+<!--kg-card-begin: html-->
+<table>
+    <tr>
+        <th></th>
+        <th><strong>Indexer/Pull</strong></th>
+        <th><strong>Push</strong></th>
+    </tr>
+    <tr>
+        <td>S1 1 parallel</td>
+        <td>3:10</td>
+        <td>1:05</td>
+    </tr>
+    <tr>
+        <td>S1 10 parallel</td>
+        <td>0:20</td>
+        <td>0:59</td>
+    </tr>
+    <tr>
+        <td>S1 20 parallel</td>
+        <td>0:11</td>
+        <td>0:49</td>
+    </tr>
+    <tr>
+        <td>S1 40 parallel</td>
+        <td>0:06</td>
+        <td>0:34</td>
+    </tr>
+</table>
+<!--kg-card-end: html-->
+<p>The performance of the indexer scaled almost linearly with parallelization, showing significant improvements. Specifically, using 10 indexers was approximately 9.5 times faster, 20 indexers around 17.3 times faster, and 40 indexers about 31.2 times faster compared to a single indexer. Although asynchronously pushing batches also enhanced performance, the improvement was roughly 2 times better when using 40 parallel threads for pushing. Increasing parallel threads further had a negative impact and decreased performance for both push and pull.</p><h2 id="considerations">Considerations</h2><p>Choosing between the push and pull models for populating the Azure Search Index should be based on project-specific requirements, including indexing speed, security, source flexibility,  AI enrichment potential and the need for re-indexing over time. While the pull model integrates closely with Azure AI Search&apos;s advanced features, offering built-in enrichment and easy re-indexing, it lags behind the push model in terms of speed and flexibility.</p><p>Using standard configurations, the push model outperforms pull and is three times faster. However, you can setup multiple indexers to linearly improve ingestion speed for each indexer added, minding the <a href="https://tikkie.me/pay/6br4267rul7pecgmjhhe?ref=192.168.1.45" rel="noreferrer">maximum limit</a> of indexers. This does  require a bit of orchestration, where you need to split your indexes over multiple data sources (or folders) and track the progress of multiple indexers.</p><p></p><p></p><p></p><p> </p>]]></content:encoded></item><item><title><![CDATA[Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search & RAG]]></title><description><![CDATA[<p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code</p>]]></description><link>https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/</link><guid isPermaLink="false">6554901574cc9d000175f02e</guid><category><![CDATA[ingestion]]></category><category><![CDATA[rag]]></category><category><![CDATA[retrievel augmented generation]]></category><category><![CDATA[azure cognitive search]]></category><category><![CDATA[form recognizer]]></category><category><![CDATA[python]]></category><category><![CDATA[search index]]></category><category><![CDATA[azure openai]]></category><category><![CDATA[embeddings]]></category><category><![CDATA[azure ai search]]></category><dc:creator><![CDATA[Bart Jansen]]></dc:creator><pubDate>Mon, 13 Nov 2023 13:52:00 GMT</pubDate><content:encoded><![CDATA[<p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT. </p><blockquote>Please keep in mind that these snippets are a great starting point, but have been kept as small as possible to fit the format of this blog. Comprehensive processing such as chunking, text splitting, enriching, embedding and semantic configuration, semantic reranking have consciously been kept out of the scope of this blog post, but are required for creating an effective search index.</blockquote><figure class="kg-card kg-image-card kg-width-full"><img src="https://blog.bart.je/content/images/2023/11/cognitive-search-pdf-ingestion.png" class="kg-image" alt loading="lazy" width="2000" height="487" srcset="https://blog.bart.je/content/images/size/w600/2023/11/cognitive-search-pdf-ingestion.png 600w, https://blog.bart.je/content/images/size/w1000/2023/11/cognitive-search-pdf-ingestion.png 1000w, https://blog.bart.je/content/images/size/w1600/2023/11/cognitive-search-pdf-ingestion.png 1600w, https://blog.bart.je/content/images/size/w2400/2023/11/cognitive-search-pdf-ingestion.png 2400w"></figure><h3 id="create-azure-ai-search-index">Create Azure AI Search Index</h3><p>First step is to create an Azure AI Search Index, this can be done through the Azure Portal, the REST API or with the Python SDK:</p><pre><code class="language-python">SEARCH_SERVICE = &quot;your-azure-search-resource&quot;
 SEARCH_INDEX = &quot;your-search-index&quot;
 SEARCH_KEY = &quot;your-secret-azure-search-key&quot;
 SEARCH_CREDS = AzureKeyCredential(SEARCH_KEY)
@@ -48,7 +160,7 @@ def create_index():
     
     # Create the index
     client.create_index(index=index_definition)
-</code></pre><p>This sets up an Azure Cognitive Search Index with these fields:</p><ul><li> <code>id</code> : ID of the document</li><li> <code>content</code> : plain text content of your document</li><li><code>sourcefile</code> : PDF file used, including page number of this document</li><li><code>embedding</code> : vectorized embedding of your plain text content</li></ul><p>Since we&apos;re using a vector embedding field we configure <code>vector_search</code>, we also setup a default <code>semantic_configuration</code> and define which fields to use for our (non-vector) content (<code>content</code> in our case).</p><h3 id="process-pdfs">Process PDFs</h3><p>With the index in place, we need to split PDFs to process, chunk size &amp; overlap size, form recognizer for OCR/Tables, enrichment.</p><p>First, we split the PDFs into single page documents:</p><pre><code class="language-python">import io
+</code></pre><p>This sets up an Azure AI Search Index with these fields:</p><ul><li> <code>id</code> : ID of the document</li><li> <code>content</code> : plain text content of your document</li><li><code>sourcefile</code> : PDF file used, including page number of this document</li><li><code>embedding</code> : vectorized embedding of your plain text content</li></ul><p>Since we&apos;re using a vector embedding field we configure <code>vector_search</code>, we also setup a default <code>semantic_configuration</code> and define which fields to use for our (non-vector) content (<code>content</code> in our case).</p><h3 id="process-pdfs">Process PDFs</h3><p>With the index in place, we need to split PDFs to process, chunk size &amp; overlap size, form recognizer for OCR/Tables, enrichment.</p><p>First, we split the PDFs into single page documents:</p><pre><code class="language-python">import io
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 def split_pdf_to_pages(pdf_path):

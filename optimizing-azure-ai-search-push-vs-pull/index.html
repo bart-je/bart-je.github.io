@@ -4,74 +4,76 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>Add Insights to Your Existing Data Using Retrieval-Augmented Generation with Azure OpenAI and Azure Cognitive Search</title>
+    <title>Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations</title>
 
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-touch-icon-57x57.png?v=10f9658231">
-    <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-touch-icon-60x60.png?v=10f9658231">
-    <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-touch-icon-72x72.png?v=10f9658231">
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-touch-icon-76x76.png?v=10f9658231">
-    <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-touch-icon-114x114.png?v=10f9658231">
-    <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-touch-icon-120x120.png?v=10f9658231">
-    <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-touch-icon-144x144.png?v=10f9658231">
-    <link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-touch-icon-152x152.png?v=10f9658231">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon-180x180.png?v=10f9658231">
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-touch-icon-57x57.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-touch-icon-60x60.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-touch-icon-72x72.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-touch-icon-76x76.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-touch-icon-114x114.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-touch-icon-120x120.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-touch-icon-144x144.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-touch-icon-152x152.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon-180x180.png?v=5a93095959">
 
-    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-32x32.png?v=10f9658231" sizes="32x32">
-    <link rel="icon" type="image/png" href="/assets/img/favicons/android-chrome-192x192.png?v=10f9658231" sizes="192x192">
-    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-96x96.png?v=10f9658231" sizes="96x96">
-    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-16x16.png?v=10f9658231" sizes="16x16">
+    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-32x32.png?v=5a93095959" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/img/favicons/android-chrome-192x192.png?v=5a93095959" sizes="192x192">
+    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-96x96.png?v=5a93095959" sizes="96x96">
+    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-16x16.png?v=5a93095959" sizes="16x16">
 
  
-    <link rel="manifest" href="/assets/img/favicons/manifest.json?v=10f9658231">
-    <link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg?v=10f9658231" color="#5bbad5">
+    <link rel="manifest" href="/assets/img/favicons/manifest.json?v=5a93095959">
+    <link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg?v=5a93095959" color="#5bbad5">
     <link rel="shortcut icon" href="https://blog.bart.je/content/images/size/w256h256/2023/10/android-chrome-192x192.png">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png?v=10f9658231">
-    <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml?v=10f9658231">
+    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png?v=5a93095959">
+    <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml?v=5a93095959">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=10f9658231" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/custom.css?v=10f9658231" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=5a93095959" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/custom.css?v=5a93095959" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=10f9658231" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/rrssb.css?v=10f9658231" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=5a93095959" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/rrssb.css?v=5a93095959" />
 
     <link rel="icon" href="https://blog.bart.je/content/images/size/w256h256/2023/10/android-chrome-192x192.png" type="image/png">
-    <link rel="canonical" href="https://blog.bart.je/add-insights-with-rag-azure-openai-cognitive-search/">
+    <link rel="canonical" href="https://blog.bart.je/optimizing-azure-ai-search-push-vs-pull/">
     <meta name="referrer" content="no-referrer-when-downgrade">
-    <link rel="amphtml" href="https://blog.bart.je/add-insights-with-rag-azure-openai-cognitive-search/amp/">
+    <link rel="amphtml" href="https://blog.bart.je/optimizing-azure-ai-search-push-vs-pull/amp/">
     
     <meta property="og:site_name" content="Bart Jansen">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Add Insights to Your Existing Data Using Retrieval-Augmented Generation with Azure OpenAI and Azure Cognitive Search">
-    <meta property="og:description" content="In the rapidly evolving world of data analytics and AI, new frameworks are popping up every day to enhance the way we interact with and understand our data. One of the most exciting developments is the integration of tailor-made Large Language Models (LLM) into business processes. These models, like Azure">
-    <meta property="og:url" content="https://blog.bart.je/add-insights-with-rag-azure-openai-cognitive-search/">
-    <meta property="og:image" content="https://blog.bart.je/content/images/2021/07/newprofilepic-1.png">
-    <meta property="article:published_time" content="2023-11-08T19:49:00.000Z">
-    <meta property="article:modified_time" content="2023-11-15T08:41:02.000Z">
-    <meta property="article:tag" content="llm">
-    <meta property="article:tag" content="azure openai">
-    <meta property="article:tag" content="embeddings">
+    <meta property="og:title" content="Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations">
+    <meta property="og:description" content="The Azure Search Index can be populated in two different ways. You can either directly push data into the index via the REST API/SDK (left image), or leverage the built-in Azure Search Indexer, which pulls data from a chosen DataSource and adds them to a specified index (right image)">
+    <meta property="og:url" content="https://blog.bart.je/optimizing-azure-ai-search-push-vs-pull/">
+    <meta property="og:image" content="https://blog.bart.je/content/images/2024/05/pushvspull_yellow.png">
+    <meta property="article:published_time" content="2024-05-06T09:44:00.000Z">
+    <meta property="article:modified_time" content="2024-05-08T10:04:14.000Z">
+    <meta property="article:tag" content="azure ai search">
+    <meta property="article:tag" content="push">
+    <meta property="article:tag" content="pull">
+    <meta property="article:tag" content="indexers">
+    <meta property="article:tag" content="search index">
     <meta property="article:tag" content="vector search">
-    <meta property="article:tag" content="azure cognitive search">
+    <meta property="article:tag" content="ingestion">
     
     <meta property="article:publisher" content="https://www.facebook.com/bartj">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Add Insights to Your Existing Data Using Retrieval-Augmented Generation with Azure OpenAI and Azure Cognitive Search">
-    <meta name="twitter:description" content="In the rapidly evolving world of data analytics and AI, new frameworks are popping up every day to enhance the way we interact with and understand our data. One of the most exciting developments is the integration of tailor-made Large Language Models (LLM) into business processes. These models, like Azure">
-    <meta name="twitter:url" content="https://blog.bart.je/add-insights-with-rag-azure-openai-cognitive-search/">
-    <meta name="twitter:image" content="https://blog.bart.je/content/images/2021/07/newprofilepic.png">
+    <meta name="twitter:title" content="Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations">
+    <meta name="twitter:description" content="The Azure Search Index can be populated in two different ways. You can either directly push data into the index via the REST API/SDK (left image), or leverage the built-in Azure Search Indexer, which pulls data from a chosen DataSource and adds them to a specified index (right image)">
+    <meta name="twitter:url" content="https://blog.bart.je/optimizing-azure-ai-search-push-vs-pull/">
+    <meta name="twitter:image" content="https://blog.bart.je/content/images/2024/05/pushvspull_yellow.png">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Bart Jansen">
     <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="llm, azure openai, embeddings, vector search, azure cognitive search">
+    <meta name="twitter:data2" content="azure ai search, push, pull, indexers, search index, vector search, ingestion">
     <meta name="twitter:site" content="@bartjansn">
-    <meta property="og:image:width" content="2000">
-    <meta property="og:image:height" content="2000">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="614">
     
     <script type="application/ld+json">
 {
@@ -94,19 +96,25 @@
         "url": "https://blog.bart.je/author/bart/",
         "sameAs": []
     },
-    "headline": "Add Insights to Your Existing Data Using Retrieval-Augmented Generation with Azure OpenAI and Azure Cognitive Search",
-    "url": "https://blog.bart.je/add-insights-with-rag-azure-openai-cognitive-search/",
-    "datePublished": "2023-11-08T19:49:00.000Z",
-    "dateModified": "2023-11-15T08:41:02.000Z",
-    "keywords": "llm, azure openai, embeddings, vector search, azure cognitive search",
-    "description": "In the rapidly evolving world of data analytics and AI, new frameworks are popping up every day to enhance the way we interact with and understand our data. One of the most exciting developments is the integration of tailor-made Large Language Models (LLM) into business processes. These models, like Azure OpenAI&#x27;s GPT-4, are transforming how companies get insights from their data. In this post, we&#x27;ll dive into how you can leverage Retrieval-Augmented Generation (RAG) using Azure OpenAI and Azure",
-    "mainEntityOfPage": "https://blog.bart.je/add-insights-with-rag-azure-openai-cognitive-search/"
+    "headline": "Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations",
+    "url": "https://blog.bart.je/optimizing-azure-ai-search-push-vs-pull/",
+    "datePublished": "2024-05-06T09:44:00.000Z",
+    "dateModified": "2024-05-08T10:04:14.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://blog.bart.je/content/images/2024/05/pushvspull_yellow.png",
+        "width": 1200,
+        "height": 614
+    },
+    "keywords": "azure ai search, push, pull, indexers, search index, vector search, ingestion",
+    "description": "The Azure Search Index can be populated in two different ways. You can either directly push data into the index via the REST API/SDK (left image), or leverage the built-in Azure Search Indexer, which pulls data from a chosen DataSource and adds them to a specified index (right image)\n\nChoosing between the pull and push models depends on the requirements you have. Do you care most about how fast your data gets indexed, or is security your top priority? Maybe you need the flexibility to work with ",
+    "mainEntityOfPage": "https://blog.bart.je/optimizing-azure-ai-search-push-vs-pull/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 5.73">
+    <meta name="generator" content="Ghost 5.82">
     <link rel="alternate" type="application/rss+xml" title="Bart Jansen" href="https://blog.bart.je/rss/">
-    <script defer src="https://cdn.jsdelivr.net/ghost/portal@~2.36/umd/portal.min.js" data-i18n="false" data-ghost="https://blog.bart.je/" data-key="eea4b713fe9c8879c6eba1396b" data-api="https://blog.bart.je/ghost/api/content/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+    <script defer src="https://cdn.jsdelivr.net/ghost/portal@~2.37/umd/portal.min.js" data-i18n="false" data-ghost="https://blog.bart.je/" data-key="eea4b713fe9c8879c6eba1396b" data-api="https://blog.bart.je/ghost/api/content/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
 .gh-post-upgrade-cta {
     display: flex;
     flex-direction: column;
@@ -173,9 +181,9 @@
     <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="eea4b713fe9c8879c6eba1396b" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="https://blog.bart.je/" crossorigin="anonymous"></script>
     
     <link href="https://blog.bart.je/webmentions/receive/" rel="webmention">
-    <script defer src="/public/cards.min.js?v=10f9658231"></script>
-    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=10f9658231">
-    <script defer src="/public/member-attribution.min.js?v=10f9658231"></script>
+    <script defer src="/public/cards.min.js?v=5a93095959"></script>
+    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=5a93095959">
+    <script defer src="/public/member-attribution.min.js?v=5a93095959"></script>
     <script>
 
 var disqus_shortname = 'bartjansen'
@@ -190,7 +198,7 @@ var social_link = {
 }
 </script><style>:root {--ghost-accent-color: #ecc24a;}</style>
 </head>
-<body class="post-template tag-llm tag-azure-openai tag-embeddings tag-vector-search tag-azure-cognitive-search">
+<body class="post-template tag-azure-ai-search tag-push tag-pull tag-indexers tag-search-index tag-vector-search tag-ingestion">
 
 
     <div class="site-wrapper">
@@ -198,20 +206,20 @@ var social_link = {
         
 
 
-<header class="main-header post-head no-cover">
-    <nav class="main-nav  clearfix">
+<header class="main-header post-head " style="background-image: url(https://blog.bart.je/content/images/2024/05/pushvspull_yellow.png)">
+    <nav class="main-nav overlay clearfix">
         <a class="back-button icon-arrow-left" href="https://blog.bart.je"> Home</a>
         <a class="subscribe-button icon-feed" href="https://blog.bart.je/rss/"> Subscribe</a>
     </nav>
 </header>
 
 <main class="content" role="main">
-    <article class="post tag-llm tag-azure-openai tag-embeddings tag-vector-search tag-azure-cognitive-search no-image">
+    <article class="post tag-azure-ai-search tag-push tag-pull tag-indexers tag-search-index tag-vector-search tag-ingestion">
 
         <header class="post-header">
-            <h1 class="post-title">Add Insights to Your Existing Data Using Retrieval-Augmented Generation with Azure OpenAI and Azure Cognitive Search</h1>
+            <h1 class="post-title">Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2023-11-08">08 November 2023</time>  on <a href="/tag/llm/">llm</a>, <a href="/tag/azure-openai/">azure openai</a>, <a href="/tag/embeddings/">embeddings</a>, <a href="/tag/vector-search/">vector search</a>, <a href="/tag/azure-cognitive-search/">azure cognitive search</a>
+                <time class="post-date" datetime="2024-05-06">06 May 2024</time>  on <a href="/tag/azure-ai-search/">azure ai search</a>, <a href="/tag/push/">push</a>, <a href="/tag/pull/">pull</a>, <a href="/tag/indexers/">indexers</a>, <a href="/tag/search-index/">search index</a>, <a href="/tag/vector-search/">vector search</a>, <a href="/tag/ingestion/">ingestion</a>
             </section>
             <section class="social-share">
                 <ul class="rrssb-buttons clearfix">
@@ -302,10 +310,122 @@ var social_link = {
         </header>
 
         <section class="post-content">
-            <p>In the rapidly evolving world of data analytics and AI, new frameworks are popping up every day to enhance the way we interact with and understand our data. One of the most exciting developments is the integration of tailor-made Large Language Models (LLM) into business processes. These models, like Azure OpenAI's GPT-4, are transforming how companies get insights from their data. In this post, we'll dive into how you can leverage Retrieval-Augmented Generation (RAG) using Azure OpenAI and Azure Cognitive Search to create a CoPilot experience for your data.</p><h3 id="what-is-rag-and-why-should-you-care">What Is RAG and Why Should You Care?</h3><p>Retrieval-Augmented Generation is an architecture that combines the best of two worlds: the knowledge and natural language understanding of LLMs and the precision of an effective search index. While there are other alternatives available, RAG stands out for its ease of use and effectiveness.</p><figure class="kg-card kg-image-card kg-width-wide"><img src="https://blog.bart.je/content/images/2023/11/ragexample.svg" class="kg-image" alt loading="lazy" width="851" height="294"></figure><p>As shown in the diagram above, RAG works by first retrieving relevant information from, e.g. a search index, and then using that specific knowledge index from the data sources to generate more informed and accurate responses using GPT. This makes it particularly valuable for businesses looking to extract insights from their existing data, while having the ability to form a proper natural language based response.</p><h3 id="how-to-implement-rag-in-your-data-pipeline">How to Implement RAG in Your Data Pipeline</h3><p>Implementing RAG involves two main components: setting up an ingestion pipeline that indexes all your business-specific data and creating a RAG consumption pipeline. Here's how you can do it:</p><p><strong>Setting Up the Ingestion Pipeline:</strong></p><ol><li><strong>Create an Azure Cognitive Search Index with Vector Embeddings:</strong> Start by building an index that can handle vector embeddings. This will lay the foundation for powerful search capabilities.</li><li><strong>Ingest Your Data and Populate Your Index:</strong> Once your index is ready, ingest your existing data. This step is crucial as it populates your index with the data that the RAG model will use.</li></ol><p><strong>Setting Up the RAG Consumption Pipeline:</strong></p><ol><li><strong>Generate Embeddings for Prompts:</strong> Use Azure OpenAI to generate embeddings for your prompts. These embeddings represent the semantic content of your queries.</li><li><strong>Query Azure Cognitive Search Endpoint:</strong> Hit the Azure Cognitive Search endpoint to retrieve the top results based on your embeddings.</li><li><strong>Combine Results with a Customized System Prompt:</strong> Take the results from Azure Cognitive Search and combine them with a customized prompt. Then, use this combined input to query the GPT-4 model to provide an insightful answer.</li></ol><h3 id="testing-and-optimizing-performance">Testing and Optimizing Performance</h3><p>An essential part of implementing RAG is testing and optimizing the performance of your Azure Cognitive Search Index. You can use an LLM like GPT-4 to generate question-answer pairs relevant to your data. This approach allows you to test how well your index performs, giving you insights into the effectiveness of your data indexing strategies, chunking, overlap size, and data enrichment processes. A simple approach using synthetic QA generation is described <a href="https://jakobs.dev/evaluating-rag-synthetic-dataset-generation/?ref=192.168.1.45" rel="noreferrer">here</a>.</p><h3 id="conclusion">Conclusion</h3><p>Adding RAG to your data pipeline using Azure OpenAI and Azure Cognitive Search is not just about keeping up with the latest tech trends. It's about unlocking new levels of understanding and insights from your data, tailored specifically to your company's data. With the steps outlined above, you're well on your way to implementing a powerful CoPilot for your data.</p>
+            <p>The Azure Search Index can be populated in two different ways. You can either directly <em>push</em> data into the index via the REST API/SDK (left image), or leverage the built-in Azure Search Indexer, which&nbsp;<em>pulls</em>&nbsp;data from a chosen DataSource and adds them to a specified index (right image)</p><figure class="kg-card kg-image-card kg-width-full"><img src="https://blog.bart.je/content/images/2024/05/search-index-solutions.drawio-1.png" class="kg-image" alt="" loading="lazy" width="1061" height="342" srcset="https://blog.bart.je/content/images/size/w600/2024/05/search-index-solutions.drawio-1.png 600w, https://blog.bart.je/content/images/size/w1000/2024/05/search-index-solutions.drawio-1.png 1000w, https://blog.bart.je/content/images/2024/05/search-index-solutions.drawio-1.png 1061w"></figure><p>Choosing between the pull and push models depends on the requirements you have. Do you care most about how fast your data gets indexed, or is security your top priority? Maybe you need the flexibility to work with many different data sources. Each model has its own set of pros and cons. To help you decide, we've put together a comparison table below that breaks down the differences between the pull and push models across several important areas, including their ability to enrich data with AI, security features, indexing performance, and more. </p>
+<!--kg-card-begin: html-->
+<table>
+  <thead>
+    <tr>
+      <th>Aspect</th>
+      <th>Pull Model</th>
+      <th>Push Model</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Enrichment</strong></td>
+      <td>✅ Supports AI enrichment through built-in skillsets.</td>
+      <td>❌ Does not support AI enrichment capabilities via skillsets.</td>
+      <td>Manual enrichment before indexing also possible</td>
+    </tr>
+    <tr>
+      <td><strong>Security</strong></td>
+      <td>✅ Makes use of Azure AI Search's built-in security.</td>
+      <td>❌ All security measures must be implemented by the user.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>Performance</strong></td>
+      <td>❌ Inferior indexing performance compared to push model (currently ~3 times slower)* </td>
+      <td>✅ More performant indexing, allows async upload upto 1000 documents per batch.</td>
+      <td>Indexing performance is key for the overall ingestion duration.</td>
+    </tr>
+    <tr>
+      <td><strong>Monitoring</strong></td>
+      <td>✅ Azure AI Search provides built-in monitoring capabilities.</td>
+      <td>❌ User needs to monitor the index status manually.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>Flexibility</strong></td>
+      <td>❌ Limited to supported data sources; source needs to be compatible with Azure AI Search Indexer.</td>
+      <td>✅ More flexible; can push data from any source.</td>
+      <td>Azure Blob, Data Lake, SQL, Table Storage and CosmosDB are supported at time of writing.</td>
+    </tr>
+    <tr>
+      <td><strong>Reindexing</strong></td>
+      <td>✅ Easily able to reindex with a simple trigger, if data stays in place in DataSource.</td>
+      <td>❌ Need to cache documents and manually push each document again</td>
+      <td>Re-indexing a lot easier with pull model.</td>
+    </tr>
+    <tr>
+      <td><strong>Tooling</strong></td>
+      <td>✅ Indexer functionality is exposed in the Azure portal.</td>
+      <td>❌ No tool support for pushing data via the portal.</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<!--kg-card-end: html-->
+<p>The comparison between the pull and push models shows that the pull model excels in areas like AI enrichment, built-in security, monitoring, and ease of reindexing, thanks to its integration with Azure AI Search's capabilities. However, it falls short in indexing performance and flexibility, being slower and limited to certain data sources.</p><h2 id="performance-improvements">Performance improvements</h2><p>Feeding data into your search index, whether through push or pull, significantly impacts the overall time taken for ingestion. As seen from the comparison table above, using the push approach can make the process up to three times faster. These results come from the standard configuration, when using a single Azure Search Indexer and a single thread pushing batches of documents to the search index.</p><p>Using a dataset with 10,000 documents, we evaluated the performance of ingestions data with the pull and push models under various configurations:</p><ul><li>Upgrade Azure AI Search service tier from S1 to S2</li><li>Add partitions, scaling document counts as well as faster data ingestion by spanning your index over multiple units</li><li>Parallel indexing, using multiple indexers and async pushing documents</li></ul><p>We'll have a look at the impact of each individual configuration first, and then combine configurations for further optimizations. To ensure consistency in testing conditions and to mitigate the effects of throughput and latency, all data ingestions were conducted within the same Azure Region, originating from an Azure-hosted machine. The results presented are the average of five test runs.</p>
+<!--kg-card-begin: html-->
+<table>
+    <tr>
+        <th></th>
+        <th><strong>Indexer/Pull</strong></th>
+        <th><strong>Push</strong></th>
+    </tr>
+    <tr>
+        <td>S1 1 partition</td>
+        <td>3:10</td>
+        <td>1:05</td>
+    </tr>
+    <tr>
+        <td>S2 1 partition</td>
+        <td>2:51</td>
+        <td>0:57</td>
+    </tr>
+    <tr>
+        <td>S1 4 partitions</td>
+        <td>3:22</td>
+        <td>1:10</td>
+    </tr>
+</table>
+<!--kg-card-end: html-->
+<p>As shown in the results above, the push method is almost three times faster than using an indexer.Interestingly, the introduction of additional partitions and upgrading to an S2 search instance had a negligible effect on performance in these tests. These results suggest that both the addition of more partitions and upgrading to an S2 search instance primarily enhance capacity and query-performance, rather than directly improving the rate of data ingestion. </p><p>To speed things up, we also investigated parallel indexing. For the pull model we can use multiple indexers that write to the same index, and with the push model we can asynchronously push multiple batches simultaneously. Here, we also play with the partition size, to see how that effects the results.</p>
+<!--kg-card-begin: html-->
+<table>
+    <tr>
+        <th></th>
+        <th><strong>Indexer/Pull</strong></th>
+        <th><strong>Push</strong></th>
+    </tr>
+    <tr>
+        <td>S1 1 parallel</td>
+        <td>3:10</td>
+        <td>1:05</td>
+    </tr>
+    <tr>
+        <td>S1 10 parallel</td>
+        <td>0:20</td>
+        <td>0:59</td>
+    </tr>
+    <tr>
+        <td>S1 20 parallel</td>
+        <td>0:11</td>
+        <td>0:49</td>
+    </tr>
+    <tr>
+        <td>S1 40 parallel</td>
+        <td>0:06</td>
+        <td>0:34</td>
+    </tr>
+</table>
+<!--kg-card-end: html-->
+<p>The performance of the indexer scaled almost linearly with parallelization, showing significant improvements. Specifically, using 10 indexers was approximately 9.5 times faster, 20 indexers around 17.3 times faster, and 40 indexers about 31.2 times faster compared to a single indexer. Although asynchronously pushing batches also enhanced performance, the improvement was roughly 2 times better when using 40 parallel threads for pushing. Increasing parallel threads further had a negative impact and decreased performance for both push and pull.</p><h2 id="considerations">Considerations</h2><p>Choosing between the push and pull models for populating the Azure Search Index should be based on project-specific requirements, including indexing speed, security, source flexibility,  AI enrichment potential and the need for re-indexing over time. While the pull model integrates closely with Azure AI Search's advanced features, offering built-in enrichment and easy re-indexing, it lags behind the push model in terms of speed and flexibility.</p><p>Using standard configurations, the push model outperforms pull and is three times faster. However, you can setup multiple indexers to linearly improve ingestion speed for each indexer added, minding the <a href="https://tikkie.me/pay/6br4267rul7pecgmjhhe?ref=192.168.1.45" rel="noreferrer">maximum limit</a> of indexers. This does  require a bit of orchestration, where you need to split your indexes over multiple data sources (or folders) and track the progress of multiple indexers.</p><p></p><p></p><p></p><p> </p>
         </section>
 		
-			<div class="fb-comments" data-href="https://blog.bart.je/add-insights-with-rag-azure-openai-cognitive-search/" data-numposts="5"></div>
+			<div class="fb-comments" data-href="https://blog.bart.je/optimizing-azure-ai-search-push-vs-pull/" data-numposts="5"></div>
 
         <section class="social-share">
             <ul class="rrssb-buttons clearfix">
@@ -437,16 +557,10 @@ var social_link = {
 </main>
 
 <aside class="read-next">
-    <a class="read-next-story no-cover" href="/ingest-pdfs-cognitive-search-rag/">
+    <a class="read-next-story prev no-cover" href="/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/">
         <section class="post">
-            <h2>Add Insights to Unstructured PDFs with Retrieval Augmented Generation</h2>
-            <p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search&hellip;</p>
-        </section>
-    </a>
-    <a class="read-next-story prev " style="background-image: url(https://blog.bart.je/content/images/2023/11/Screenshot-2023-11-09-at-11.36.02.png)" href="/host-your-own-chatgpt-instance-azure-openai/">
-        <section class="post">
-            <h2>Host your own ChatGPT instance using Azure OpenAI</h2>
-            <p>It’s 2023, everyone is playing around with ChatGPT on OpenAI and a new and improved version of GPT&hellip;</p>
+            <h2>Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG</h2>
+            <p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search&hellip;</p>
         </section>
     </a>
 </aside>
@@ -455,7 +569,7 @@ var social_link = {
 
 
         <footer class="site-footer clearfix">
-            <section class="copyright"><a href="https://blog.bart.je">Bart Jansen</a> &copy; 2023</section>
+            <section class="copyright"><a href="https://blog.bart.je">Bart Jansen</a> &copy; 2024</section>
             <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
         </footer>
 
@@ -464,21 +578,21 @@ var social_link = {
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     
 
-    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=10f9658231"></script>
-    <script type="text/javascript" src="/assets/js/index.js?v=10f9658231"></script>
-    <script type="text/javascript" src="/assets/js/prism.js?v=10f9658231"></script>
-    <script type="text/javascript" src="/assets/js/rrssb.min.js?v=10f9658231"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=5a93095959"></script>
+    <script type="text/javascript" src="/assets/js/index.js?v=5a93095959"></script>
+    <script type="text/javascript" src="/assets/js/prism.js?v=5a93095959"></script>
+    <script type="text/javascript" src="/assets/js/rrssb.min.js?v=5a93095959"></script>
 
     <script type="text/javascript">
         jQuery(document).ready(function($) {
 
             $('.rrssb-buttons').rrssb({
                 // required:
-                title: 'Add Insights to Your Existing Data Using Retrieval-Augmented Generation with Azure OpenAI and Azure Cognitive Search',
-                url: 'https://blog.bart.je/add-insights-with-rag-azure-openai-cognitive-search/',
+                title: 'Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations',
+                url: 'https://blog.bart.je/optimizing-azure-ai-search-push-vs-pull/',
 
                 // optional:
-                 description: 'Add Insights to Your Existing Data Using Retrieval-Augmented Generation with Azure OpenAI and Azure Cognitive Search',
+                 description: 'Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations',
                 // emailBody: 'Usually email body is just the description + url, but you can customize it if you want'
             });
 

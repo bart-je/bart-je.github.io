@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-    <title>Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG</title>
+    <title>Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG</title>
 
     <link rel="icon" href="https://blog.bart.je/content/images/size/w256h256/2023/10/android-chrome-192x192.png" type="image/png">
     <link rel="canonical" href="https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/">
@@ -12,14 +12,14 @@
     
     <meta property="og:site_name" content="Bart Jansen">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG">
-    <meta property="og:description" content="A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.
+    <meta property="og:title" content="Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG">
+    <meta property="og:description" content="A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.
 
 This blog posts shows various code">
     <meta property="og:url" content="https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/">
     <meta property="og:image" content="https://blog.bart.je/content/images/2021/07/newprofilepic-1.png">
     <meta property="article:published_time" content="2023-11-13T13:52:00.000Z">
-    <meta property="article:modified_time" content="2023-11-20T23:02:29.000Z">
+    <meta property="article:modified_time" content="2024-05-06T07:43:30.000Z">
     <meta property="article:tag" content="ingestion">
     <meta property="article:tag" content="rag">
     <meta property="article:tag" content="retrievel augmented generation">
@@ -29,11 +29,12 @@ This blog posts shows various code">
     <meta property="article:tag" content="search index">
     <meta property="article:tag" content="azure openai">
     <meta property="article:tag" content="embeddings">
+    <meta property="article:tag" content="azure ai search">
     
     <meta property="article:publisher" content="https://www.facebook.com/bartj">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG">
-    <meta name="twitter:description" content="A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.
+    <meta name="twitter:title" content="Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG">
+    <meta name="twitter:description" content="A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.
 
 This blog posts shows various code">
     <meta name="twitter:url" content="https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/">
@@ -41,10 +42,10 @@ This blog posts shows various code">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Bart Jansen">
     <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="ingestion, rag, retrievel augmented generation, azure cognitive search, form recognizer, python, search index, azure openai, embeddings">
+    <meta name="twitter:data2" content="ingestion, rag, retrievel augmented generation, azure cognitive search, form recognizer, python, search index, azure openai, embeddings, azure ai search">
     <meta name="twitter:site" content="@bartjansn">
-    <meta property="og:image:width" content="2000">
-    <meta property="og:image:height" content="2000">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
     
     <script type="application/ld+json">
 {
@@ -67,17 +68,17 @@ This blog posts shows various code">
         "url": "https://blog.bart.je/author/bart/",
         "sameAs": []
     },
-    "headline": "Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG",
+    "headline": "Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG",
     "url": "https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/",
     "datePublished": "2023-11-13T13:52:00.000Z",
-    "dateModified": "2023-11-20T23:02:29.000Z",
-    "keywords": "ingestion, rag, retrievel augmented generation, azure cognitive search, form recognizer, python, search index, azure openai, embeddings",
-    "description": "A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.\n\nThis blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT.",
+    "dateModified": "2024-05-06T07:43:30.000Z",
+    "keywords": "ingestion, rag, retrievel augmented generation, azure cognitive search, form recognizer, python, search index, azure openai, embeddings, azure ai search",
+    "description": "A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.\n\nThis blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT.\n\nPleas",
     "mainEntityOfPage": "https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 5.74">
+    <meta name="generator" content="Ghost 5.82">
     <link rel="alternate" type="application/rss+xml" title="Bart Jansen" href="https://blog.bart.je/rss/">
 
     <style amp-custom>
@@ -1074,7 +1075,7 @@ This blog posts shows various code">
         <article class="post">
 
             <header class="post-header">
-                <h1 class="post-title">Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG</h1>
+                <h1 class="post-title">Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG</h1>
                 <section class="post-meta">
                     Bart Jansen -
                     <time class="post-date" datetime="2023-11-13">13 Nov 2023</time>
@@ -1082,7 +1083,7 @@ This blog posts shows various code">
             </header>
             <section class="post-content">
 
-                <p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT. </p><blockquote>Please keep in mind that these snippets are a great starting point, but have been kept as small as possible to fit the format of this blog. Comprehensive processing such as chunking, text splitting, enriching, embedding and semantic configuration, semantic reranking have consciously been kept out of the scope of this blog post, but are required for creating an effective search index.</blockquote><figure class="kg-card kg-image-card kg-width-full"><amp-img src="https://blog.bart.je/content/images/2023/11/cognitive-search-pdf-ingestion.png" class="kg-image" width="3087" height="752" srcset="https://blog.bart.je/content/images/size/w600/2023/11/cognitive-search-pdf-ingestion.png 600w, https://blog.bart.je/content/images/size/w1000/2023/11/cognitive-search-pdf-ingestion.png 1000w, https://blog.bart.je/content/images/size/w1600/2023/11/cognitive-search-pdf-ingestion.png 1600w, https://blog.bart.je/content/images/size/w2400/2023/11/cognitive-search-pdf-ingestion.png 2400w" layout="responsive"></amp-img></figure><h3 id="create-azure-cognitive-search-index">Create Azure Cognitive Search Index</h3><p>First step is to create an Azure Cognitive Search Index, this can be done through the Azure Portal, the REST API or with the Python SDK:</p><pre><code class="language-python">SEARCH_SERVICE = "your-azure-search-resource"
+                <p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT. </p><blockquote>Please keep in mind that these snippets are a great starting point, but have been kept as small as possible to fit the format of this blog. Comprehensive processing such as chunking, text splitting, enriching, embedding and semantic configuration, semantic reranking have consciously been kept out of the scope of this blog post, but are required for creating an effective search index.</blockquote><figure class="kg-card kg-image-card kg-width-full"><amp-img src="https://blog.bart.je/content/images/2023/11/cognitive-search-pdf-ingestion.png" class="kg-image" alt="" width="3087" height="752" srcset="https://blog.bart.je/content/images/size/w600/2023/11/cognitive-search-pdf-ingestion.png 600w, https://blog.bart.je/content/images/size/w1000/2023/11/cognitive-search-pdf-ingestion.png 1000w, https://blog.bart.je/content/images/size/w1600/2023/11/cognitive-search-pdf-ingestion.png 1600w, https://blog.bart.je/content/images/size/w2400/2023/11/cognitive-search-pdf-ingestion.png 2400w" layout="responsive"></amp-img></figure><h3 id="create-azure-ai-search-index">Create Azure AI Search Index</h3><p>First step is to create an Azure AI Search Index, this can be done through the Azure Portal, the REST API or with the Python SDK:</p><pre><code class="language-python">SEARCH_SERVICE = "your-azure-search-resource"
 SEARCH_INDEX = "your-search-index"
 SEARCH_KEY = "your-secret-azure-search-key"
 SEARCH_CREDS = AzureKeyCredential(SEARCH_KEY)
@@ -1132,7 +1133,7 @@ def create_index():
     
     # Create the index
     client.create_index(index=index_definition)
-</code></pre><p>This sets up an Azure Cognitive Search Index with these fields:</p><ul><li> <code>id</code> : ID of the document</li><li> <code>content</code> : plain text content of your document</li><li><code>sourcefile</code> : PDF file used, including page number of this document</li><li><code>embedding</code> : vectorized embedding of your plain text content</li></ul><p>Since we're using a vector embedding field we configure <code>vector_search</code>, we also setup a default <code>semantic_configuration</code> and define which fields to use for our (non-vector) content (<code>content</code> in our case).</p><h3 id="process-pdfs">Process PDFs</h3><p>With the index in place, we need to split PDFs to process, chunk size &amp; overlap size, form recognizer for OCR/Tables, enrichment.</p><p>First, we split the PDFs into single page documents:</p><pre><code class="language-python">import io
+</code></pre><p>This sets up an Azure AI Search Index with these fields:</p><ul><li> <code>id</code> : ID of the document</li><li> <code>content</code> : plain text content of your document</li><li><code>sourcefile</code> : PDF file used, including page number of this document</li><li><code>embedding</code> : vectorized embedding of your plain text content</li></ul><p>Since we're using a vector embedding field we configure <code>vector_search</code>, we also setup a default <code>semantic_configuration</code> and define which fields to use for our (non-vector) content (<code>content</code> in our case).</p><h3 id="process-pdfs">Process PDFs</h3><p>With the index in place, we need to split PDFs to process, chunk size &amp; overlap size, form recognizer for OCR/Tables, enrichment.</p><p>First, we split the PDFs into single page documents:</p><pre><code class="language-python">import io
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 def split_pdf_to_pages(pdf_path):

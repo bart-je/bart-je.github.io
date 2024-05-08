@@ -4,41 +4,41 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG</title>
+    <title>Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG</title>
 
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-touch-icon-57x57.png?v=b52a897248">
-    <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-touch-icon-60x60.png?v=b52a897248">
-    <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-touch-icon-72x72.png?v=b52a897248">
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-touch-icon-76x76.png?v=b52a897248">
-    <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-touch-icon-114x114.png?v=b52a897248">
-    <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-touch-icon-120x120.png?v=b52a897248">
-    <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-touch-icon-144x144.png?v=b52a897248">
-    <link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-touch-icon-152x152.png?v=b52a897248">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon-180x180.png?v=b52a897248">
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-touch-icon-57x57.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-touch-icon-60x60.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-touch-icon-72x72.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-touch-icon-76x76.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-touch-icon-114x114.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-touch-icon-120x120.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-touch-icon-144x144.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-touch-icon-152x152.png?v=5a93095959">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon-180x180.png?v=5a93095959">
 
-    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-32x32.png?v=b52a897248" sizes="32x32">
-    <link rel="icon" type="image/png" href="/assets/img/favicons/android-chrome-192x192.png?v=b52a897248" sizes="192x192">
-    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-96x96.png?v=b52a897248" sizes="96x96">
-    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-16x16.png?v=b52a897248" sizes="16x16">
+    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-32x32.png?v=5a93095959" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/img/favicons/android-chrome-192x192.png?v=5a93095959" sizes="192x192">
+    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-96x96.png?v=5a93095959" sizes="96x96">
+    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-16x16.png?v=5a93095959" sizes="16x16">
 
  
-    <link rel="manifest" href="/assets/img/favicons/manifest.json?v=b52a897248">
-    <link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg?v=b52a897248" color="#5bbad5">
+    <link rel="manifest" href="/assets/img/favicons/manifest.json?v=5a93095959">
+    <link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg?v=5a93095959" color="#5bbad5">
     <link rel="shortcut icon" href="https://blog.bart.je/content/images/size/w256h256/2023/10/android-chrome-192x192.png">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png?v=b52a897248">
-    <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml?v=b52a897248">
+    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png?v=5a93095959">
+    <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml?v=5a93095959">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=b52a897248" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/custom.css?v=b52a897248" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=5a93095959" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/custom.css?v=5a93095959" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=b52a897248" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/rrssb.css?v=b52a897248" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/prism.css?v=5a93095959" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/rrssb.css?v=5a93095959" />
 
     <link rel="icon" href="https://blog.bart.je/content/images/size/w256h256/2023/10/android-chrome-192x192.png" type="image/png">
     <link rel="canonical" href="https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/">
@@ -47,14 +47,14 @@
     
     <meta property="og:site_name" content="Bart Jansen">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG">
-    <meta property="og:description" content="A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.
+    <meta property="og:title" content="Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG">
+    <meta property="og:description" content="A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.
 
 This blog posts shows various code">
     <meta property="og:url" content="https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/">
     <meta property="og:image" content="https://blog.bart.je/content/images/2021/07/newprofilepic-1.png">
     <meta property="article:published_time" content="2023-11-13T13:52:00.000Z">
-    <meta property="article:modified_time" content="2023-11-20T23:02:29.000Z">
+    <meta property="article:modified_time" content="2024-05-06T07:43:30.000Z">
     <meta property="article:tag" content="ingestion">
     <meta property="article:tag" content="rag">
     <meta property="article:tag" content="retrievel augmented generation">
@@ -64,11 +64,12 @@ This blog posts shows various code">
     <meta property="article:tag" content="search index">
     <meta property="article:tag" content="azure openai">
     <meta property="article:tag" content="embeddings">
+    <meta property="article:tag" content="azure ai search">
     
     <meta property="article:publisher" content="https://www.facebook.com/bartj">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG">
-    <meta name="twitter:description" content="A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.
+    <meta name="twitter:title" content="Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG">
+    <meta name="twitter:description" content="A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.
 
 This blog posts shows various code">
     <meta name="twitter:url" content="https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/">
@@ -76,10 +77,10 @@ This blog posts shows various code">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Bart Jansen">
     <meta name="twitter:label2" content="Filed under">
-    <meta name="twitter:data2" content="ingestion, rag, retrievel augmented generation, azure cognitive search, form recognizer, python, search index, azure openai, embeddings">
+    <meta name="twitter:data2" content="ingestion, rag, retrievel augmented generation, azure cognitive search, form recognizer, python, search index, azure openai, embeddings, azure ai search">
     <meta name="twitter:site" content="@bartjansn">
-    <meta property="og:image:width" content="2000">
-    <meta property="og:image:height" content="2000">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
     
     <script type="application/ld+json">
 {
@@ -102,19 +103,19 @@ This blog posts shows various code">
         "url": "https://blog.bart.je/author/bart/",
         "sameAs": []
     },
-    "headline": "Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG",
+    "headline": "Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG",
     "url": "https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/",
     "datePublished": "2023-11-13T13:52:00.000Z",
-    "dateModified": "2023-11-20T23:02:29.000Z",
-    "keywords": "ingestion, rag, retrievel augmented generation, azure cognitive search, form recognizer, python, search index, azure openai, embeddings",
-    "description": "A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.\n\nThis blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT.",
+    "dateModified": "2024-05-06T07:43:30.000Z",
+    "keywords": "ingestion, rag, retrievel augmented generation, azure cognitive search, form recognizer, python, search index, azure openai, embeddings, azure ai search",
+    "description": "A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: Add Insights to Unstructured PDFs with Retrieval Augmented Generation.\n\nThis blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT.\n\nPleas",
     "mainEntityOfPage": "https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/"
 }
     </script>
 
-    <meta name="generator" content="Ghost 5.74">
+    <meta name="generator" content="Ghost 5.82">
     <link rel="alternate" type="application/rss+xml" title="Bart Jansen" href="https://blog.bart.je/rss/">
-    <script defer src="https://cdn.jsdelivr.net/ghost/portal@~2.36/umd/portal.min.js" data-i18n="false" data-ghost="https://blog.bart.je/" data-key="eea4b713fe9c8879c6eba1396b" data-api="https://blog.bart.je/ghost/api/content/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+    <script defer src="https://cdn.jsdelivr.net/ghost/portal@~2.37/umd/portal.min.js" data-i18n="false" data-ghost="https://blog.bart.je/" data-key="eea4b713fe9c8879c6eba1396b" data-api="https://blog.bart.je/ghost/api/content/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
 .gh-post-upgrade-cta {
     display: flex;
     flex-direction: column;
@@ -181,9 +182,9 @@ This blog posts shows various code">
     <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="eea4b713fe9c8879c6eba1396b" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="https://blog.bart.je/" crossorigin="anonymous"></script>
     
     <link href="https://blog.bart.je/webmentions/receive/" rel="webmention">
-    <script defer src="/public/cards.min.js?v=b52a897248"></script>
-    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=b52a897248">
-    <script defer src="/public/member-attribution.min.js?v=b52a897248"></script>
+    <script defer src="/public/cards.min.js?v=5a93095959"></script>
+    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=5a93095959">
+    <script defer src="/public/member-attribution.min.js?v=5a93095959"></script>
     <script>
 
 var disqus_shortname = 'bartjansen'
@@ -198,7 +199,7 @@ var social_link = {
 }
 </script><style>:root {--ghost-accent-color: #ecc24a;}</style>
 </head>
-<body class="post-template tag-ingestion tag-rag tag-retrievel-augmented-generation tag-azure-cognitive-search tag-form-recognizer tag-python tag-search-index tag-azure-openai tag-embeddings">
+<body class="post-template tag-ingestion tag-rag tag-retrievel-augmented-generation tag-azure-cognitive-search tag-form-recognizer tag-python tag-search-index tag-azure-openai tag-embeddings tag-azure-ai-search">
 
 
     <div class="site-wrapper">
@@ -214,12 +215,12 @@ var social_link = {
 </header>
 
 <main class="content" role="main">
-    <article class="post tag-ingestion tag-rag tag-retrievel-augmented-generation tag-azure-cognitive-search tag-form-recognizer tag-python tag-search-index tag-azure-openai tag-embeddings no-image">
+    <article class="post tag-ingestion tag-rag tag-retrievel-augmented-generation tag-azure-cognitive-search tag-form-recognizer tag-python tag-search-index tag-azure-openai tag-embeddings tag-azure-ai-search no-image">
 
         <header class="post-header">
-            <h1 class="post-title">Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG</h1>
+            <h1 class="post-title">Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="2023-11-13">13 November 2023</time>  on <a href="/tag/ingestion/">ingestion</a>, <a href="/tag/rag/">rag</a>, <a href="/tag/retrievel-augmented-generation/">retrievel augmented generation</a>, <a href="/tag/azure-cognitive-search/">azure cognitive search</a>, <a href="/tag/form-recognizer/">form recognizer</a>, <a href="/tag/python/">python</a>, <a href="/tag/search-index/">search index</a>, <a href="/tag/azure-openai/">azure openai</a>, <a href="/tag/embeddings/">embeddings</a>
+                <time class="post-date" datetime="2023-11-13">13 November 2023</time>  on <a href="/tag/ingestion/">ingestion</a>, <a href="/tag/rag/">rag</a>, <a href="/tag/retrievel-augmented-generation/">retrievel augmented generation</a>, <a href="/tag/azure-cognitive-search/">azure cognitive search</a>, <a href="/tag/form-recognizer/">form recognizer</a>, <a href="/tag/python/">python</a>, <a href="/tag/search-index/">search index</a>, <a href="/tag/azure-openai/">azure openai</a>, <a href="/tag/embeddings/">embeddings</a>, <a href="/tag/azure-ai-search/">azure ai search</a>
             </section>
             <section class="social-share">
                 <ul class="rrssb-buttons clearfix">
@@ -310,7 +311,7 @@ var social_link = {
         </header>
 
         <section class="post-content">
-            <p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure Cognitive Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT. </p><blockquote>Please keep in mind that these snippets are a great starting point, but have been kept as small as possible to fit the format of this blog. Comprehensive processing such as chunking, text splitting, enriching, embedding and semantic configuration, semantic reranking have consciously been kept out of the scope of this blog post, but are required for creating an effective search index.</blockquote><figure class="kg-card kg-image-card kg-width-full"><img src="https://blog.bart.je/content/images/2023/11/cognitive-search-pdf-ingestion.png" class="kg-image" alt loading="lazy" width="2000" height="487" srcset="https://blog.bart.je/content/images/size/w600/2023/11/cognitive-search-pdf-ingestion.png 600w, https://blog.bart.je/content/images/size/w1000/2023/11/cognitive-search-pdf-ingestion.png 1000w, https://blog.bart.je/content/images/size/w1600/2023/11/cognitive-search-pdf-ingestion.png 1600w, https://blog.bart.je/content/images/size/w2400/2023/11/cognitive-search-pdf-ingestion.png 2400w"></figure><h3 id="create-azure-cognitive-search-index">Create Azure Cognitive Search Index</h3><p>First step is to create an Azure Cognitive Search Index, this can be done through the Azure Portal, the REST API or with the Python SDK:</p><pre><code class="language-python">SEARCH_SERVICE = "your-azure-search-resource"
+            <p>A great way to add insights to your unstructured PDFs is by ingesting them into an Azure AI Search Index and adding an LLM on top, also known as the RAG pattern as described in: <a href="https://blog.bart.je/ingest-pdfs-cognitive-search-rag/?ref=192.168.1.45" rel="noreferrer">Add Insights to Unstructured PDFs with Retrieval Augmented Generation</a>.</p><p>This blog posts shows various code snippets, on how to achieve these different steps using Python. The first bit is to setup and populate the Search Index, and the last sections show how to query the search index and enrich the data using GPT. </p><blockquote>Please keep in mind that these snippets are a great starting point, but have been kept as small as possible to fit the format of this blog. Comprehensive processing such as chunking, text splitting, enriching, embedding and semantic configuration, semantic reranking have consciously been kept out of the scope of this blog post, but are required for creating an effective search index.</blockquote><figure class="kg-card kg-image-card kg-width-full"><img src="https://blog.bart.je/content/images/2023/11/cognitive-search-pdf-ingestion.png" class="kg-image" alt="" loading="lazy" width="2000" height="487" srcset="https://blog.bart.je/content/images/size/w600/2023/11/cognitive-search-pdf-ingestion.png 600w, https://blog.bart.je/content/images/size/w1000/2023/11/cognitive-search-pdf-ingestion.png 1000w, https://blog.bart.je/content/images/size/w1600/2023/11/cognitive-search-pdf-ingestion.png 1600w, https://blog.bart.je/content/images/size/w2400/2023/11/cognitive-search-pdf-ingestion.png 2400w"></figure><h3 id="create-azure-ai-search-index">Create Azure AI Search Index</h3><p>First step is to create an Azure AI Search Index, this can be done through the Azure Portal, the REST API or with the Python SDK:</p><pre><code class="language-python">SEARCH_SERVICE = "your-azure-search-resource"
 SEARCH_INDEX = "your-search-index"
 SEARCH_KEY = "your-secret-azure-search-key"
 SEARCH_CREDS = AzureKeyCredential(SEARCH_KEY)
@@ -360,7 +361,7 @@ def create_index():
     
     # Create the index
     client.create_index(index=index_definition)
-</code></pre><p>This sets up an Azure Cognitive Search Index with these fields:</p><ul><li> <code>id</code> : ID of the document</li><li> <code>content</code> : plain text content of your document</li><li><code>sourcefile</code> : PDF file used, including page number of this document</li><li><code>embedding</code> : vectorized embedding of your plain text content</li></ul><p>Since we're using a vector embedding field we configure <code>vector_search</code>, we also setup a default <code>semantic_configuration</code> and define which fields to use for our (non-vector) content (<code>content</code> in our case).</p><h3 id="process-pdfs">Process PDFs</h3><p>With the index in place, we need to split PDFs to process, chunk size &amp; overlap size, form recognizer for OCR/Tables, enrichment.</p><p>First, we split the PDFs into single page documents:</p><pre><code class="language-python">import io
+</code></pre><p>This sets up an Azure AI Search Index with these fields:</p><ul><li> <code>id</code> : ID of the document</li><li> <code>content</code> : plain text content of your document</li><li><code>sourcefile</code> : PDF file used, including page number of this document</li><li><code>embedding</code> : vectorized embedding of your plain text content</li></ul><p>Since we're using a vector embedding field we configure <code>vector_search</code>, we also setup a default <code>semantic_configuration</code> and define which fields to use for our (non-vector) content (<code>content</code> in our case).</p><h3 id="process-pdfs">Process PDFs</h3><p>With the index in place, we need to split PDFs to process, chunk size &amp; overlap size, form recognizer for OCR/Tables, enrichment.</p><p>First, we split the PDFs into single page documents:</p><pre><code class="language-python">import io
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 def split_pdf_to_pages(pdf_path):
@@ -670,6 +671,12 @@ for result, enriched_info in enriched_results:
 </main>
 
 <aside class="read-next">
+    <a class="read-next-story " style="background-image: url(https://blog.bart.je/content/images/2024/05/pushvspull_yellow.png)" href="/optimizing-azure-ai-search-push-vs-pull/">
+        <section class="post">
+            <h2>Optimizing Azure AI Search: Comparing Push and Pull approaches with performance recommendations</h2>
+            <p>The Azure Search Index can be populated in two different ways. You can either directly push data into the&hellip;</p>
+        </section>
+    </a>
     <a class="read-next-story prev " style="background-image: url(https://blog.bart.je/content/images/2023/11/needle-in-haystack.jpg)" href="/enhancing-data-azure-insights-retrieval-augmented-generation/">
         <section class="post">
             <h2>Enhancing Your Data with Azure: Unlocking Insights through Retrieval-Augmented Generation</h2>
@@ -682,7 +689,7 @@ for result, enriched_info in enriched_results:
 
 
         <footer class="site-footer clearfix">
-            <section class="copyright"><a href="https://blog.bart.je">Bart Jansen</a> &copy; 2023</section>
+            <section class="copyright"><a href="https://blog.bart.je">Bart Jansen</a> &copy; 2024</section>
             <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
         </footer>
 
@@ -691,21 +698,21 @@ for result, enriched_info in enriched_results:
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     
 
-    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=b52a897248"></script>
-    <script type="text/javascript" src="/assets/js/index.js?v=b52a897248"></script>
-    <script type="text/javascript" src="/assets/js/prism.js?v=b52a897248"></script>
-    <script type="text/javascript" src="/assets/js/rrssb.min.js?v=b52a897248"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=5a93095959"></script>
+    <script type="text/javascript" src="/assets/js/index.js?v=5a93095959"></script>
+    <script type="text/javascript" src="/assets/js/prism.js?v=5a93095959"></script>
+    <script type="text/javascript" src="/assets/js/rrssb.min.js?v=5a93095959"></script>
 
     <script type="text/javascript">
         jQuery(document).ready(function($) {
 
             $('.rrssb-buttons').rrssb({
                 // required:
-                title: 'Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG',
+                title: 'Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG',
                 url: 'https://blog.bart.je/transforming-pdf-chaos-clarity-azure-cognitive-search-rag/',
 
                 // optional:
-                 description: 'Transforming PDF Chaos into clarity: Add PDF Insights with Azure Cognitive Search &amp; RAG',
+                 description: 'Transforming PDF Chaos into clarity: Add PDF Insights with Azure AI Search &amp; RAG',
                 // emailBody: 'Usually email body is just the description + url, but you can customize it if you want'
             });
 
