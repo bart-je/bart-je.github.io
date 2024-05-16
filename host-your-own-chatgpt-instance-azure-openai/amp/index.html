@@ -6,7 +6,7 @@
 
     <title>Host your own ChatGPT instance using Azure OpenAI</title>
 
-    <link rel="icon" href="https://blog.bart.je/content/images/size/w256h256/2023/10/android-chrome-192x192.png" type="image/png">
+    <link rel="icon" href="https://blog.bart.je/content/images/size/w256h256/2024/05/favicon-194x194.png" type="image/png">
     <link rel="canonical" href="https://blog.bart.je/host-your-own-chatgpt-instance-azure-openai/">
     <meta name="referrer" content="no-referrer-when-downgrade">
     
@@ -19,7 +19,7 @@ The problem with these new models is that they’re only available for">
     <meta property="og:url" content="https://blog.bart.je/host-your-own-chatgpt-instance-azure-openai/">
     <meta property="og:image" content="https://blog.bart.je/content/images/2023/11/Screenshot-2023-11-09-at-11.36.02.png">
     <meta property="article:published_time" content="2023-10-31T14:30:19.000Z">
-    <meta property="article:modified_time" content="2023-11-09T12:05:49.000Z">
+    <meta property="article:modified_time" content="2024-05-16T14:57:34.000Z">
     <meta property="article:tag" content="chatgpt">
     <meta property="article:tag" content="openai">
     <meta property="article:tag" content="azure">
@@ -51,7 +51,7 @@ The problem with these new models is that they’re only available for">
         "url": "https://blog.bart.je/",
         "logo": {
             "@type": "ImageObject",
-            "url": "https://blog.bart.je/content/images/2023/10/newprofilepic_o-1.png",
+            "url": "https://blog.bart.je/content/images/2024/05/profilepictest.jpg",
             "width": 60,
             "height": 60
         }
@@ -65,7 +65,7 @@ The problem with these new models is that they’re only available for">
     "headline": "Host your own ChatGPT instance using Azure OpenAI",
     "url": "https://blog.bart.je/host-your-own-chatgpt-instance-azure-openai/",
     "datePublished": "2023-10-31T14:30:19.000Z",
-    "dateModified": "2023-11-09T12:05:49.000Z",
+    "dateModified": "2024-05-16T14:57:34.000Z",
     "image": {
         "@type": "ImageObject",
         "url": "https://blog.bart.je/content/images/2023/11/Screenshot-2023-11-09-at-11.36.02.png",
@@ -1067,7 +1067,7 @@ The problem with these new models is that they’re only available for">
 <body class="amp-template">
     <header class="page-header">
         <a href="https://blog.bart.je">
-                <amp-img class="site-icon" src="https://blog.bart.je/content/images/2023/10/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
+                <amp-img class="site-icon" src="https://blog.bart.je/content/images/2024/05/favicon-194x194.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
         </a>
     </header>
 
@@ -1095,15 +1095,15 @@ The problem with these new models is that they’re only available for">
   -e OPENAI_API_TYPE=azure \
   -e DEFAULT_MODEL=gpt-4-32k \
   -p 3000:3000 \
-  ghcr.io/mckaywrigley/chatbot-ui:main
-</code></pre><figcaption><p><span>*don't ever run UIs like this, with your OpenAI GPT keys, on the public internet</span></p></figcaption></figure><p>Simply replace your <code>OPENAI_API_KEY</code>, <code>AZURE_DEPLOYMENT_ID</code> and <code>OPENAI_API_HOST</code> with respectively your primary key, deployment-name and Azure OpenAI endpoint. Your UI will be available on <a href="http://localhost:3000/?ref=192.168.1.45" rel="noreferrer">http://localhost:3000</a>. </p>
+  bartmsft/chatbot-ui:main
+</code></pre><figcaption><p><span>*don't ever run UIs like this, with your OpenAI GPT keys, on the public internet</span></p></figcaption></figure><p>Simply replace your <code>OPENAI_API_KEY</code>, <code>AZURE_DEPLOYMENT_ID</code> and <code>OPENAI_API_HOST</code> with respectively your primary key, deployment-name and Azure OpenAI endpoint. Your UI will be available on <a href="http://localhost:3000/?ref=192.168.1.45" rel="noreferrer">http://localhost:3000</a>. </p><blockquote>Update May 2024: As of earlier this year, the original maintainer of chatbot-ui moved to a new interface, adding more features but also adding lots of extra dependencies. Therefore I'm using a personal fork on  <a href="https://hub.docker.com/r/bartmsft/chatbot-ui?ref=192.168.1.45" rel="noreferrer">Docker Hub - bartmsft</a> of the old instance.</blockquote>
 
             </section>
 
         </article>
     </main>
     <footer class="page-footer">
-            <amp-img class="site-icon" src="https://blog.bart.je/content/images/2023/10/android-chrome-192x192.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
+            <amp-img class="site-icon" src="https://blog.bart.je/content/images/2024/05/favicon-194x194.png" width="50" height="50" layout="fixed" alt="Bart Jansen"></amp-img>
         <h3>Bart Jansen</h3>
             <p>Software Engineer at Microsoft</p>
         <p><a href="https://blog.bart.je">Read more posts →</a></p>
